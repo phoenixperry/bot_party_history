@@ -657,7 +657,7 @@ PlayerSettings:
   facebookSdkVersion: 7.9.1
   apiCompatibilityLevel: 2
   cloudProjectId: 42416ae8-c766-4843-bd26-f9ceed6b54c8
-  projectName: New Unity Project (5)
+  projectName: bot_party_unity_game
   organizationId: default-account
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
