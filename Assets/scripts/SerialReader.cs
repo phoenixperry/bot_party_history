@@ -33,6 +33,10 @@ public struct Bot {
 public struct TouchedBots {
     public static string botsTouched;
     public static string touch; 
+}
+
+public struct Colors {
+    public static Color     
 } 
 
 public class SerialReader : MonoBehaviour
