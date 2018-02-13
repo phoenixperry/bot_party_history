@@ -161,6 +161,7 @@ MonoBehaviour:
   twothree: {fileID: 8300000, guid: 6232884ef0fa1e14ea97cbf37eaf4ba9, type: 3}
   onethree: {fileID: 8300000, guid: 93b479a0f01cd3d4b9adb18f4d466f02, type: 3}
   allthree: {fileID: 8300000, guid: 2d341040ffcb5ff4591a26f8a1ea666f, type: 3}
+  btnInterface: {fileID: 550139577}
 --- !u!82 &153992067
 AudioSource:
   m_ObjectHideFlags: 0
@@ -304,6 +305,11 @@ MonoBehaviour:
   bot1: {fileID: 0}
   bot2: {fileID: 0}
   bot3: {fileID: 0}
+--- !u!1 &550139577 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1436395205452076, guid: a9fe7003a08df214f8ebb33eb2d4f1f3,
+    type: 2}
+  m_PrefabInternal: {fileID: 1938884076}
 --- !u!1 &566813174
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,16 +10,12 @@ public class SpwanGame : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-
         serialDataManager = Instantiate(serialDataManager, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity) as GameObject;
-		//serialDataManager.SetActive (false);
+		serialDataManager.SetActive (false);
 		keyboardDataManager = Instantiate (keyboardDataManager, new Vector3 (0.0f, 0.0f, 0.0f), Quaternion.identity) as GameObject;
-		keyboardDataManager.SetActive (false);
+		//keyboardDataManager.SetActive (false);
 		// botDataManager   = Instantiate(botDataManager, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity) as GameObject;
         touchManager = Instantiate(touchManager, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity) as GameObject;
-
-
-
     }
 	
 	// Update is called once per frame

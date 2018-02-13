@@ -15,15 +15,7 @@ public class botBehavior : MonoBehaviour {
 
     private void Start()
     {
-        gameObject.GetComponent<AudioSource>().playOnAwake = false;
-    }
-
-    public void OnEnable() {
-		Debug.Log ("Enable");
-    }
-    public void OnDisable()
-    {
-        
+        //gameObject.GetComponent<AudioSource>().playOnAwake = false;
     }
 
     
@@ -58,6 +50,7 @@ public class botBehavior : MonoBehaviour {
     public void updateDisplay() {
         btn.onClick.Invoke();
     }
+
     public void triggerSound(AudioClip sound) {
 
         gameObject.GetComponent<AudioSource>().clip  = sound;

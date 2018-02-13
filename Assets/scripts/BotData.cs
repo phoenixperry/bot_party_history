@@ -17,13 +17,30 @@ public class BotData : MonoBehaviour
 	public GameObject bot1;
 	public GameObject bot2;
 	public GameObject bot3;
-    
+
+	public Bot bot1_data;
+	public Bot bot2_data;
+	public Bot bot3_data;
 
     public int integratedCompass;
     int btn1Down = 0; //saves btn down state 
     int btn2Down = 0;
     int btn3Down = 0;
 
+	public delegate void BoxOneButtonDown();
+	public static event BoxOneButtonDown OnBoxOneButtonDown;
+	public delegate void BoxOneButtonUp();
+	public static event BoxOneButtonUp OnBoxOneButtonUp;
+
+	public delegate void BoxTwoButtonDown();
+	public static event BoxTwoButtonDown OnBoxTwoButtonDown;
+	public delegate void BoxTwoButtonUp();
+	public static event BoxTwoButtonUp OnBoxTwoButtonUp;
+
+	public delegate void BoxThreeButtonDown();
+	public static event BoxThreeButtonDown OnBoxThreeButtonDown;
+	public delegate void BoxThreeButtonUp();
+	public static event BoxThreeButtonUp OnBoxThreeButtonUp;
    
     public void Start() {
 
@@ -34,6 +51,46 @@ public class BotData : MonoBehaviour
 	}
 
 	private void processData(Bot b) {
+		if (b.name == "botOne") {
+			processBotDifference (b, bot1_data);
+			bot1_data = b;
+		} else if (b.name == "botTwo") {
+			processBotDifference (b, bot2_data);
+			bot2_data = b;
+		} else if (b.name == "botThree") {
+			processBotDifference (b, bot3_data);
+			bot3_data = b;
+		}
+	}
+
+	private void processBotDifference(Bot b1, Bot b2)
+	{
+		// To implement: send the actual buttonup/down events
+		if (b2.name == "") return;
+		if (b1.btn == "1" && b2.btn == "0") {
+			doButtonDownFor (b1);
+		} else if (b1.btn == "0" && b2.btn == "1") {
+			doButtonUpFor (b1);
+		}
+	}
+
+	private void doButtonUpFor(Bot b1)
+	{
+		if (b1.name == "botOne")
+			OnBoxOneButtonUp ();
+		else if (b1.name == "botTwo")
+			OnBoxTwoButtonUp ();
+		else if (b1.name == "botThree")
+			OnBoxThreeButtonUp ();
+	}
+
+	private void doButtonDownFor(Bot b1){
+		if (b1.name == "botOne")
+			OnBoxOneButtonDown ();
+		else if (b1.name == "botTwo")
+			OnBoxTwoButtonDown ();
+		else if (b1.name == "botThree")
+			OnBoxThreeButtonDown ();
 	}
     
     public void updateData(string values)

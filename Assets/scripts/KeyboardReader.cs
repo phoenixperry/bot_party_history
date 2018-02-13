@@ -25,5 +25,29 @@ public class KeyboardReader : AbstractReader {
 			passOnTouch (new TouchedBots ("BoxOneThree", "0"));	
 		}
 
+		if (Input.GetKey (KeyCode.R)) {
+			passOnTouch(new TouchedBots("AllBoxes", "1")); 		
+		} else {
+			passOnTouch (new TouchedBots ("AllBoxes", "0"));	
+		}
+
+		if (Input.GetKey(KeyCode.Alpha1)) {
+			passOnBotDataReceived(new Bot("botOne","0","0","0","0","1"));
+		} else {
+			passOnBotDataReceived(new Bot("botOne","0","0","0","0","0"));
+		}
+
+		if (Input.GetKey(KeyCode.Alpha2)) {
+			passOnBotDataReceived(new Bot("botTwo","0","0","0","0","1"));
+		} else {
+			passOnBotDataReceived(new Bot("botTwo","0","0","0","0","0"));
+		}
+
+		if (Input.GetKey(KeyCode.Alpha3)) {
+			passOnBotDataReceived(new Bot("botThree","0","0","0","0","1"));
+		} else {
+			passOnBotDataReceived(new Bot("botThree","0","0","0","0","0"));
+		}
+
 	}
 }
