@@ -10,12 +10,12 @@ public struct Bot {
 	public void printBotData() {
 		Debug.Log ("Bot: " + name + ", compass: " + compass + " x,y,z = " + xpos + "," + ypos + "," + zpos + " btn = " + btn);
 	}
-	public static string name;
-	public static string compass;
-	public static string xpos;
-	public static string ypos;
-	public static string zpos;
-	public static string btn;
+	public string name;
+	public string compass;
+	public string xpos;
+	public string ypos;
+	public string zpos;
+	public string btn;
 }
 
 public struct TouchedBots {
@@ -27,8 +27,8 @@ public struct TouchedBots {
 	public void printTouchData() {
 		Debug.Log ("Touching: " + touch + " and " + botsTouched);
 	}
-	public static string botsTouched;
-	public static string touch; 
+	public string botsTouched;
+	public string touch; 
 }
 
 public class AbstractReader : MonoBehaviour {
@@ -41,7 +41,6 @@ public class AbstractReader : MonoBehaviour {
 	public static event TouchManagerReceived OnTouch;
 
 	protected void passOnBotDataReceived(Bot b_) {
-		b_.printBotData();
 		if (OnBotDataReceived != null) OnBotDataReceived (b_);
 	}
 

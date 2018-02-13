@@ -68,7 +68,6 @@ public class TouchManager : MonoBehaviour
     }
 
 	void OnEnable() {
-		Debug.Log ("OnEnable");
 		AbstractReader.OnTouch += processOnTouch;
 	}
 
@@ -77,7 +76,74 @@ public class TouchManager : MonoBehaviour
 	}
 
 	private void processOnTouch(TouchedBots t_) {
-		
+		string touchingBoxes = t_.botsTouched;
+		int touch;
+		int.TryParse(t_.touch, out touch);
+		if (touchingBoxes == "BoxOneTwo" && touch == 1 && allOn == false && boxOneTwoOn == false)
+		{
+				if(OnBoxOneTwoTouched != null)
+					OnBoxOneTwoTouched(); 
+			boxOneTwoOn = true;
+			boxOneTwoPreviousState = touch; 
+		}
+		else if (touchingBoxes == "BoxOneTwo" && touch == 0 && boxOneTwoPreviousState == 1)
+		{
+			boxOneTwoOn = false;
+			boxOneTwoPreviousState = touch; 
+			if (OnBoxOneTwoReleased != null)
+				OnBoxOneTwoReleased();
+		}
+
+		else if (touchingBoxes == "BoxTwoThree" && touch == 1 && allOn == false && boxTwoThreeOn == false)
+		{
+				if (OnBoxTwoThreeTouched != null)
+					OnBoxTwoThreeTouched();
+			boxTwoThreeOn = true;
+			boxTwoThreePreviousState = touch;
+		}
+		else if (touchingBoxes == "BoxTwoThree" && touch == 0 && boxTwoThreePreviousState == 1)
+		{
+			boxTwoThreeOn = false;
+			if (OnBoxTwoThreeReleased != null)
+				OnBoxTwoThreeReleased();
+			boxTwoThreePreviousState = touch;
+		}
+
+		else if (touchingBoxes == "BoxOneThree" && touch == 1 && allOn == false && boxOneThreeOn == false)
+		{
+				if (OnBoxOneThreeTouched != null)
+					OnBoxOneThreeTouched();
+			
+			boxOneThreeOn = true;
+			boxOneThreePreviousState = touch;
+		}
+		else if (touchingBoxes == "BoxOneThree" && touch == 0 && boxOneThreePreviousState == 1)
+		{
+			boxOneThreeOn = false;
+			if (OnBoxOneThreeReleased != null)
+				OnBoxOneThreeReleased();
+			boxOneThreePreviousState = touch;
+		}
+
+		else if (touchingBoxes == "AllBoxes" && touch == 1 && allOn == false)
+		{
+				if (OnAllBoxesConnected != null) {
+					OnAllBoxesConnected(); 
+				} 
+			allOn = true;
+			allTouchingPreviousState = touch; 
+		}else if (touchingBoxes == "AllBoxes" && touch == 0 && allTouchingPreviousState == 1)
+		{
+			allOn = false;
+			if(OnAllBoxesReleased !=null)
+				OnAllBoxesReleased();
+
+			allTouchingPreviousState = touch; 
+
+
+		}
+
+
 	}
     
 
@@ -91,13 +157,11 @@ public class TouchManager : MonoBehaviour
 
         if (touchingBoxes == "BoxOneTwo" && touch == 1 && allOn == false && boxOneTwoOn == false)
         {
-            if (!gameObject.GetComponent<AudioSource>().isPlaying)
-            {
+            
                 //gameObject.GetComponent<AudioSource>().clip = touchsound[0] as AudioClip;
                 //gameObject.GetComponent<AudioSource>().Play();
                 if(OnBoxOneTwoTouched != null)
                     OnBoxOneTwoTouched(); 
-            }
             boxOneTwoOn = true;
             boxOneTwoPreviousState = touch; 
         }

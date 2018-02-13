@@ -54,7 +54,7 @@ public class SerialReader : AbstractReader
        AsynchronousReadFromArduino
            (incommingData =>
             {
-                Debug.Log(incommingData);
+                //Debug.Log(incommingData);
                 string [] sensors = incommingData.Split(' ');
                 if (sensors.Length > 1 && sensors.Length < 4)
                 {

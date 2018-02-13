@@ -85,19 +85,19 @@ public class BotManager : MonoBehaviour {
     }
     public void BoxOneTwoConnected()
     {
-		Debug.Log ("BoxOneTwoConnected");
-    }
+
+	}
     public void BoxOneTwoReleased()
     {
 
     }
     public void BoxTwoThreeConnected()
     {
-
+		Debug.Log ("BOX TWO AND THREE TOUCH!");
     }
     public void BoxTwoThreeReleased()
     {
-
+		Debug.Log ("BOX TWO AND THREE RELEASED.");
     }
 }
 

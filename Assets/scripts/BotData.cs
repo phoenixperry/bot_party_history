@@ -34,7 +34,6 @@ public class BotData : MonoBehaviour
 	}
 
 	private void processData(Bot b) {
-		Debug.Log ("processData");
 	}
     
     public void updateData(string values)

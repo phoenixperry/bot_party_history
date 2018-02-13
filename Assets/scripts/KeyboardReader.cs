@@ -8,15 +8,15 @@ public class KeyboardReader : AbstractReader {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKey (KeyCode.Q)) {
-			passOnTouch(new TouchedBots("botOne", "botTwo")); 
+			passOnTouch(new TouchedBots("BoxOneTwo", "1")); 
 		}
 
 		if (Input.GetKey (KeyCode.W)) {
-			passOnTouch(new TouchedBots("botOne", "botTwo")); 		
+			passOnTouch(new TouchedBots("BoxTwoThree", "1")); 		
 		}
 
 		if (Input.GetKey (KeyCode.E)) {
-			passOnTouch(new TouchedBots("botOne", "botTwo")); 		}
+			passOnTouch(new TouchedBots("BoxOneThree", "1")); 		}
 
 	}
 }

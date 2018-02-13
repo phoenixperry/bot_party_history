@@ -28,12 +28,12 @@ public class botBehavior : MonoBehaviour {
 
     
     public void setData(Bot b_) {
-        name = Bot.name;
-        int.TryParse(Bot.compass, out compass);
-        int.TryParse(Bot.xpos, out xpos);
-        int.TryParse(Bot.ypos, out ypos);
-        int.TryParse(Bot.zpos, out zpos);
-        int.TryParse(Bot.btn, out btnState);
+        name = b_.name;
+        int.TryParse(b_.compass, out compass);
+		int.TryParse(b_.xpos, out xpos);
+		int.TryParse(b_.ypos, out ypos);
+		int.TryParse(b_.zpos, out zpos);
+		int.TryParse(b_.btn, out btnState);
     }
     public void setBtn(UnityEngine.UI.Button _btn) {
 
