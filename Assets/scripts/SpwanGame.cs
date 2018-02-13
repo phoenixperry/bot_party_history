@@ -12,9 +12,12 @@ public class SpwanGame : MonoBehaviour {
     void Start () {
 
         serialDataManager = Instantiate(serialDataManager, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity) as GameObject;
+		//serialDataManager.SetActive (false);
 		keyboardDataManager = Instantiate (keyboardDataManager, new Vector3 (0.0f, 0.0f, 0.0f), Quaternion.identity) as GameObject;
+		keyboardDataManager.SetActive (false);
 		// botDataManager   = Instantiate(botDataManager, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity) as GameObject;
         touchManager = Instantiate(touchManager, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity) as GameObject;
+
 
 
     }
