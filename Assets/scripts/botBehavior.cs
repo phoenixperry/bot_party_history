@@ -9,7 +9,7 @@ public class botBehavior : MonoBehaviour {
     public Button btn;
 
     // Use this for initialization
-    public int xpos, ypos, zpos, compass = 0.0f;
+    public int xpos, ypos, zpos, compass = 0;
     public int btnState = 0;
     public string name; 
 
@@ -19,7 +19,7 @@ public class botBehavior : MonoBehaviour {
     }
 
     public void OnEnable() {
-
+		Debug.Log ("Enable");
     }
     public void OnDisable()
     {

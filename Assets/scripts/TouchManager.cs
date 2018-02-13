@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TouchData : MonoBehaviour
+public class TouchManager : MonoBehaviour
 {
 
 
@@ -67,7 +67,18 @@ public class TouchData : MonoBehaviour
 
     }
 
+	void OnEnable() {
+		Debug.Log ("OnEnable");
+		AbstractReader.OnTouch += processOnTouch;
+	}
 
+	void OnDisable() {
+		AbstractReader.OnTouch -= processOnTouch;
+	}
+
+	private void processOnTouch(TouchedBots t_) {
+		
+	}
     
 
     public void updateData(string value)
@@ -82,8 +93,8 @@ public class TouchData : MonoBehaviour
         {
             if (!gameObject.GetComponent<AudioSource>().isPlaying)
             {
-                gameObject.GetComponent<AudioSource>().clip = touchsound[0] as AudioClip;
-                gameObject.GetComponent<AudioSource>().Play();
+                //gameObject.GetComponent<AudioSource>().clip = touchsound[0] as AudioClip;
+                //gameObject.GetComponent<AudioSource>().Play();
                 if(OnBoxOneTwoTouched != null)
                     OnBoxOneTwoTouched(); 
             }
@@ -101,8 +112,8 @@ public class TouchData : MonoBehaviour
         {
             if (!gameObject.GetComponent<AudioSource>().isPlaying)
             {
-                gameObject.GetComponent<AudioSource>().clip = touchsound[1] as AudioClip;
-                gameObject.GetComponent<AudioSource>().Play();
+                //gameObject.GetComponent<AudioSource>().clip = touchsound[1] as AudioClip;
+                //gameObject.GetComponent<AudioSource>().Play();
                 if (OnBoxTwoThreeTouched != null)
                     OnBoxTwoThreeTouched();
             }
@@ -121,8 +132,8 @@ public class TouchData : MonoBehaviour
            
             if (!gameObject.GetComponent<AudioSource>().isPlaying)
             {
-                gameObject.GetComponent<AudioSource>().clip = touchsound[2] as AudioClip;
-                gameObject.GetComponent<AudioSource>().Play();
+                //gameObject.GetComponent<AudioSource>().clip = touchsound[2] as AudioClip;
+                //gameObject.GetComponent<AudioSource>().Play();
                 if (OnBoxOneThreeTouched != null)
                     OnBoxOneThreeTouched();
             }
@@ -141,8 +152,8 @@ public class TouchData : MonoBehaviour
         {
             if (!gameObject.GetComponent<AudioSource>().isPlaying)
             {
-                gameObject.GetComponent<AudioSource>().clip = touchsound[3] as AudioClip;
-                gameObject.GetComponent<AudioSource>().Play();
+                //gameObject.GetComponent<AudioSource>().clip = touchsound[3] as AudioClip;
+                //gameObject.GetComponent<AudioSource>().Play();
                 if (OnAllBoxesConnected != null) {
                     OnAllBoxesConnected(); 
                 } 

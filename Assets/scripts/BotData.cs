@@ -14,6 +14,9 @@ public class BotData : MonoBehaviour
     public static ArrayList compass = new ArrayList();
     public static int btn;
     private static string[] sensors;
+	public GameObject bot1;
+	public GameObject bot2;
+	public GameObject bot3;
     
 
     public int integratedCompass;
@@ -25,6 +28,14 @@ public class BotData : MonoBehaviour
     public void Start() {
 
     }
+
+	void OnEnable() {
+		AbstractReader.OnBotDataReceived += processData;
+	}
+
+	private void processData(Bot b) {
+		Debug.Log ("processData");
+	}
     
     public void updateData(string values)
 
@@ -70,18 +81,18 @@ public class BotData : MonoBehaviour
                 Debug.Log("btn 1 fired");
                 //flip on the bool that checks if it is down on so it does not trigger repeatedly. 
                 btn1Down = 1;
-                bot1.GetComponent<botBehavior>().triggerSound(); //trigger the sound 
-                var colors = btn1.colors;
-                colors.normalColor = Color.red;
-                btn1.colors = colors;
+                //bot1.GetComponent<botBehavior>().triggerSound(); //trigger the sound 
+                //var colors = btn1.colors;
+                //colors.normalColor = Color.red;
+                //btn1.colors = colors;
             }
             else if (btn == 0)
             {
                 btn1Down = 0; //reset the btn flag so the button can fire again 
                               //create a color then assign it through to the btn to show it's off now 
-                var colors = btn1.colors;
-                colors.normalColor = Color.green;
-                btn1.colors = colors;
+                //var colors = btn1.colors;
+                //colors.normalColor = Color.green;
+                //btn1.colors = colors;
             }
 
         } else if (botName == "botTwo")
@@ -108,17 +119,17 @@ public class BotData : MonoBehaviour
                 Debug.Log("btn 2 fired");
                 //flip on the bool that checks if it is down on so it does not trigger repeatedly. 
                 btn2Down = 1;
-                bot2.GetComponent<botBehavior>().triggerSound(); //trigger the sound 
-                var colors = btn2.colors;
-                colors.normalColor = Color.red;
-                btn2.colors = colors;
+                //bot2.GetComponent<botBehavior>().triggerSound(); //trigger the sound 
+                //var colors = btn2.colors;
+                //colors.normalColor = Color.red;
+                //btn2.colors = colors;
             } else if (btn == 0)
             {
                 btn2Down = 0; //reset the btn flag so the button can fire again
                               //create a color then assign it through to the btn to show it's off now 
-                var colors = btn2.colors;
-                colors.normalColor = Color.green;
-                btn2.colors = colors;
+                //var colors = btn2.colors;
+                //colors.normalColor = Color.green;
+                //btn2.colors = colors;
             }
         } else if (botName == "botThree")
         {
@@ -145,17 +156,17 @@ public class BotData : MonoBehaviour
                 Debug.Log("btn 3 fired");
                 //flip on the bool that checks if it is down on so it does not trigger repeatedly. 
                 btn3Down = 1;
-                bot3.GetComponent<botBehavior>().triggerSound(); //trigger the sound 
-                var colors = btn3.colors;
-                colors.normalColor = Color.red;
-                btn3.colors = colors;
+                //bot3.GetComponent<botBehavior>().triggerSound(); //trigger the sound 
+                //var colors = btn3.colors;
+                //colors.normalColor = Color.red;
+                //btn3.colors = colors;
             } else if (btn == 0)
             {
                 btn3Down = 0; //reset the btn flag so the button can fire again 
                               //create a color then assign it through to the btn to show it's off now 
-                var colors = btn3.colors;
-                colors.normalColor = Color.green;
-                btn3.colors = colors;
+                //var colors = btn3.colors;
+                //colors.normalColor = Color.green;
+                //btn3.colors = colors;
             }
       }
     

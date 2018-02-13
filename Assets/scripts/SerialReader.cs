@@ -21,46 +21,23 @@ public static class AppHelper
     }
 }
 
-public struct Bot {
-    public static string name;
-    public static string compass;
-    public static string xpos;
-    public static string ypos;
-    public static string zpos;
-    public static string btn;
-}
+//public struct Colors {
+ //   public static Color     
+//} 
 
-public struct TouchedBots {
-    public static string botsTouched;
-    public static string touch; 
-}
-
-public struct Colors {
-    public static Color     
-} 
-
-public class SerialReader : MonoBehaviour
+public class SerialReader : AbstractReader
 {
 
-    SerialPort stream = new SerialPort("COM3", 115200); //this is for the port you're on = it has to match what arduino is plugged into       
+    SerialPort stream = new SerialPort("COM5", 115200); //this is for the port you're on = it has to match what arduino is plugged into       
 
    
 
     string incommingData;
     // Use this for initialization
-    protected Bot b;
-    protected TouchedBots touchedBots;
-    public delegate void BotDataReceived(Bot b_);
-    public static event BotDataReceived OnBotDataReceived;
-
-    public delegate void TouchDataReceived(TouchedBots t_);
-    public static event TouchDataReceived OnTouch;
 
     void Start()
     {
 
-        Bot bot = new Bot();
-        TouchedBots touchedBots = new TouchedBots(); 
         // Get a list of serial port names in case we are not dealing with com3 .
         string[] ports = SerialPort.GetPortNames();
 
@@ -81,25 +58,20 @@ public class SerialReader : MonoBehaviour
                 string [] sensors = incommingData.Split(' ');
                 if (sensors.Length > 1 && sensors.Length < 4)
                 {
-                    Bot.name = sensors[0];
-                    Bot.name = sensors[1];
-                    if (OnTouch != null) {
-                        OnTouch(touchedBots); 
-                    }
+                    //Bot.name = sensors[0];
+                    //Bot.name = sensors[1];
+                    //if (OnTouch != null) {
+		passOnTouch(new TouchedBots(sensors[0], sensors[1])); 
+                    //}
 
                 }
                 else if (sensors.Length == 6)
                 {
-                    Bot.name = sensors[0];
-                    Bot.compass = sensors[1];
-                    Bot.xpos = sensors[2];
-                    Bot.ypos = sensors[3];
-                    Bot.zpos = sensors[4];
-                    Bot.btn = sensors[5]; 
+					
 
-                    if (OnBotDataReceived != null) {
-                        OnBotDataReceived(bot); 
-                    } 
+                    //if (OnBotDataReceived != null) {
+					passOnBotDataReceived(new Bot(sensors[0], sensors[1], sensors[2], sensors[3], sensors[4], sensors[5])); 
+                    //} 
 
                
                 }

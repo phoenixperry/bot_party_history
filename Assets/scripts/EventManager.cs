@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EventManager : MonoBehaviour {
+}
 
 
     //these are the events you can resister functions to if you want to listen for touch events. 
@@ -12,11 +13,11 @@ public class EventManager : MonoBehaviour {
      *  {
      *      public void onEnable()
      *      {
-     *          TouchData.OnBoxOneTwoTouched += myFunction;  
+     *          TouchManager.OnBoxOneTwoTouched += myFunction;  
      *      }
      *      public void onDisable
      *      {
-     *          TouchData.OnBoxOneTwoTouched -= myFunctions; 
+     *          TouchManager.OnBoxOneTwoTouched -= myFunctions; 
      *      }
      *      void myFunction() {
      *          //nonsense to have happen when box one and two are touched. 
@@ -38,7 +39,4 @@ public class EventManager : MonoBehaviour {
 
 
 
-    public delegate void
-
-
-} 
+    //public delegate void

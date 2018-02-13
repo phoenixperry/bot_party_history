@@ -8,32 +8,32 @@ public class EventTestExample : MonoBehaviour {
  
     public void OnEnable()
     {
-        TouchData.OnBoxOneTwoTouched += testFunctionOneTouch;
-        TouchData.OnBoxOneTwoReleased += testFunctionOneRelease;
+        TouchManager.OnBoxOneTwoTouched += testFunctionOneTouch;
+        TouchManager.OnBoxOneTwoReleased += testFunctionOneRelease;
 
-        TouchData.OnBoxOneThreeTouched += testFunctionTwoTouch;
-        TouchData.OnBoxOneThreeReleased += testFunctionTwoRelease;
+        TouchManager.OnBoxOneThreeTouched += testFunctionTwoTouch;
+        TouchManager.OnBoxOneThreeReleased += testFunctionTwoRelease;
 
-        TouchData.OnBoxTwoThreeTouched += testFunction3Touch;
-        TouchData.OnBoxTwoThreeReleased += testFunction3Release;
+        TouchManager.OnBoxTwoThreeTouched += testFunction3Touch;
+        TouchManager.OnBoxTwoThreeReleased += testFunction3Release;
 
-        TouchData.OnAllBoxesConnected += testFunction4Touch;
-        TouchData.OnAllBoxesReleased += testFunction4Release; 
+        TouchManager.OnAllBoxesConnected += testFunction4Touch;
+        TouchManager.OnAllBoxesReleased += testFunction4Release; 
     }
     //here's how to unsubscibe - if you do one, you must do the other! 
     public void OnDisable() {
 
-        TouchData.OnBoxOneTwoTouched -= testFunctionOneTouch;
-        TouchData.OnBoxOneTwoReleased -= testFunctionOneRelease;
+        TouchManager.OnBoxOneTwoTouched -= testFunctionOneTouch;
+        TouchManager.OnBoxOneTwoReleased -= testFunctionOneRelease;
 
-        TouchData.OnBoxOneThreeTouched -= testFunctionTwoTouch;
-        TouchData.OnBoxOneThreeReleased -= testFunctionTwoRelease;
+        TouchManager.OnBoxOneThreeTouched -= testFunctionTwoTouch;
+        TouchManager.OnBoxOneThreeReleased -= testFunctionTwoRelease;
 
-        TouchData.OnBoxTwoThreeTouched -= testFunction3Touch;
-        TouchData.OnBoxTwoThreeReleased -= testFunction3Release;
+        TouchManager.OnBoxTwoThreeTouched -= testFunction3Touch;
+        TouchManager.OnBoxTwoThreeReleased -= testFunction3Release;
 
-        TouchData.OnAllBoxesConnected -= testFunction4Touch;
-        TouchData.OnAllBoxesReleased -= testFunction4Release;
+        TouchManager.OnAllBoxesConnected -= testFunction4Touch;
+        TouchManager.OnAllBoxesReleased -= testFunction4Release;
 
     }
 

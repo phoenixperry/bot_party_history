@@ -16,32 +16,32 @@ public class BotManager : MonoBehaviour {
 
     public void OnEnable()
     {
-        TouchData.OnBoxOneTwoTouched += BoxOneTwoConnected;
-        TouchData.OnBoxOneTwoReleased += BoxOneTwoReleased;
+        TouchManager.OnBoxOneTwoTouched += BoxOneTwoConnected;
+        TouchManager.OnBoxOneTwoReleased += BoxOneTwoReleased;
 
-        TouchData.OnBoxOneThreeTouched += BoxOneThreeConnected;
-        TouchData.OnBoxOneThreeReleased += BoxOneThreeReleased;
+        TouchManager.OnBoxOneThreeTouched += BoxOneThreeConnected;
+        TouchManager.OnBoxOneThreeReleased += BoxOneThreeReleased;
 
-        TouchData.OnBoxTwoThreeTouched += BoxTwoThreeConnected;
-        TouchData.OnBoxTwoThreeReleased += BoxTwoThreeReleased;
+        TouchManager.OnBoxTwoThreeTouched += BoxTwoThreeConnected;
+        TouchManager.OnBoxTwoThreeReleased += BoxTwoThreeReleased;
 
-        TouchData.OnAllBoxesConnected += AllConnected;
-        TouchData.OnAllBoxesReleased += AllReleased;
+        TouchManager.OnAllBoxesConnected += AllConnected;
+        TouchManager.OnAllBoxesReleased += AllReleased;
     }
     //here's how to unsubscibe - if you do one, you must do the other! 
     public void OnDisable()
     {
-        TouchData.OnBoxOneTwoTouched -= BoxOneTwoConnected;
-        TouchData.OnBoxOneTwoReleased -= BoxOneTwoReleased;
+        TouchManager.OnBoxOneTwoTouched -= BoxOneTwoConnected;
+        TouchManager.OnBoxOneTwoReleased -= BoxOneTwoReleased;
 
-        TouchData.OnBoxOneThreeTouched -= BoxOneThreeConnected;
-        TouchData.OnBoxOneThreeReleased -= BoxOneThreeReleased;
+        TouchManager.OnBoxOneThreeTouched -= BoxOneThreeConnected;
+        TouchManager.OnBoxOneThreeReleased -= BoxOneThreeReleased;
 
-        TouchData.OnBoxTwoThreeTouched -= BoxTwoThreeConnected;
-        TouchData.OnBoxTwoThreeReleased -= BoxTwoThreeReleased;
+        TouchManager.OnBoxTwoThreeTouched -= BoxTwoThreeConnected;
+        TouchManager.OnBoxTwoThreeReleased -= BoxTwoThreeReleased;
 
-        TouchData.OnAllBoxesConnected -= AllConnected;
-        TouchData.OnAllBoxesReleased -= AllReleased;
+        TouchManager.OnAllBoxesConnected -= AllConnected;
+        TouchManager.OnAllBoxesReleased -= AllReleased;
 
     }
 
@@ -85,7 +85,7 @@ public class BotManager : MonoBehaviour {
     }
     public void BoxOneTwoConnected()
     {
-
+		Debug.Log ("BoxOneTwoConnected");
     }
     public void BoxOneTwoReleased()
     {
