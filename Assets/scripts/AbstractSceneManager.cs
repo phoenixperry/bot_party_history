@@ -40,6 +40,16 @@ public abstract class AbstractSceneManager : MonoBehaviour {
 
 		BotData.OnBoxThreeButtonDown += BoxThreeButtonDown;
 		BotData.OnBoxThreeButtonUp += BoxThreeButtonUp;
+
+		BotData.OnBoxOneStartMoving += BoxOneStartMoving;
+		BotData.OnBoxOneStopMoving += BoxOneStopMoving;
+
+		BotData.OnBoxTwoStartMoving += BoxTwoStartMoving;
+		BotData.OnBoxTwoStopMoving += BoxTwoStopMoving;
+
+		BotData.OnBoxThreeStartMoving += BoxThreeStartMoving;
+		BotData.OnBoxThreeStopMoving += BoxThreeStopMoving;
+
 	}
 	//here's how to unsubscibe - if you do one, you must do the other! 
 	public void OnDisable()
@@ -64,6 +74,15 @@ public abstract class AbstractSceneManager : MonoBehaviour {
 
 		BotData.OnBoxThreeButtonDown -= BoxThreeButtonDown;
 		BotData.OnBoxThreeButtonUp -= BoxThreeButtonUp;
+
+		BotData.OnBoxOneStartMoving -= BoxOneStartMoving;
+		BotData.OnBoxOneStopMoving -= BoxOneStopMoving;
+
+		BotData.OnBoxTwoStartMoving -= BoxTwoStartMoving;
+		BotData.OnBoxTwoStopMoving -= BoxTwoStopMoving;
+
+		BotData.OnBoxThreeStartMoving -= BoxThreeStartMoving;
+		BotData.OnBoxThreeStopMoving -= BoxThreeStopMoving;
 
 	}
 
@@ -129,6 +148,28 @@ public abstract class AbstractSceneManager : MonoBehaviour {
 
 	}
 	public virtual void BoxThreeButtonUp() {
+
+	}
+
+	// Accelerometer events
+	public virtual void BoxOneStartMoving() {
+
+	}
+	public virtual void BoxOneStopMoving() {
+
+	}
+
+	public virtual void BoxTwoStartMoving() {
+
+	}
+	public virtual void BoxTwoStopMoving() {
+
+	}
+
+	public virtual void BoxThreeStartMoving() {
+
+	}
+	public virtual void BoxThreeStopMoving() {
 
 	}
 }

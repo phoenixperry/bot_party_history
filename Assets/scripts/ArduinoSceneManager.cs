@@ -72,4 +72,34 @@ public class ArduinoSceneManager : AbstractSceneManager {
 		Button button = btnInterface.transform.Find ("botBtn3").GetComponent<Button> ();
 		button.CancelInvoke ();
 	}
+
+	public override void BoxOneStartMoving()
+	{
+		gameObject.transform.Find ("Move1").GetComponent<TextMesh> ().text = "1: Moving";
+	}
+
+	public override void BoxOneStopMoving()
+	{
+		gameObject.transform.Find ("Move1").GetComponent<TextMesh> ().text = "1: At rest";
+	}
+
+	public override void BoxTwoStartMoving()
+	{
+		gameObject.transform.Find ("Move2").GetComponent<TextMesh> ().text = "2: Moving";
+	}
+
+	public override void BoxTwoStopMoving()
+	{
+		gameObject.transform.Find ("Move2").GetComponent<TextMesh> ().text = "2: At rest";
+	}
+
+	public override void BoxThreeStartMoving()
+	{
+		gameObject.transform.Find ("Move3").GetComponent<TextMesh> ().text = "3: Moving";
+	}
+
+	public override void BoxThreeStopMoving()
+	{
+		gameObject.transform.Find ("Move3").GetComponent<TextMesh> ().text = "3: At rest";
+	}
 }

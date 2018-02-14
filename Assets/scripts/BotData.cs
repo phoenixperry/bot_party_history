@@ -41,6 +41,24 @@ public class BotData : MonoBehaviour
 	public static event BoxThreeButtonDown OnBoxThreeButtonDown;
 	public delegate void BoxThreeButtonUp();
 	public static event BoxThreeButtonUp OnBoxThreeButtonUp;
+
+	public delegate void BoxOneStartMoving();
+	public static event BoxOneStartMoving OnBoxOneStartMoving;
+
+	public delegate void BoxOneStopMoving ();
+	public static event BoxOneStopMoving OnBoxOneStopMoving;
+
+	public delegate void BoxTwoStartMoving();
+	public static event BoxTwoStartMoving OnBoxTwoStartMoving;
+
+	public delegate void BoxTwoStopMoving ();
+	public static event BoxTwoStopMoving OnBoxTwoStopMoving;
+
+	public delegate void BoxThreeStartMoving();
+	public static event BoxThreeStartMoving OnBoxThreeStartMoving;
+
+	public delegate void BoxThreeStopMoving ();
+	public static event BoxThreeStopMoving OnBoxThreeStopMoving;
    
     public void Start() {
 
@@ -65,12 +83,77 @@ public class BotData : MonoBehaviour
 
 	private void processBotDifference(Bot b1, Bot b2)
 	{
-		// To implement: send the actual buttonup/down events
 		if (b2.name == "") return;
+
+		// Deals with button presses
 		if (b1.btn == "1" && b2.btn == "0") {
 			doButtonDownFor (b1);
 		} else if (b1.btn == "0" && b2.btn == "1") {
 			doButtonUpFor (b1);
+		}
+
+		processAccelerometer (b2, b1);
+
+	}
+	public static double DELTA = 0.25;
+	public static double THRESHOLD = 5;
+	public static double CAP = 10;
+	public static double STICKINESS = 0.5;
+	public double bot1_mv_avg = 0.0;
+	public double bot2_mv_avg = 0.0;
+	public double bot3_mv_avg = 0.0;
+	public bool box1_moving = false;
+	public bool box2_moving = false;
+	public bool box3_moving = false;
+
+	/*
+	 * This works by taking a weighted moving average of the speed
+	 * v(t+1) = new * d + (1-d) * v(t)
+	 * if v(t+1) > T and v(t) < T then Move event
+	 * if v(t+1) < T and v(t) > T then Stop Move event
+	 * If new > CAP then new = cap (to stop large movement frames from skewing the data too much)
+	 */
+	private void processAccelerometer(Bot b1, Bot b2)
+	{
+		int b1x, b2x, b1y, b2y, b1z, b2z;
+		int.TryParse(b1.xpos, out b1x); 		int.TryParse(b2.xpos, out b2x);
+		int.TryParse(b1.ypos, out b1y); 		int.TryParse(b2.ypos, out b2y);
+		int.TryParse(b1.zpos, out b1z); 		int.TryParse(b2.zpos, out b2z);
+		double magnitude_change = Mathf.Sqrt (Mathf.Pow((b1x - b2x),2) + Mathf.Pow((b1y - b2y),2) + Mathf.Pow((b1z - b2z), 2));
+		if (magnitude_change > CAP) {
+			magnitude_change = CAP;
+		}
+		double new_mv_avg;			
+		if (b1.name == "botOne") {
+			new_mv_avg = DELTA * magnitude_change + (1 - DELTA) * bot1_mv_avg;
+			if (!box1_moving && new_mv_avg > THRESHOLD) {
+				box1_moving = true;
+				OnBoxOneStartMoving ();
+			} else if (box1_moving && new_mv_avg < THRESHOLD-STICKINESS) {
+				box1_moving = false;
+				OnBoxOneStopMoving ();
+			}
+			bot1_mv_avg = new_mv_avg;
+		} else if (b1.name == "botTwo") {
+			new_mv_avg = DELTA * magnitude_change + (1 - DELTA) * bot2_mv_avg;
+			if (!box2_moving && new_mv_avg > THRESHOLD) {
+				box2_moving = true;
+				OnBoxTwoStartMoving ();
+			} else if (box2_moving && new_mv_avg < THRESHOLD-STICKINESS) {
+				box2_moving = false;
+				OnBoxTwoStopMoving ();
+			}
+			bot2_mv_avg = new_mv_avg;
+		} else if (b1.name == "botThree") {
+			new_mv_avg = DELTA * magnitude_change + (1 - DELTA) * bot3_mv_avg;
+			if (!box3_moving && new_mv_avg > THRESHOLD) {
+				box3_moving = true;
+				OnBoxThreeStartMoving ();
+			} else if (box3_moving && new_mv_avg < THRESHOLD-STICKINESS) {
+				box3_moving = false;
+				OnBoxThreeStopMoving ();
+			}
+			bot3_mv_avg = new_mv_avg;
 		}
 	}
 

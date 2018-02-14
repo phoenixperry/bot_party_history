@@ -40,16 +40,16 @@ public class SerialReader : AbstractReader
 		string[] ports = SerialPort.GetPortNames ();
 		if (ports.Length == 0) {
 			Debug.Log ("No serial port found.");
-			return ""; // How do I deal with errors here hmm.
+			return "";
 		}
-		return ports [0];
+		return ports [0]; // TODO: At present this uses the first found serial input. --cap
 		}
 
 		void OnEnable() {
 			string port = getSerialPort ();
 		if (port == "") {
 		Debug.Log ("Terminating stream enable...\n (Hint: Hit semicolon (;) to switch to keyboard input.)");
-				return; // Case that there is no port
+				return; // TODO: The case of there not being input is handled a little inelegantly. --cap
 		}
 			stream = new SerialPort (port, 115200);
 			Debug.Log ("Opening stream...");
