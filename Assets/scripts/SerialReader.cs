@@ -47,7 +47,10 @@ public class SerialReader : AbstractReader
 
 		void OnEnable() {
 			string port = getSerialPort ();
-			Debug.Log ("Opening up autodetected serial port: " + port);
+		if (port == "") {
+		Debug.Log ("Terminating stream enable...\n (Hint: Hit semicolon (;) to switch to keyboard input.)");
+				return; // Case that there is no port
+		}
 			stream = new SerialPort (port, 115200);
 			Debug.Log ("Opening stream...");
 			stream.Open ();
@@ -56,8 +59,10 @@ public class SerialReader : AbstractReader
 		}
 
 		void OnDisable() {
+		if (stream != null) {
 			Debug.Log ("Closing stream.");
 			stream.Close ();
+		}
 		}
 
     void Start()

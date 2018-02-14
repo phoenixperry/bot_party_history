@@ -23,9 +23,13 @@ public class SpawnGame : MonoBehaviour {
 	}
 
 	void switchControls(bool serial) {
-		Debug.Log ("Switching controls. Serial: " + serial);
 		serialDataManager.SetActive (serial);
 		keyboardDataManager.SetActive(!serial);
+		if (serial) {
+			Debug.Log ("Switched to Serial Control");
+		} else {
+			Debug.Log ("Switched to Keyboard Control");
+		}
 	} 
 	
 	// Update is called once per frame
