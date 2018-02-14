@@ -14,7 +14,7 @@ public class BotManager : MonoBehaviour {
     public GameObject bot3;
 
 
-    public void OnEnable()
+    public void OnEnable()	
     {
         TouchManager.OnBoxOneTwoTouched += BoxOneTwoConnected;
         TouchManager.OnBoxOneTwoReleased += BoxOneTwoReleased;
