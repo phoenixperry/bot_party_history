@@ -8,7 +8,7 @@ public class EventTestExample : MonoBehaviour {
  
     public void OnEnable()
     {
-        TouchManager.OnBoxOneTwoTouched += testFunctionOneTouch;
+        /*TouchManager.OnBoxOneTwoTouched += testFunctionOneTouch;
         TouchManager.OnBoxOneTwoReleased += testFunctionOneRelease;
 
         TouchManager.OnBoxOneThreeTouched += testFunctionTwoTouch;
@@ -18,7 +18,7 @@ public class EventTestExample : MonoBehaviour {
         TouchManager.OnBoxTwoThreeReleased += testFunction3Release;
 
         TouchManager.OnAllBoxesConnected += testFunction4Touch;
-        TouchManager.OnAllBoxesReleased += testFunction4Release; 
+        TouchManager.OnAllBoxesReleased += testFunction4Release;*/
     }
     //here's how to unsubscibe - if you do one, you must do the other! 
     public void OnDisable() {
