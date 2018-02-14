@@ -63,11 +63,11 @@ public class TouchManager : MonoBehaviour
     }
 
 	void OnEnable() {
-		AbstractReader.OnTouch += processOnTouch;
+        AbstractInputReader.OnTouch += processOnTouch;
 	}
 
 	void OnDisable() {
-		AbstractReader.OnTouch -= processOnTouch;
+        AbstractInputReader.OnTouch -= processOnTouch;
 	}
 
 	private void processOnTouch(TouchedBots t_) {

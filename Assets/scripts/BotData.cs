@@ -68,7 +68,7 @@ public class BotData : MonoBehaviour
     }
 
 	void OnEnable() {
-		AbstractReader.OnBotDataReceived += processData;
+        AbstractInputReader.OnBotDataReceived += processData;
 	}
 
 	private void processData(Bot b) {

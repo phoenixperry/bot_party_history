@@ -31,7 +31,7 @@ public struct TouchedBots {
 	public string touch; 
 }
 
-public class AbstractReader : MonoBehaviour {
+public class AbstractInputReader : MonoBehaviour {
 	protected Bot b;
 	protected TouchedBots touchedBots;
 	public delegate void BotDataReceived(Bot b_);

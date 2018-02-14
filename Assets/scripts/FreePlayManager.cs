@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ArduinoSceneManager : AbstractSceneManager {
+public class FreePlayManager : AbstractManager {
 	public ArrayList touchsound = new ArrayList();
 	public AudioClip onetwo, twothree, onethree, allthree;
 	public GameObject btnInterface;

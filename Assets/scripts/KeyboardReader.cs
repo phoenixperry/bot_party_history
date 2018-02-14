@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KeyboardReader : AbstractReader {
+public class KeyboardReader : AbstractInputReader {
 
 	// Use this for initialization
 	// Update is called once per frame
