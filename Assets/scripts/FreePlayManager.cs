@@ -93,18 +93,19 @@ public class FreePlayManager : AbstractManager {
 
 	public override void BoxOneStartMoving(double speed)
 	{
-		gameObject.GetComponent<AudioSource> ().Play ();
+		gameObject.transform.Find("MeowBot").GetComponent<AudioSource> ().Play ();
+		BoxOneContinueMoving (speed);
 		gameObject.transform.Find ("Move1").GetComponent<TextMesh> ().text = "1: Moving";
 	}
 
 	public override void BoxOneContinueMoving(double speed)
 	{
-		gameObject.GetComponent<AudioSource> ().pitch = (float)(speed / 7.5);
+		gameObject.transform.Find("MeowBot").GetComponent<AudioSource> ().pitch = (float)(speed / 7.5);
 	}
 
 	public override void BoxOneStopMoving()
 	{
-		gameObject.GetComponent<AudioSource> ().Stop ();
+		gameObject.transform.Find("MeowBot").GetComponent<AudioSource> ().Stop ();
 		gameObject.transform.Find ("Move1").GetComponent<TextMesh> ().text = "1: At rest";
 	}
 
