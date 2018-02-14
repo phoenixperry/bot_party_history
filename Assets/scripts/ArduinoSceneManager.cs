@@ -43,45 +43,33 @@ public class ArduinoSceneManager : AbstractSceneManager {
 	public override void BoxOneButtonDown ()
 	{
 		Button button = btnInterface.transform.Find ("botBtn1").GetComponent<Button> ();
-		ColorBlock cb = button.colors;
-		cb.normalColor = Color.red;
-		button.colors = cb;
+		button.onClick.Invoke ();
 	}
 	public override void BoxOneButtonUp ()
 	{
 		Button button = btnInterface.transform.Find ("botBtn1").GetComponent<Button> ();
-		ColorBlock cb = button.colors;
-		cb.normalColor = Color.green;
-		button.colors = cb;	
+		button.CancelInvoke ();
 	}
 
 	public override void BoxTwoButtonDown ()
 	{
 		Button button = btnInterface.transform.Find ("botBtn2").GetComponent<Button> ();
-		ColorBlock cb = button.colors;
-		cb.normalColor = Color.red;
-		button.colors = cb;
+		button.onClick.Invoke ();
 	}
 	public override void BoxTwoButtonUp ()
 	{
 		Button button = btnInterface.transform.Find ("botBtn2").GetComponent<Button> ();
-		ColorBlock cb = button.colors;
-		cb.normalColor = Color.green;
-		button.colors = cb;	
+		button.CancelInvoke ();
 	}
 
 	public override void BoxThreeButtonDown ()
 	{
 		Button button = btnInterface.transform.Find ("botBtn3").GetComponent<Button> ();
-		ColorBlock cb = button.colors;
-		cb.normalColor = Color.red;
-		button.colors = cb;
+		button.onClick.Invoke ();
 	}
 	public override void BoxThreeButtonUp ()
 	{
 		Button button = btnInterface.transform.Find ("botBtn3").GetComponent<Button> ();
-		ColorBlock cb = button.colors;
-		cb.normalColor = Color.green;
-		button.colors = cb;	
+		button.CancelInvoke ();
 	}
 }
