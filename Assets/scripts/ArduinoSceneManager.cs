@@ -91,17 +91,24 @@ public class ArduinoSceneManager : AbstractSceneManager {
 		button.CancelInvoke ();
 	}
 
-	public override void BoxOneStartMoving()
+	public override void BoxOneStartMoving(double speed)
 	{
+		gameObject.GetComponent<AudioSource> ().Play ();
 		gameObject.transform.Find ("Move1").GetComponent<TextMesh> ().text = "1: Moving";
+	}
+
+	public override void BoxOneContinueMoving(double speed)
+	{
+		gameObject.GetComponent<AudioSource> ().pitch = (float)(speed / 7.5);
 	}
 
 	public override void BoxOneStopMoving()
 	{
+		gameObject.GetComponent<AudioSource> ().Stop ();
 		gameObject.transform.Find ("Move1").GetComponent<TextMesh> ().text = "1: At rest";
 	}
 
-	public override void BoxTwoStartMoving()
+	public override void BoxTwoStartMoving(double speed)
 	{
 		gameObject.transform.Find ("Move2").GetComponent<TextMesh> ().text = "2: Moving";
 	}
@@ -111,7 +118,7 @@ public class ArduinoSceneManager : AbstractSceneManager {
 		gameObject.transform.Find ("Move2").GetComponent<TextMesh> ().text = "2: At rest";
 	}
 
-	public override void BoxThreeStartMoving()
+	public override void BoxThreeStartMoving(double speed)
 	{
 		gameObject.transform.Find ("Move3").GetComponent<TextMesh> ().text = "3: Moving";
 	}

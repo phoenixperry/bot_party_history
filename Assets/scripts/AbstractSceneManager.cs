@@ -42,12 +42,15 @@ public abstract class AbstractSceneManager : MonoBehaviour {
 		BotData.OnBoxThreeButtonUp += BoxThreeButtonUp;
 
 		BotData.OnBoxOneStartMoving += BoxOneStartMoving;
+		BotData.OnBoxOneContinueMoving += BoxOneContinueMoving;
 		BotData.OnBoxOneStopMoving += BoxOneStopMoving;
 
 		BotData.OnBoxTwoStartMoving += BoxTwoStartMoving;
+		BotData.OnBoxTwoContinueMoving += BoxTwoContinueMoving;
 		BotData.OnBoxTwoStopMoving += BoxTwoStopMoving;
 
 		BotData.OnBoxThreeStartMoving += BoxThreeStartMoving;
+		BotData.OnBoxThreeContinueMoving += BoxThreeContinueMoving;
 		BotData.OnBoxThreeStopMoving += BoxThreeStopMoving;
 
 	}
@@ -76,12 +79,15 @@ public abstract class AbstractSceneManager : MonoBehaviour {
 		BotData.OnBoxThreeButtonUp -= BoxThreeButtonUp;
 
 		BotData.OnBoxOneStartMoving -= BoxOneStartMoving;
+		BotData.OnBoxOneContinueMoving -= BoxOneContinueMoving;
 		BotData.OnBoxOneStopMoving -= BoxOneStopMoving;
 
 		BotData.OnBoxTwoStartMoving -= BoxTwoStartMoving;
+		BotData.OnBoxTwoContinueMoving -= BoxTwoContinueMoving;
 		BotData.OnBoxTwoStopMoving -= BoxTwoStopMoving;
 
 		BotData.OnBoxThreeStartMoving -= BoxThreeStartMoving;
+		BotData.OnBoxThreeContinueMoving -= BoxThreeContinueMoving;
 		BotData.OnBoxThreeStopMoving -= BoxThreeStopMoving;
 
 	}
@@ -152,21 +158,30 @@ public abstract class AbstractSceneManager : MonoBehaviour {
 	}
 
 	// Accelerometer events
-	public virtual void BoxOneStartMoving() {
+	public virtual void BoxOneStartMoving(double speed) {
+		
+	}
+	public virtual void BoxOneContinueMoving(double speed) {
 
 	}
 	public virtual void BoxOneStopMoving() {
 
 	}
 
-	public virtual void BoxTwoStartMoving() {
+	public virtual void BoxTwoStartMoving(double speed) {
+
+	}
+	public virtual void BoxTwoContinueMoving(double speed) {
 
 	}
 	public virtual void BoxTwoStopMoving() {
 
 	}
 
-	public virtual void BoxThreeStartMoving() {
+	public virtual void BoxThreeStartMoving(double speed) {
+
+	}
+	public virtual void BoxThreeContinueMoving(double speed) {
 
 	}
 	public virtual void BoxThreeStopMoving() {

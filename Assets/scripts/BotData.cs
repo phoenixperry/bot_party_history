@@ -42,21 +42,24 @@ public class BotData : MonoBehaviour
 	public delegate void BoxThreeButtonUp();
 	public static event BoxThreeButtonUp OnBoxThreeButtonUp;
 
-	public delegate void BoxOneStartMoving();
+	public delegate void BoxOneStartMoving(double speed);
 	public static event BoxOneStartMoving OnBoxOneStartMoving;
-
+	public delegate void BoxOneContinueMoving(double speed);
+	public static event BoxOneContinueMoving OnBoxOneContinueMoving;
 	public delegate void BoxOneStopMoving ();
 	public static event BoxOneStopMoving OnBoxOneStopMoving;
 
-	public delegate void BoxTwoStartMoving();
+	public delegate void BoxTwoStartMoving(double speed);
 	public static event BoxTwoStartMoving OnBoxTwoStartMoving;
-
+	public delegate void BoxTwoContinueMoving(double speed);
+	public static event BoxTwoContinueMoving OnBoxTwoContinueMoving;
 	public delegate void BoxTwoStopMoving ();
 	public static event BoxTwoStopMoving OnBoxTwoStopMoving;
 
-	public delegate void BoxThreeStartMoving();
+	public delegate void BoxThreeStartMoving(double speed);
 	public static event BoxThreeStartMoving OnBoxThreeStartMoving;
-
+	public delegate void BoxThreeContinueMoving(double speed);
+	public static event BoxThreeContinueMoving OnBoxThreeContinueMoving;
 	public delegate void BoxThreeStopMoving ();
 	public static event BoxThreeStopMoving OnBoxThreeStopMoving;
    
@@ -128,30 +131,36 @@ public class BotData : MonoBehaviour
 			new_mv_avg = DELTA * magnitude_change + (1 - DELTA) * bot1_mv_avg;
 			if (!box1_moving && new_mv_avg > THRESHOLD) {
 				box1_moving = true;
-				OnBoxOneStartMoving ();
-			} else if (box1_moving && new_mv_avg < THRESHOLD-STICKINESS) {
+				OnBoxOneStartMoving (new_mv_avg);
+			} else if (box1_moving && new_mv_avg < THRESHOLD - STICKINESS) {
 				box1_moving = false;
 				OnBoxOneStopMoving ();
+			} else if (box1_moving) {
+				OnBoxOneContinueMoving (new_mv_avg);
 			}
 			bot1_mv_avg = new_mv_avg;
 		} else if (b1.name == "botTwo") {
 			new_mv_avg = DELTA * magnitude_change + (1 - DELTA) * bot2_mv_avg;
 			if (!box2_moving && new_mv_avg > THRESHOLD) {
 				box2_moving = true;
-				OnBoxTwoStartMoving ();
+				OnBoxTwoStartMoving (new_mv_avg);
 			} else if (box2_moving && new_mv_avg < THRESHOLD-STICKINESS) {
 				box2_moving = false;
 				OnBoxTwoStopMoving ();
+			} else if (box2_moving) {
+				OnBoxTwoContinueMoving (new_mv_avg);
 			}
 			bot2_mv_avg = new_mv_avg;
 		} else if (b1.name == "botThree") {
 			new_mv_avg = DELTA * magnitude_change + (1 - DELTA) * bot3_mv_avg;
 			if (!box3_moving && new_mv_avg > THRESHOLD) {
 				box3_moving = true;
-				OnBoxThreeStartMoving ();
+				OnBoxThreeStartMoving (new_mv_avg);
 			} else if (box3_moving && new_mv_avg < THRESHOLD-STICKINESS) {
 				box3_moving = false;
 				OnBoxThreeStopMoving ();
+			} else if (box3_moving) {
+				OnBoxThreeContinueMoving (new_mv_avg);
 			}
 			bot3_mv_avg = new_mv_avg;
 		}
