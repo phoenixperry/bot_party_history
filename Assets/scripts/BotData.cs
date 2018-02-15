@@ -99,7 +99,7 @@ public class BotData : MonoBehaviour
 
 	}
 	public static double DELTA = 0.25;
-	public static double THRESHOLD = 5;
+	public static double THRESHOLD = 4;
 	public static double CAP = 10;
 	public static double STICKINESS = 0.5;
 	public double bot1_mv_avg = 0.0;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using AudioHelm;
 
 public class FreePlayManager : AbstractManager {
 	public ArrayList touchsound = new ArrayList();
@@ -93,39 +94,58 @@ public class FreePlayManager : AbstractManager {
 
 	public override void BoxOneStartMoving(double speed)
 	{
-		gameObject.transform.Find("MeowBot").GetComponent<AudioSource> ().Play ();
 		BoxOneContinueMoving (speed);
 		gameObject.transform.Find ("Move1").GetComponent<TextMesh> ().text = "1: Moving";
 	}
 
 	public override void BoxOneContinueMoving(double speed)
 	{
-		gameObject.transform.Find("MeowBot").GetComponent<AudioSource> ().pitch = (float)(speed / 7.5);
+		// So this plays notes proportional to speed of box one from the octave C3 to C4.
+		gameObject.transform.Find ("Bot1Midi").GetComponent<HelmController> ().AllNotesOff ();
+		// Note 48 = C3. 
+		gameObject.transform.Find ("Bot1Midi").GetComponent<HelmController> ().NoteOn ((int)(48 + Mathf.Max(0f,(float)(speed-5))*2));
 	}
 
 	public override void BoxOneStopMoving()
 	{
-		gameObject.transform.Find("MeowBot").GetComponent<AudioSource> ().Stop ();
+		gameObject.transform.Find ("Bot1Midi").GetComponent<HelmController> ().AllNotesOff();
 		gameObject.transform.Find ("Move1").GetComponent<TextMesh> ().text = "1: At rest";
 	}
 
 	public override void BoxTwoStartMoving(double speed)
 	{
 		gameObject.transform.Find ("Move2").GetComponent<TextMesh> ().text = "2: Moving";
+		BoxTwoContinueMoving (speed);
+
+	}
+
+	public override void BoxTwoContinueMoving(double speed) {
+		gameObject.transform.Find ("Bot2Midi").GetComponent<HelmController> ().AllNotesOff ();
+		// Note 60 = C3
+		gameObject.transform.Find ("Bot2Midi").GetComponent<HelmController> ().NoteOn ((int)(60 + Mathf.Max(0f,(float)(speed-5))*2));
 	}
 
 	public override void BoxTwoStopMoving()
 	{
 		gameObject.transform.Find ("Move2").GetComponent<TextMesh> ().text = "2: At rest";
+		gameObject.transform.Find ("Bot2Midi").GetComponent<HelmController> ().AllNotesOff ();
 	}
 
 	public override void BoxThreeStartMoving(double speed)
 	{
+		BoxThreeContinueMoving (speed);
 		gameObject.transform.Find ("Move3").GetComponent<TextMesh> ().text = "3: Moving";
 	}
 
+	public override void BoxThreeContinueMoving(double speed)
+	{
+		gameObject.transform.Find ("Bot3Midi").GetComponent<HelmController> ().AllNotesOff ();
+		// Note 72 = C5.
+		gameObject.transform.Find ("Bot3Midi").GetComponent<HelmController> ().NoteOn ((int)(72 + Mathf.Max(0f,(float)(speed-5))*2));
+	}
 	public override void BoxThreeStopMoving()
 	{
 		gameObject.transform.Find ("Move3").GetComponent<TextMesh> ().text = "3: At rest";
+		gameObject.transform.Find ("Bot3Midi").GetComponent<HelmController> ().AllNotesOff ();
 	}
 }
