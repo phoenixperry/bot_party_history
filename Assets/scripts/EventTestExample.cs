@@ -8,7 +8,7 @@ public class EventTestExample : MonoBehaviour {
  
     public void OnEnable()
     {
-        /*TouchManager.OnBoxOneTwoTouched += testFunctionOneTouch;
+        TouchManager.OnBoxOneTwoTouched += testFunctionOneTouch;
         TouchManager.OnBoxOneTwoReleased += testFunctionOneRelease;
 
         TouchManager.OnBoxOneThreeTouched += testFunctionTwoTouch;
@@ -18,7 +18,20 @@ public class EventTestExample : MonoBehaviour {
         TouchManager.OnBoxTwoThreeReleased += testFunction3Release;
 
         TouchManager.OnAllBoxesConnected += testFunction4Touch;
-        TouchManager.OnAllBoxesReleased += testFunction4Release;*/
+        TouchManager.OnAllBoxesReleased += testFunction4Release;
+
+		BotData.OnBoxOneButtonDown += testBoxOneButtonDown;
+		BotData.OnBoxOneButtonUp += testBoxOneButtonUp;
+
+		BotData.OnBoxTwoButtonDown += testBoxTwoButtonDown;
+		BotData.OnBoxTwoButtonUp += testBoxTwoButtonUp;
+
+		BotData.OnBoxThreeButtonDown += testBoxThreeButtonDown;
+		BotData.OnBoxThreeButtonUp += testBoxThreeButtonUp;
+
+		BotData.OnBoxOneStartMoving += testBoxOneStartMoving;
+		BotData.OnBoxTwoStartMoving += testBoxTwoStartMoving;
+		BotData.OnBoxThreeStartMoving += testBoxThreeStartMoving;
     }
     //here's how to unsubscibe - if you do one, you must do the other! 
     public void OnDisable() {
@@ -35,6 +48,14 @@ public class EventTestExample : MonoBehaviour {
         TouchManager.OnAllBoxesConnected -= testFunction4Touch;
         TouchManager.OnAllBoxesReleased -= testFunction4Release;
 
+		BotData.OnBoxOneButtonDown -= testBoxOneButtonDown;
+		BotData.OnBoxOneButtonUp -= testBoxOneButtonUp;
+
+		BotData.OnBoxTwoButtonDown -= testBoxTwoButtonDown;
+		BotData.OnBoxTwoButtonUp -= testBoxTwoButtonUp;
+
+		BotData.OnBoxThreeButtonDown -= testBoxThreeButtonDown;
+		BotData.OnBoxThreeButtonUp -= testBoxThreeButtonUp;
     }
 
     void testFunctionOneTouch() {
@@ -74,5 +95,48 @@ public class EventTestExample : MonoBehaviour {
         Debug.Log("all touching release works");
     }
 
+	void testBoxOneButtonDown()
+	{
+		Debug.Log ("Button one works.");
+	}
 
+	void testBoxTwoButtonDown()
+	{
+		Debug.Log ("Button two works.");
+	}
+
+	void testBoxThreeButtonDown()
+	{
+		Debug.Log ("Button three works.");
+	}
+
+	void testBoxOneButtonUp()
+	{
+		Debug.Log ("Button one up.");
+	}
+
+	void testBoxTwoButtonUp()
+	{
+		Debug.Log ("Button two up.");
+	}
+
+	void testBoxThreeButtonUp()
+	{
+		Debug.Log ("Button three up.");
+	}
+		
+	void testBoxOneStartMoving(double speed) 
+	{
+		Debug.Log("Box one moving.");
+	}
+
+	void testBoxTwoStartMoving(double speed) 
+	{
+		Debug.Log ("Box two moving.");
+	}
+
+	void testBoxThreeStartMoving(double speed)
+	{
+		Debug.Log("Box three moving.");
+	}
 }

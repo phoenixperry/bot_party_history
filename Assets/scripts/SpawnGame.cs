@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpawnGame : MonoBehaviour {
     public GameObject serialDataManager;
 	public GameObject keyboardDataManager;
-    //public GameObject botDataManager;
+    public GameObject botDataManager;
     public GameObject touchManager;
 
 	public bool serial;
@@ -16,7 +16,7 @@ public class SpawnGame : MonoBehaviour {
 		//serialDataManager.SetActive (false);
 		keyboardDataManager = Instantiate (keyboardDataManager, new Vector3 (0.0f, 0.0f, 0.0f), Quaternion.identity) as GameObject;
 		//keyboardDataManager.SetActive (false);
-		// botDataManager   = Instantiate(botDataManager, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity) as GameObject;
+		botDataManager = Instantiate(botDataManager, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity) as GameObject;
 		touchManager = Instantiate (touchManager, new Vector3 (0.0f, 0.0f, 0.0f), Quaternion.identity) as GameObject;
 		serial = true;
 		switchControls (serial);
