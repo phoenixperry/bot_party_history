@@ -53,6 +53,17 @@ public abstract class AbstractManager : MonoBehaviour {
 		BotData.OnBoxThreeContinueMoving += BoxThreeContinueMoving;
 		BotData.OnBoxThreeStopMoving += BoxThreeStopMoving;
 
+		BotData.OnBoxOneStartRotating += BoxOneStartRotating;
+		BotData.OnBoxOneContinueRotating += BoxOneContinueRotating;
+		BotData.OnBoxOneStopRotating += BoxOneStopRotating;
+
+		BotData.OnBoxTwoStartRotating += BoxTwoStartRotating;
+		BotData.OnBoxTwoContinueRotating += BoxTwoContinueRotating;
+		BotData.OnBoxTwoStopRotating += BoxTwoStopRotating;
+
+		BotData.OnBoxThreeStartRotating += BoxThreeStartRotating;
+		BotData.OnBoxThreeContinueRotating += BoxThreeContinueRotating;
+		BotData.OnBoxThreeStopRotating += BoxThreeStopRotating;
 	}
 	//here's how to unsubscibe - if you do one, you must do the other! 
 	public void OnDisable()
@@ -89,6 +100,18 @@ public abstract class AbstractManager : MonoBehaviour {
 		BotData.OnBoxThreeStartMoving -= BoxThreeStartMoving;
 		BotData.OnBoxThreeContinueMoving -= BoxThreeContinueMoving;
 		BotData.OnBoxThreeStopMoving -= BoxThreeStopMoving;
+
+		BotData.OnBoxOneStartRotating -= BoxOneStartRotating;
+		BotData.OnBoxOneContinueRotating -= BoxOneContinueRotating;
+		BotData.OnBoxOneStopRotating -= BoxOneStopRotating;
+
+		BotData.OnBoxTwoStartRotating -= BoxTwoStartRotating;
+		BotData.OnBoxTwoContinueRotating -= BoxTwoContinueRotating;
+		BotData.OnBoxTwoStopRotating -= BoxTwoStopRotating;
+
+		BotData.OnBoxThreeStartRotating -= BoxThreeStartRotating;
+		BotData.OnBoxThreeContinueRotating -= BoxThreeContinueRotating;
+		BotData.OnBoxThreeStopRotating -= BoxThreeStopRotating;
 
 	}
 
@@ -185,6 +208,37 @@ public abstract class AbstractManager : MonoBehaviour {
 
 	}
 	public virtual void BoxThreeStopMoving() {
+
+	}
+
+	// Rotating events
+	public virtual void BoxOneStartRotating(double angular_speed) {
+
+	}
+	public virtual void BoxOneContinueRotating(double angular_speed) {
+
+	}
+	public virtual void BoxOneStopRotating() {
+
+	}
+
+	public virtual void BoxTwoStartRotating(double angular_speed) {
+
+	}
+	public virtual void BoxTwoContinueRotating(double angular_speed) {
+
+	}
+	public virtual void BoxTwoStopRotating() {
+
+	}
+
+	public virtual void BoxThreeStartRotating(double angular_speed) {
+
+	}
+	public virtual void BoxThreeContinueRotating(double angular_speed) {
+
+	}
+	public virtual void BoxThreeStopRotating() {
 
 	}
 }

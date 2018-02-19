@@ -62,6 +62,27 @@ public class BotData : MonoBehaviour
 	public static event BoxThreeContinueMoving OnBoxThreeContinueMoving;
 	public delegate void BoxThreeStopMoving ();
 	public static event BoxThreeStopMoving OnBoxThreeStopMoving;
+
+	public delegate void BoxOneStartRotating(double angular_speed);
+	public static event BoxOneStartRotating OnBoxOneStartRotating;
+	public delegate void BoxOneContinueRotating(double angular_speed);
+	public static event BoxOneContinueRotating OnBoxOneContinueRotating;
+	public delegate void BoxOneStopRotating ();
+	public static event BoxOneStopRotating OnBoxOneStopRotating;
+
+	public delegate void BoxTwoStartRotating(double angular_speed);
+	public static event BoxTwoStartRotating OnBoxTwoStartRotating;
+	public delegate void BoxTwoContinueRotating(double angular_speed);
+	public static event BoxTwoContinueRotating OnBoxTwoContinueRotating;
+	public delegate void BoxTwoStopRotating ();
+	public static event BoxTwoStopRotating OnBoxTwoStopRotating;
+
+	public delegate void BoxThreeStartRotating(double angular_speed);
+	public static event BoxThreeStartRotating OnBoxThreeStartRotating;
+	public delegate void BoxThreeContinueRotating(double angular_speed);
+	public static event BoxThreeContinueRotating OnBoxThreeContinueRotating;
+	public delegate void BoxThreeStopRotating ();
+	public static event BoxThreeStopRotating OnBoxThreeStopRotating;
    
     public void Start() {
 
@@ -96,6 +117,7 @@ public class BotData : MonoBehaviour
 		}
 
 		processAccelerometer (b2, b1);
+		processCompass (b2, b1);
 
 	}
 	public static double DELTA = 0.25;
@@ -163,6 +185,78 @@ public class BotData : MonoBehaviour
 				OnBoxThreeContinueMoving (new_mv_avg);
 			}
 			bot3_mv_avg = new_mv_avg;
+		}
+	}
+	/*
+	 * This works by taking a weighted moving average of the angular speed
+	 * v(t+1) = new * d + (1-d) * v(t)
+	 * if v(t+1) > T and v(t) < T then Rotate event
+	 * if v(t+1) < T and v(t) > T then Stop Rotate event
+	 * If new > CAP then new = cap (to stop large movement frames from skewing the data too much)
+	 */
+	public static double COMPASS_DELTA = 0.2;
+	public static double COMPASS_THRESHOLD = 15;
+	public static double COMPASS_CAP = 40;
+	public static double COMPASS_STICKINESS = 3;
+	public double bot1_mv_avg_angle = 0.0;
+	public double bot2_mv_avg_angle = 0.0;
+	public double bot3_mv_avg_angle = 0.0;
+	public bool box1_rotating = false;
+	public bool box2_rotating = false;
+	public bool box3_rotating = false;
+	private void processCompass(Bot b1, Bot b2) {
+		int b1a, b2a;
+		int.TryParse (b1.compass, out b1a);
+		int.TryParse (b2.compass, out b2a);
+		double new_mv_avg_angle;
+		if (b1.name == "botOne") {
+			double magnitude_change = Mathf.Abs (b1a - b2a);
+			if (magnitude_change > COMPASS_CAP) {
+				magnitude_change = COMPASS_CAP;
+			}
+			new_mv_avg_angle = DELTA * magnitude_change + (1 - DELTA) * bot1_mv_avg_angle;
+			if (!box1_rotating && new_mv_avg_angle > COMPASS_THRESHOLD) {
+				OnBoxOneStartRotating (new_mv_avg_angle);
+				box1_rotating = true;
+			} else if (box1_rotating && new_mv_avg_angle < COMPASS_THRESHOLD - COMPASS_STICKINESS) {
+				OnBoxOneStopRotating ();
+				box1_rotating = false;
+			} else if (box1_rotating) {
+				OnBoxOneContinueRotating (new_mv_avg_angle);
+			}
+			bot1_mv_avg_angle = new_mv_avg_angle;
+		} else if (b1.name == "botTwo") {
+			double magnitude_change = Mathf.Abs (b1a - b2a);
+			if (magnitude_change > COMPASS_CAP) {
+				magnitude_change = COMPASS_CAP;
+			}
+			new_mv_avg_angle = DELTA * magnitude_change + (1 - DELTA) * bot2_mv_avg_angle;
+			if (!box2_rotating && new_mv_avg_angle > COMPASS_THRESHOLD) {
+				OnBoxTwoStartRotating (new_mv_avg_angle);
+				box2_rotating = true;
+			} else if (box2_rotating && new_mv_avg_angle < COMPASS_THRESHOLD - COMPASS_STICKINESS) {
+				OnBoxTwoStopRotating ();
+				box2_rotating = false;
+			} else if (box2_rotating) {
+				OnBoxTwoContinueRotating (new_mv_avg_angle);
+			}
+			bot2_mv_avg_angle = new_mv_avg_angle;
+		} else if (b1.name == "botThree") {
+			double magnitude_change = Mathf.Abs (b1a - b2a);
+			if (magnitude_change > COMPASS_CAP) {
+				magnitude_change = COMPASS_CAP;
+			}
+			new_mv_avg_angle = DELTA * magnitude_change + (1 - DELTA) * bot3_mv_avg_angle;
+			if (!box3_rotating && new_mv_avg_angle > COMPASS_THRESHOLD) {
+				OnBoxThreeStartRotating (new_mv_avg_angle);
+				box3_rotating = true;
+			} else if (box3_rotating && new_mv_avg_angle < COMPASS_THRESHOLD - COMPASS_STICKINESS) {
+				OnBoxThreeStopRotating ();
+				box3_rotating = false;
+			} else if (box3_rotating) {
+				OnBoxThreeContinueRotating (new_mv_avg_angle);
+			}
+			bot3_mv_avg_angle = new_mv_avg_angle;
 		}
 	}
 

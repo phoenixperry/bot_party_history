@@ -154,4 +154,42 @@ public class FreePlayManager : AbstractManager {
 		gameObject.transform.Find ("Move3").GetComponent<TextMesh> ().text = "3: At rest";
 		gameObject.transform.Find ("Bot3Midi").GetComponent<HelmController> ().AllNotesOff ();
 	}
+
+	public override void BoxOneStartRotating(double angular_speed) {
+		gameObject.transform.Find ("Rotate1").GetComponent<TextMesh> ().text = "1: Spinning!";
+		BoxOneContinueRotating (angular_speed);
+	}
+	public override void BoxOneContinueRotating (double angular_speed)
+	{
+		gameObject.transform.Find ("Bot1Midi").GetComponent<HelmController> ().SetParameterPercent (Param.kResonance, (float)angular_speed / 40);
+	}
+	public override void BoxOneStopRotating() {
+		gameObject.transform.Find ("Rotate1").GetComponent<TextMesh> ().text = "1: Not Spinning!";
+		gameObject.transform.Find ("Bot1Midi").GetComponent<HelmController> ().SetParameterPercent (Param.kResonance, 0);
+	}
+
+	public override void BoxTwoStartRotating(double angular_speed) {
+		gameObject.transform.Find ("Rotate2").GetComponent<TextMesh> ().text = "2: Spinning!";
+	}
+	public override void BoxTwoContinueRotating (double angular_speed)
+	{
+		gameObject.transform.Find ("Bot2Midi").GetComponent<HelmController> ().SetParameterPercent (Param.kResonance, (float)angular_speed / 40);
+
+	}
+	public override void BoxTwoStopRotating() {
+		gameObject.transform.Find ("Rotate2").GetComponent<TextMesh> ().text = "2: Not Spinning!";
+		gameObject.transform.Find ("Bot2Midi").GetComponent<HelmController> ().SetParameterPercent (Param.kResonance, 0);
+	}
+
+	public override void BoxThreeStartRotating(double angular_speed) {
+		gameObject.transform.Find ("Rotate3").GetComponent<TextMesh> ().text = "3: Spinning!";
+	}
+	public override void BoxThreeContinueRotating (double angular_speed)
+	{
+		gameObject.transform.Find ("Bot3Midi").GetComponent<HelmController> ().SetParameterPercent (Param.kResonance, (float)angular_speed / 40);
+	}
+	public override void BoxThreeStopRotating() {
+		gameObject.transform.Find ("Rotate3").GetComponent<TextMesh> ().text = "3: Not Spinning!";
+		gameObject.transform.Find ("Bot3Midi").GetComponent<HelmController> ().SetParameterPercent (Param.kResonance, 0);
+	}
 }

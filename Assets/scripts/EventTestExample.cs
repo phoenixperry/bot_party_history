@@ -32,6 +32,7 @@ public class EventTestExample : MonoBehaviour {
 		BotData.OnBoxOneStartMoving += testBoxOneStartMoving;
 		BotData.OnBoxTwoStartMoving += testBoxTwoStartMoving;
 		BotData.OnBoxThreeStartMoving += testBoxThreeStartMoving;
+
     }
     //here's how to unsubscibe - if you do one, you must do the other! 
     public void OnDisable() {
