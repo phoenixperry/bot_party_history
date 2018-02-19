@@ -658,7 +658,7 @@ PlayerSettings:
   apiCompatibilityLevel: 2
   cloudProjectId: 42416ae8-c766-4843-bd26-f9ceed6b54c8
   projectName: bot_party_unity_game
-  organizationId: default-account
+  organizationId: bot-party
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
