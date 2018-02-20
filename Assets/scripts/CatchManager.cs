@@ -32,12 +32,17 @@ public class CatchManager : AbstractManager //referencing the Abstract script fo
     void Update()
     {
         
-        //CurrentTime = Time.time;
-       /* if (StartTime + TimerLength > CurrentTime)
+        CurrentTime = Time.time;
+        if (enabled && StartTime + TimerLength > CurrentTime)
         {
-          // Debug.Log("Bang " + CurrentTime);
-           CurrentTime = StartTime;
-        }*/
+           // Updates the timer on the screen - cap
+		   gameObject.transform.Find("TimerText").GetComponent<TextMesh>().text = "Time: "+(CurrentTime-StartTime);
+        }
+
+		if (enabled && StartTime + TimerLength < CurrentTime) {
+			// This means they failed because they ran out of time -cap
+			fail();
+		}
 
     }
     
@@ -51,6 +56,7 @@ public class CatchManager : AbstractManager //referencing the Abstract script fo
             gameObject.transform.Find("ButtonSound").GetComponent<AudioSource>().Play();
             gameObject.transform.Find("ButtonSound").GetComponent<AudioSource>().loop = true;
         }
+		enabled = false; // also disables the game.
     }
     void newTarget() //call for a new target button
     {
@@ -63,14 +69,21 @@ public class CatchManager : AbstractManager //referencing the Abstract script fo
         target = new_t;
         
         gameObject.transform.Find("TargetText").GetComponent<TextMesh>().text = "Target: " + target;
+
+		StartTime = Time.time;
         
         //LED light on for new target and make sure old LED is off again
-        //dimmer LED if available
+		//dimmer LED if available (It will be soon -cap)
     }
 
-    void fail() //sound plays when you fail //** now currently don't need fail as if you get one button wrong the game is over
+    void fail() 
     {
-        gameObject.transform.Find("ButtonSound").GetComponent<AudioSource>().clip = Sound_Fail as AudioClip;
+		// Does cleanup on a GameOver. Disabled the game, plays music, sets text to game over. -cap
+		gameObject.transform.Find ("TargetText").GetComponent<TextMesh> ().text = "Game over!";
+		enabled = false;
+		GameOver = true;
+
+        gameObject.transform.Find("ButtonSound").GetComponent<AudioSource>().clip = Sound_Fail as AudioClip; 
         gameObject.transform.Find("ButtonSound").GetComponent<AudioSource>().Play();
     }
 
@@ -85,18 +98,16 @@ public class CatchManager : AbstractManager //referencing the Abstract script fo
         gameObject.transform.Find("ButtonSound").GetComponent<AudioSource>().Play();
 
     }
-    bool GameOver = false; //game isnt over
-    void checkMatch(ButtonState input) //checking what is happening in the game
+    bool GameOver = false; 
+    void checkMatch(ButtonState input) 
     {
            if (!enabled) 
                return;
-       // Debug.Log("function ran");
-        if (!GameOver)
+	
+		if (!GameOver)
         {
-            //Debug.Log("Target Button: " + input);
-            if (input == target && Time.time <= EndTime)     //StartTime + TimerLength >= CurrentTime)
+            if (input == target && Time.time <= EndTime)
             {
-                //Debug.Log("whaaaaat");
                 success();
                 newTarget();
                 
@@ -106,23 +117,21 @@ public class CatchManager : AbstractManager //referencing the Abstract script fo
                 }
                 else
                 {
-                    GameOver = true;
-                    Debug.Log("Game Over");
-                }
-                //turn off LED?
+				}
 
             }
             else if (input != target)
             {
                // GameOver = true;
-                Debug.Log(input + "" + target);
+                Debug.Log(input + "input, target: " + target);
+				// If they get it wrong, cause a gameover. -cap
+				fail ();
             }
 
             if (score >= TO_WIN)
             {
-                enabled = false; //game finished
                 win();
-                //GameOver = false;
+                // If they have enough points, cause a win -cap
                 Debug.Log("yay");
             }
 
@@ -131,7 +140,7 @@ public class CatchManager : AbstractManager //referencing the Abstract script fo
 
     public override void BoxOneButtonDown()
     {
-      //  Debug.Log("Hello Bot 1!");
+        //Debug.Log("Hello Bot 1!");
         checkMatch(ButtonState.BtnOne);
     }
 
