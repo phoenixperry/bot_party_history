@@ -31,7 +31,34 @@ public struct TouchedBots {
 	public string touch; 
 }
 
+public enum LED_CHANGES {None=0, On, Off};
 public class AbstractInputReader : MonoBehaviour {
+	public delegate void WriteToSerial(byte[] wri); //all methods that subscribe to this delegate must be void and pass in no data 
+	public static event WriteToSerial OnWriteToSerial; //this is the event to register your functions to 
+
+	public void HandleLEDChange(int led, LED_CHANGES type, int parameter) {
+		byte first = (byte) (((byte) led) << 6);
+		if (type == LED_CHANGES.On) {
+			first += 32;
+		} else if (type == LED_CHANGES.Off) {
+			first += 16;
+		}
+
+		passWrite(new byte[] { first, (byte)parameter});
+	}
+
+	public static void passWrite(byte[] wri) {
+		if (OnWriteToSerial != null) {
+			OnWriteToSerial (wri);
+		}
+	}
+
+	public void OnEnable() {
+		AbstractManager.DoLEDChange += HandleLEDChange;
+	}
+	public void OnDisable() {
+		AbstractManager.DoLEDChange -= HandleLEDChange;
+	}
 	protected Bot b;
 	protected TouchedBots touchedBots;
 	public delegate void BotDataReceived(Bot b_);

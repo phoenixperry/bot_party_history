@@ -11,14 +11,7 @@ using System.Collections.Generic;
 
 public class SerialReader : AbstractInputReader
 {
-	public static void passWrite(string wri) {
-		if (OnWriteToSerial != null) {
-			OnWriteToSerial (wri);
-		}
-	}
-
-	public delegate void WriteToSerial(string wri); //all methods that subscribe to this delegate must be void and pass in no data 
-	public static event WriteToSerial OnWriteToSerial; //this is the event to register your functions to 
+	Queue<byte[]> writeQueue;
      //this is for the port you're on = it has to match what arduino is plugged into       
 
 	SerialPort stream;
@@ -35,10 +28,20 @@ public class SerialReader : AbstractInputReader
 		return ports [0]; // TODO: At present this uses the first found serial input. --cap
 		}
 
-		void OnEnable() {
-		OnWriteToSerial += write;
+	void Update() {
+		checkForWrites ();
+	}
+	void checkForWrites() {
+		while (writeQueue.Count > 0) {
+			stream.Write (writeQueue.Dequeue(),0,2);
+		}
+	}
 
-			string port = getSerialPort ();
+	void OnEnable() {
+		base.OnEnable ();
+		OnWriteToSerial += queueWrite;
+		writeQueue = new Queue<byte[]>();
+		string port = getSerialPort ();
 		if (port == "") {
 		Debug.Log ("Terminating stream enable...\n (Hint: Hit semicolon (;) to switch to keyboard input.)");
 				return; // TODO: The case of there not being input is handled a little inelegantly. --cap
@@ -53,7 +56,8 @@ public class SerialReader : AbstractInputReader
 		}
 
 		void OnDisable() {
-		OnWriteToSerial -= write;
+		base.OnDisable ();
+		OnWriteToSerial -= queueWrite;
 		if (stream != null) {
 			Debug.Log ("Closing stream.");
 			stream.Close ();
@@ -101,15 +105,9 @@ public class SerialReader : AbstractInputReader
 		}
 		
 
-	public void write(string wri)
+	public void queueWrite(byte[] wri)
 	{
-		// TODO: This should probably be asynchronous
-		if (stream != null) {
-			stream.WriteTimeout = 200;
-			Debug.Log ("Wroten?");
-			stream.Write (wri);
-			Debug.Log ("Written.");
-		}
+		writeQueue.Enqueue (wri);
 	}
 
     public IEnumerator AsynchronousReadFromArduino(System.Action<string> callback, System.Action fail = null, float timeout = float.PositiveInfinity)

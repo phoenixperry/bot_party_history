@@ -43,7 +43,7 @@ public class FreePlayManager : AbstractManager {
 
 	public override void BoxOneButtonDown ()
 	{
-		SerialReader.passWrite ("led1 on");
+		TurnOnLEDOne ();
 		Button button = btnInterface.transform.Find ("botBtn1").GetComponent<Button> ();
 		ColorBlock cb = button.colors;
 		cb.normalColor = Color.red;
@@ -52,7 +52,7 @@ public class FreePlayManager : AbstractManager {
 	}
 	public override void BoxOneButtonUp ()
 	{
-		SerialReader.passWrite("led1 off");
+		TurnOffLEDOne ();
 		Button button = btnInterface.transform.Find ("botBtn1").GetComponent<Button> ();
 		ColorBlock cb = button.colors;
 		cb.normalColor = Color.green;
@@ -62,7 +62,7 @@ public class FreePlayManager : AbstractManager {
 
 	public override void BoxTwoButtonDown ()
 	{
-		SerialReader.passWrite ("led2 on");
+		TurnOnLEDTwo ();
 		Button button = btnInterface.transform.Find ("botBtn2").GetComponent<Button> ();
 		ColorBlock cb = button.colors;
 		cb.normalColor = Color.red;
@@ -71,7 +71,7 @@ public class FreePlayManager : AbstractManager {
 	}
 	public override void BoxTwoButtonUp ()
 	{
-		SerialReader.passWrite ("led2 off");
+		TurnOffLEDTwo ();
 		Button button = btnInterface.transform.Find ("botBtn2").GetComponent<Button> ();
 		ColorBlock cb = button.colors;
 		cb.normalColor = Color.green;
@@ -81,7 +81,7 @@ public class FreePlayManager : AbstractManager {
 
 	public override void BoxThreeButtonDown ()
 	{
-		SerialReader.passWrite ("led3 on");
+		TurnOnLEDThree ();
 		Button button = btnInterface.transform.Find ("botBtn3").GetComponent<Button> ();
 		ColorBlock cb = button.colors;
 		cb.normalColor = Color.red;
@@ -90,7 +90,7 @@ public class FreePlayManager : AbstractManager {
 	}
 	public override void BoxThreeButtonUp ()
 	{
-		SerialReader.passWrite ("led3 off");
+		TurnOffLEDThree ();
 		Button button = btnInterface.transform.Find ("botBtn3").GetComponent<Button> ();
 		ColorBlock cb = button.colors;
 		cb.normalColor = Color.green;

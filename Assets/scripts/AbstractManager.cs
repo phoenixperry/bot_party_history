@@ -241,4 +241,26 @@ public abstract class AbstractManager : MonoBehaviour {
 	public virtual void BoxThreeStopRotating() {
 
 	}
+
+	public delegate void LEDChange(int led, LED_CHANGES type, int parameter);
+	public static event LEDChange DoLEDChange;
+	public void TurnOnLEDOne() {
+		DoLEDChange (1, LED_CHANGES.On, 0);
+	}
+	public void TurnOnLEDTwo() {
+		DoLEDChange (2, LED_CHANGES.On, 0);
+	}
+	public void TurnOnLEDThree() {
+		DoLEDChange (3, LED_CHANGES.On, 0);
+	}
+
+	public void TurnOffLEDOne() {
+		DoLEDChange (1, LED_CHANGES.Off, 0);
+	}
+	public void TurnOffLEDTwo() {
+		DoLEDChange (2, LED_CHANGES.Off, 0);
+	}
+	public void TurnOffLEDThree() {
+		DoLEDChange (3, LED_CHANGES.Off, 0);
+	}
 }
