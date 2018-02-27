@@ -14,7 +14,11 @@ AudioMixerController:
   m_SuspendThreshold: -80
   m_EnableSuspend: 1
   m_UpdateMode: 0
-  m_ExposedParameters: []
+  m_ExposedParameters:
+  - guid: 15436d37e99611742a98ff90f813c17e
+    name: osc1waveform
+  - guid: 9e94216e356b5744681d6bbcc7677d11
+    name: resonance
   m_AudioMixerGroupViews:
   - guids:
     - 911cf5ae3671d254581a6fa29f399533
@@ -63,7 +67,7 @@ AudioMixerSnapshotController:
   m_FloatValues:
     3111530007335bf42a50c3e4a9889cc5: 23.102812
     3e5a3600d6e68f94da839ebfd41a8e85: 0
-    7c8923504e0748b40a23962627c8f6d8: -14.3
+    7c8923504e0748b40a23962627c8f6d8: -15.502062
     62af71603cd35684b9b3f82aca7c7cc8: 0
     043b53708ba7f48429401426d262a751: 0
     c5228580b3ee254458342b31d39a1782: 0
@@ -150,7 +154,7 @@ AudioMixerSnapshotController:
     917090f6825f6df45b96a63a02a99d77: 0.39999998
     49a648178ffd7914da07ce9b2b53b07d: 14
     1fc5d137b974b5148b25bd3513caee77: 0
-    15436d37e99611742a98ff90f813c17e: 1
+    15436d37e99611742a98ff90f813c17e: 0
     2a69c747e3c66c34ab912dde00bc328d: 0
     32858c47c56ba404dbe4dc026abef083: 0
     1d35bd47925aba145af2efe77fb6160e: 11
@@ -183,7 +187,7 @@ AudioMixerSnapshotController:
     f3cc2da9a256f50429422032661f678d: 0
     9700dea964de20942aa99258782b4f63: 12
     ca20b9b9720c9bf449a9060703835224: 0
-    3e4a6fe972dd00846bb196941cb6b9cc: 0.46803272
+    3e4a6fe972dd00846bb196941cb6b9cc: 0
     29de86f9763daa041a376e7882df8e4d: 0
     eef7400ad168b4840bc3e656b7b36f2e: 1
     d6fb342a7c82c044d9467303694cdb1b: 15
@@ -240,7 +244,7 @@ AudioMixerSnapshotController:
     5c1a204e052e2e841970a2b19df74041: 0
     dc35184e662f7054fbd622a9493520fd: 49
     2092905e75f561d4ba7ce179abcb75ae: 0
-    9e94216e356b5744681d6bbcc7677d11: 0.0069444445
+    9e94216e356b5744681d6bbcc7677d11: 0
     eb727d9e4f29a174b9fe7fc3d88856f1: 15.744001
     c158c7ce4b2c4c047ace4dbd75030441: 1
     80ed51dec2fd58443b3ab71d8e66cebd: 0
