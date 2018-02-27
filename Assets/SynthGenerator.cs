@@ -48,7 +48,7 @@ public class SynthGenerator : MonoBehaviour {
         }
     }
 
-    //unity's function to analize audio 
+    //unity's function to analize audio. I don't know how to not make it play the wave form and the effect? That's for exploration 
     private void OnAudioFilterRead(float[] data, int channels)
     {
         increment = frequency * 2.0f * Mathf.PI / sampling_frequency;
