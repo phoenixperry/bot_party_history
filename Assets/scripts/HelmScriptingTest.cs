@@ -5,7 +5,7 @@ using UnityEngine.Audio; //this gives us mixer access
 
 public class HelmScriptingTest : MonoBehaviour {
 
-    public AudioMixer masterMixer; 
+    public AudioMixer helmMixer; 
 
     //you have to have all events in OnEnable and OnDisable. This is CRITICAL. Events will just hang around and if a game object calls an event that is no longer there because the object it is on has been deleted but wasn't removed in an OnDisable function beforehand, the game can crash out. 
     public void OnEnable()
@@ -27,14 +27,22 @@ public class HelmScriptingTest : MonoBehaviour {
         Debug.Log("i'm firing on the beat and the note was "+note);
 
         /* ok to pull of changing a patch while the game is running you need to watch this: https://unity3d.com/learn/tutorials/topics/audio/exposed-audiomixer-parameters (you can ignore the part where they map it to on screen UI)
-        There's stuff to set up in the editor. You need to go into the patch on the master channel and expose it's parameter. Then you need to rename it's parameter. You could call it cat butt but for sanity here I just named it what it was */ 
-        masterMixer.SetFloat("resonance", note / 15.0f); //here's setting the resonace based on note 
-        masterMixer.SetFloat("osc1waveform", note ); //heres messing with the osc waveform based on the note 
-        float val = 0.0f; 
-        masterMixer.GetFloat("resonance", out val); //if you just want to know how to get what the parameter is, maybe to save it for later, here's how to do it? 
+        There's stuff to set up in the editor. You need to go into the patch on the master channel and expose it's parameter. Then you need to rename it's parameter. You could call it cat butt but for sanity here I just named it what it was */
+        helmMixer.SetFloat("resoance", note/15.0f);//here's setting the resonace based on note 
+        helmMixer.SetFloat("osc1waveform" ,note); //heres messing with the osc waveform based on the note 
 
-        Debug.Log("Watch the resonance change: " + val); 
+        float val = 0.0f;
+
+        helmMixer.GetFloat("resonance", out val); //if you just want to know how to get what the parameter is, maybe to save it for later, here's how to do it? 
+
+        Debug.Log("Watch the resonance change: " + val);
+
+        //regular old Unity effects 
+        helmMixer.SetFloat("flangeRate", note); //here's how to just make a general old flange effect native to Unity change I have added to helm :D 
     }
+
+
+
 
     public void Start()
     {
