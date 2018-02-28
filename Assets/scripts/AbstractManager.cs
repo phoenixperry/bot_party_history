@@ -244,23 +244,61 @@ public abstract class AbstractManager : MonoBehaviour {
 
 	public delegate void LEDChange(int led, LED_CHANGES type, int parameter);
 	public static event LEDChange DoLEDChange;
+
+	void DoLEDChangeWrapper(int led, LED_CHANGES type, int parameter) {
+		if (DoLEDChange != null) {
+			DoLEDChange (led, type, parameter);
+		}
+	}
 	public void TurnOnLEDOne() {
-		DoLEDChange (1, LED_CHANGES.On, 0);
+		DoLEDChangeWrapper (1, LED_CHANGES.On, 0);
 	}
 	public void TurnOnLEDTwo() {
-		DoLEDChange (2, LED_CHANGES.On, 0);
+		DoLEDChangeWrapper (2, LED_CHANGES.On, 0);
 	}
 	public void TurnOnLEDThree() {
-		DoLEDChange (3, LED_CHANGES.On, 0);
+		DoLEDChangeWrapper (3, LED_CHANGES.On, 0);
 	}
 
 	public void TurnOffLEDOne() {
-		DoLEDChange (1, LED_CHANGES.Off, 0);
+		DoLEDChangeWrapper (1, LED_CHANGES.Off, 0);
 	}
 	public void TurnOffLEDTwo() {
-		DoLEDChange (2, LED_CHANGES.Off, 0);
+		DoLEDChangeWrapper (2, LED_CHANGES.Off, 0);
 	}
 	public void TurnOffLEDThree() {
-		DoLEDChange (3, LED_CHANGES.Off, 0);
+		DoLEDChangeWrapper (3, LED_CHANGES.Off, 0);
 	}
+
+	public void SetLEDOne(int value) {
+		DoLEDChangeWrapper (1, LED_CHANGES.Set, value);
+	}
+	public void SetLEDTwo(int value) {
+		DoLEDChangeWrapper (2, LED_CHANGES.Set, value);
+	}
+	public void SetLEDThree(int value) {
+		DoLEDChangeWrapper (3, LED_CHANGES.Set, value);
+	}
+
+	public void FadeLEDOneOn(int time) {
+		DoLEDChangeWrapper (1, LED_CHANGES.FadeOn, time);
+	}
+	public void FadeLEDTwoOn(int time) {
+		DoLEDChangeWrapper (2, LED_CHANGES.FadeOn, time);
+	}
+	public void FadeLEDThreeOn(int time) {
+		DoLEDChangeWrapper (3, LED_CHANGES.FadeOn, time);
+	}
+
+	public void FadeLEDOneOff(int time) {
+		DoLEDChangeWrapper (1, LED_CHANGES.FadeOff, time);
+	}
+	public void FadeLEDTwoOff(int time) {
+		DoLEDChangeWrapper (2, LED_CHANGES.FadeOff, time);
+	}
+	public void FadeLEDThreeOff(int time) {
+		DoLEDChangeWrapper (3, LED_CHANGES.FadeOff, time);
+	}
+
+
 }

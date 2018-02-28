@@ -31,7 +31,7 @@ public struct TouchedBots {
 	public string touch; 
 }
 
-public enum LED_CHANGES {None=0, On, Off};
+public enum LED_CHANGES {None=0, On, Off, Set, FadeOn, FadeOff};
 public class AbstractInputReader : MonoBehaviour {
 	public delegate void WriteToSerial(byte[] wri); //all methods that subscribe to this delegate must be void and pass in no data 
 	public static event WriteToSerial OnWriteToSerial; //this is the event to register your functions to 
@@ -42,6 +42,12 @@ public class AbstractInputReader : MonoBehaviour {
 			first += 32;
 		} else if (type == LED_CHANGES.Off) {
 			first += 16;
+		} else if (type == LED_CHANGES.Set) {
+			first += 8;
+		} else if (type == LED_CHANGES.FadeOn) {
+			first += 4;
+		} else if (type == LED_CHANGES.FadeOff) {
+			first += 2;
 		}
 
 		passWrite(new byte[] { first, (byte)parameter});

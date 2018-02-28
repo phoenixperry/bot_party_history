@@ -11,6 +11,9 @@ public class TouchTouchManager : AbstractManager {
 	public AudioClip Sound_Win, Sound_Success, Sound_Fail;
 	new void OnEnable() {
 		base.OnEnable ();
+	}
+
+	void Start() {
 		score = 0;
 		newTarget ();
 	}
@@ -33,6 +36,25 @@ public class TouchTouchManager : AbstractManager {
 		}
 		target = new_t;
 		gameObject.transform.Find ("TargetText").GetComponent<TextMesh> ().text = "Target: " + target;
+		lightUp (target, 30);
+	}
+
+	void lightUp(TouchState newTarget, int time) {
+		TurnOffLEDOne ();
+		TurnOffLEDTwo ();
+		TurnOffLEDThree ();
+		if (newTarget == TouchState.AllConnected || newTarget == TouchState.OneThree || newTarget == TouchState.OneTwo) {
+			TurnOnLEDOne ();
+			FadeLEDOneOff (time);
+		}
+		if (newTarget == TouchState.AllConnected || newTarget == TouchState.TwoThree || newTarget == TouchState.OneTwo) {
+			TurnOnLEDTwo ();
+			FadeLEDTwoOff (time);
+		}
+		if (newTarget == TouchState.AllConnected || newTarget == TouchState.OneThree || newTarget == TouchState.TwoThree) {
+			TurnOnLEDThree ();
+			FadeLEDThreeOff (time);
+		}
 	}
 
 	void success() {
