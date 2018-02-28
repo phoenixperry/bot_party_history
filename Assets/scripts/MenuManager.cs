@@ -15,12 +15,12 @@ public class MenuManager : MonoBehaviour
 
     public void FreePlay()
     {
-        SceneManager.LoadScene("FreePlay", LoadSceneMode.Additive);
+		SceneManager.LoadScene("FreePlay", LoadSceneMode.Single);
     }
     
     public void TouchTouchRevolution()
     {
-        SceneManager.LoadScene("TouchTouchRevolution", LoadSceneMode.Additive);
+        SceneManager.LoadScene("TouchTouchRevolution", LoadSceneMode.Single);
     }
 
    /* void Update()
