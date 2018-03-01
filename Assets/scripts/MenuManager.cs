@@ -7,17 +7,11 @@ using UnityEngine.UI;
 
 public class MenuManager : AbstractManager
 {
-    //float Timer = 0.0F;
     int FRAME_NEXT_SOUND = 0;
-    public AudioClip Menu_Sound, Bot1_Move_Sound, Bot2_Move_Sound, Bot3_Move_Sound;
-    //int Time.frameCount = 0;
+    public AudioClip Bot1_Move_Sound, Bot2_Move_Sound, Bot3_Move_Sound;
+    public AudioClip[] clips;
     public static int frameCount;
-    //public int Time.frameCount { get; }
     public int RandomNumber { get; private set; }
-    bool BOT_ACTIVATED = false;
-
-    // Use this for initialization
-    // time related
 
     public void FreePlay()
     {
@@ -34,18 +28,21 @@ public class MenuManager : AbstractManager
 
         if (Time.frameCount >= FRAME_NEXT_SOUND)
         {
-            playSound();
+            playRandomSound();
             FRAME_NEXT_SOUND = Time.frameCount + Random.Range(300, 1500);
         }
 
     }
 
-    void playSound()
+    void playRandomSound()
     {
-        //gameObject.transform.Find("RandomSound").GetComponent<AudioSource>().clip = Menu_Sound as AudioClip;
-        //gameObject.transform.Find("RandomSound").GetComponent<AudioSource>().Play();
-        gameObject.GetComponent<AudioSource>().clip = Menu_Sound as AudioClip;
-        gameObject.GetComponent<AudioSource>().Play();
+        int randomClip = Random.Range(0, clips.Length);
+        AudioSource source = gameObject.AddComponent<AudioSource>();
+        source.clip = clips[randomClip];
+        source.Play();
+        Destroy(source, clips[randomClip].length);
+        //gameObject.GetComponent<AudioSource>().clip = Menu_Sound as AudioClip; //Menu_Sound as AudioClip;
+        //gameObject.GetComponent<AudioSource>().Play();
         Debug.Log("Play Me!");
     }
 
