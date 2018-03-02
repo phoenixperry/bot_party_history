@@ -25,6 +25,7 @@ public class TestBeginningTTTScriptPart : AbstractTTTScriptPart {
 		SendNewTarget (TouchState.None, 50);
 	}
 	public override void targetFailure() {
+		SendPlayGameSound (Resources.Load ("TouchTouchTransmission/capage-drafts/screech") as AudioClip);
 		SendNewTarget (TouchState.None,50);
 	}
 	void partOne() {

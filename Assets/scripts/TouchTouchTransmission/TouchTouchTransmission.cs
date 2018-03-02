@@ -8,6 +8,7 @@ public class TouchTouchTransmission : AbstractManager {
 	int TO_WIN = 10;
 	TouchState target;
 	int score = 0;
+	float nextTime = 0;
 	public AudioClip Sound_Win, Sound_Success, Sound_Fail;
 	void OnEnable() {
 		base.OnEnable ();
@@ -25,6 +26,11 @@ public class TouchTouchTransmission : AbstractManager {
 		AbstractTTTScriptPart.OnPlayGameSound -= playGameSound;
 		AbstractTTTScriptPart.OnEndScriptPart -= endScriptPart;
 
+	}
+	void Update() {
+		if (target != TouchState.None && nextTime <= Time.time) {
+			fail ();
+		}
 	}
 	public void clearTargets() {
 		target = TouchState.None;
@@ -50,9 +56,9 @@ public class TouchTouchTransmission : AbstractManager {
 			}
 		}
 		target = new_target;
+		nextTime = Time.time + (duration / 10);
 		Debug.Log (target);
 		lightUp (target, duration);
-		Debug.Log ("Lightup hopefully...");
 	}
 
 	void Start() {
@@ -60,18 +66,7 @@ public class TouchTouchTransmission : AbstractManager {
 		script = gameObject.AddComponent<TestTTTScript>();
 		script.startCurrentScript();
 	}
-
-	void win()
-	{
-		gameObject.transform.Find ("TargetText").GetComponent<TextMesh>().text = "You win!";
-		gameObject.transform.Find ("TouchSound").GetComponent<AudioSource> ().Stop ();
-		if (!gameObject.transform.Find ("TouchSound").GetComponent<AudioSource> ().isPlaying) {
-			gameObject.transform.Find ("TouchSound").GetComponent<AudioSource> ().clip = Sound_Win as AudioClip;
-			gameObject.transform.Find ("TouchSound").GetComponent<AudioSource> ().Play ();
-			gameObject.transform.Find ("TouchSound").GetComponent<AudioSource> ().loop = true;
-		}
-	}
-
+		
 	void lightUp(TouchState newTarget, int time) {
 		TurnOffLEDOne ();
 		TurnOffLEDTwo ();
@@ -110,12 +105,11 @@ public class TouchTouchTransmission : AbstractManager {
 		} else if (target == TouchState.AllConnected) {
 			// pass. Reason why is because otherwise getting to a three-touch would cause a fail noise.
 		} else {
-			fail ();
+			//fail ();
 		}
 
 		if (score >= TO_WIN) {
 			enabled = false;
-			win ();
 		}
 	}
 
