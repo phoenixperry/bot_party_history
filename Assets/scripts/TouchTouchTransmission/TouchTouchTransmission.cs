@@ -15,6 +15,7 @@ public class TouchTouchTransmission : AbstractManager {
 		AbstractTTTScriptPart.OnNewTarget += addNewTarget;
 		AbstractTTTScriptPart.OnClearTargets += clearTargets;
 		AbstractTTTScriptPart.OnPlayGameSound += playGameSound;
+		AbstractTTTScriptPart.OnEndScriptPart += endScriptPart;
 	}
 	void OnDisable() {
 		base.OnDisable();
@@ -22,6 +23,8 @@ public class TouchTouchTransmission : AbstractManager {
 		AbstractTTTScriptPart.OnNewTarget -= addNewTarget;
 		AbstractTTTScriptPart.OnClearTargets -= clearTargets;
 		AbstractTTTScriptPart.OnPlayGameSound -= playGameSound;
+		AbstractTTTScriptPart.OnEndScriptPart -= endScriptPart;
+
 	}
 	public void clearTargets() {
 		target = TouchState.None;

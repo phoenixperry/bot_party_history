@@ -47,9 +47,10 @@ public class SerialReader : AbstractInputReader
 				return; // TODO: The case of there not being input is handled a little inelegantly. --cap
 		}
 			stream = new SerialPort (port, 115200);
+			stream.WriteTimeout = 1000;
+			stream.ReadTimeout = 1000; // Need to nicely handle this.
 			Debug.Log ("Opening stream...");
 			stream.Open ();
-		stream.WriteTimeout = 200;
 
 		Debug.Log ("Starting stream coroutine...");
 			startProcessCoroutine ();

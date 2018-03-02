@@ -66,7 +66,7 @@ public class TrainingTTTScriptPart : AbstractTTTScriptPart {
 	void partSeven() {
 		SendClearTargets ();
 		SendPlayVoice (Resources.Load ("TouchTouchTransmission/capage-drafts/end-training") as AudioClip);
-		nextTime = Time.time + 3;
+		nextTime = Time.time + 6;
 	}
 	void partEight() {
 		SendEndScriptPart ();
