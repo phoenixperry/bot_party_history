@@ -220,7 +220,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &245618500
 GameObject:
@@ -391,7 +391,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1509126003
 GameObject:
@@ -500,7 +500,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1536710119
 GameObject:
@@ -625,17 +625,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20b39e714b43ba94c9bcdb95a9bb4d9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bot1: {fileID: 100218053}
-  bot2: {fileID: 1337109357}
-  bot3: {fileID: 1509126003}
-  Bot1_Move_Sound: {fileID: 8300000, guid: 357526cdf550b46fd811d0168d91fdfa, type: 3}
-  Bot2_Move_Sound: {fileID: 8300000, guid: 302dfc62b157645a9862cf3e8868d2d0, type: 3}
-  Bot3_Move_Sound: {fileID: 8300000, guid: 7473e27e47d6dbb4893ee93992c19330, type: 3}
-  clips:
-  - {fileID: 8300000, guid: 650e397c0f0d9453287b92d5425c0610, type: 3}
-  - {fileID: 8300000, guid: 06e49b8950a574611abe68f968cb99f5, type: 3}
-  - {fileID: 8300000, guid: 502105638df1842569c465e6c9f22ef4, type: 3}
-  - {fileID: 8300000, guid: 353bc0525b9264fb28aa9ac0de4ba4a6, type: 3}
+  bot1: {fileID: 0}
+  bot2: {fileID: 0}
+  bot3: {fileID: 0}
+  Bot1_Move_Sound: {fileID: 0}
+  Bot2_Move_Sound: {fileID: 0}
+  Bot3_Move_Sound: {fileID: 0}
+  clips: []
 --- !u!4 &1586097421
 Transform:
   m_ObjectHideFlags: 0
@@ -645,7 +641,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 139.5, y: 138, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1621601551}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -831,12 +828,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1621601549}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 139.5, y: 138, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_Father: {fileID: 1586097421}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1726285597
 GameObject:

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-enum TouchState { None=0, OneTwo, TwoThree, OneThree, AllConnected };
+//enum TouchState { None=0, OneTwo, TwoThree, OneThree, AllConnected };
 public class TouchTouchManager : AbstractManager {
 	public static int TO_WIN = 10;
 	bool enabled = true;
