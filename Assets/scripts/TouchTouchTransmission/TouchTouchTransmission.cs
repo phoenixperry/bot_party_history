@@ -34,6 +34,7 @@ public class TouchTouchTransmission : AbstractManager {
 	}
 	public void clearTargets() {
 		target = TouchState.None;
+		gameObject.transform.Find("TargetText").GetComponent<TextMesh>().text = "Target: "+target;
 		lightUp (target, 0);
 	}
 	public void endScriptPart() {
@@ -59,6 +60,7 @@ public class TouchTouchTransmission : AbstractManager {
 		nextTime = Time.time + (duration / 10);
 		Debug.Log (target);
 		lightUp (target, duration);
+		gameObject.transform.Find("TargetText").GetComponent<TextMesh>().text = "Target: "+target;
 	}
 
 	void Start() {
