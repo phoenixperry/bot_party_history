@@ -11,9 +11,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/scenes/FreePlay.unity
     guid: 9e11339097146404dabeb4960730b52b
-  - enabled: 1
+  - enabled: 0
     path: Assets/scenes/TouchTouchRevolution.unity
     guid: 03416df38f8df524188bc708be729c4f
   - enabled: 0
     path: Assets/scenes/Catch.unity
     guid: 950da49280eb23b4cac87e0fbbc5b046
+  - enabled: 1
+    path: Assets/scenes/TouchTouchTransmission.unity
+    guid: abcfcf2f7f1801049a95ca93d1628558

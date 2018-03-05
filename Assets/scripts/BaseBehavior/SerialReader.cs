@@ -11,14 +11,15 @@ using System.Collections.Generic;
 
 public class SerialReader : AbstractInputReader
 {
-	Queue<byte[]> writeQueue;
-     //this is for the port you're on = it has to match what arduino is plugged into       
 
-	SerialPort stream;
+    //opens a queue of bites, which is the opposite of a stack. It's first in first out. Just like a line, you deal with the data in the order it shows up. 
+    Queue<byte[]> writeQueue;
+    
+	SerialPort stream; //serial port data 
 
-    string incommingData;
-    // Use this for initialization
+    string incommingData; //data coming in through the port 
 
+    //list the port names and return the first serial port in the stack of possible serial ports on your machine, this is usually your arduino
 	string getSerialPort() {
 		string[] ports = SerialPort.GetPortNames ();
 		if (ports.Length == 0) {
@@ -28,32 +29,33 @@ public class SerialReader : AbstractInputReader
 		return ports [0]; // TODO: At present this uses the first found serial input. --cap
 		}
 
+    //this update function simply checks if anything needs to be written. 
 	void Update() {
-		checkForWrites ();
+		checkForWrites (); //makes sure if there's data in our writeQueue, it sends. 
 	}
 	void checkForWrites() {
 		while (writeQueue.Count > 0) {
-			stream.Write (writeQueue.Dequeue(),0,2);
+			stream.Write (writeQueue.Dequeue(),0,2); //this sends the first byte in the writeQueue, it starts with the first byte in the buffer and sends 2 bytes of data. we are sending only 2 bytes to arduino this way to save memory and increase speed. 
 		}
 	}
 
 	void OnEnable() {
-		base.OnEnable ();
-		OnWriteToSerial += queueWrite;
+		base.OnEnable (); //calls the base class enable function
+		OnWriteToSerial += queueWrite; //calls queueWrite when the OnWriteSerial event is called. 
 		writeQueue = new Queue<byte[]>();
-		string port = getSerialPort ();
-		if (port == "") {
+		string port = getSerialPort (); //gets the first port at position 0. 
+		if (port == "") { 
 		Debug.Log ("Terminating stream enable...\n (Hint: Hit semicolon (;) to switch to keyboard input.)");
 				return; // TODO: The case of there not being input is handled a little inelegantly. --cap
 		}
-			stream = new SerialPort (port, 115200);
-			stream.WriteTimeout = 1000;
+			stream = new SerialPort (port, 115200); //opens the serial port 
+			stream.WriteTimeout = 1000; //this is long. - we might want to test this. 
 			stream.ReadTimeout = 1000; // Need to nicely handle this.
 			Debug.Log ("Opening stream...");
 			stream.Open ();
 
 		Debug.Log ("Starting stream coroutine...");
-			startProcessCoroutine ();
+			startProcessCoroutine (); 
 		}
 
 		void OnDisable() {
@@ -64,12 +66,7 @@ public class SerialReader : AbstractInputReader
 			stream.Close ();
 		}
 		}
-
-    void Start()
-    {
-
-    }
-
+        //this coroutine starts up when the serial port is opened successfully. It reads the data coming in from arduino and sends it to the right data sctructures.  
 		public void startProcessCoroutine() {
 		StartCoroutine
 		(
@@ -80,11 +77,8 @@ public class SerialReader : AbstractInputReader
 		string [] sensors = incommingData.Split(' ');
 		if (sensors.Length > 1 && sensors.Length < 4)
 		{
-		//Bot.name = sensors[0];
-		//Bot.name = sensors[1];
-		//if (OnTouch != null) {
-		passOnTouch(new TouchedBots(sensors[0], sensors[1])); 
-		//}
+		passOnTouch(new TouchedBots(sensors[0], sensors[1])); //creates a new touchedBots struct and passes in data.  
+	
 
 		}
 		else if (sensors.Length == 6)
@@ -105,12 +99,12 @@ public class SerialReader : AbstractInputReader
 		);
 		}
 		
-
+    //queues up data to write to the serial port 
 	public void queueWrite(byte[] wri)
 	{
 		writeQueue.Enqueue (wri);
 	}
-
+    //function which is called when the coroutine starts up.  It fires off the call back function and returns data if it can read something from the port. 
     public IEnumerator AsynchronousReadFromArduino(System.Action<string> callback, System.Action fail = null, float timeout = float.PositiveInfinity)
     {
         System.DateTime initialTime = System.DateTime.Now;

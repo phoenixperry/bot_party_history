@@ -8,15 +8,12 @@ public class BotData : MonoBehaviour
 
 {
 
-    //this class deals with all bot data 
+    //this class deals with all bot data. The other thing it does is map the accerometer data to a rate. If you want to play with how the accelerometers feel, the equation is here. see the function ProcessCompass and ProcessAccerometer for more 
 
     public static string botName;
     public static ArrayList compass = new ArrayList();
     public static int btn;
     private static string[] sensors;
-	public GameObject bot1;
-	public GameObject bot2;
-	public GameObject bot3;
 
 	public Bot bot1_data;
 	public Bot bot2_data;
@@ -91,7 +88,7 @@ public class BotData : MonoBehaviour
 	void OnEnable() {
         AbstractInputReader.OnBotDataReceived += processData;
 	}
-
+    //gets the data to the right bot. 
 	private void processData(Bot b) {
 		if (b.name == "botOne") {
 			processBotDifference (b, bot1_data);
@@ -316,7 +313,6 @@ public class BotData : MonoBehaviour
             int zpos;
             int.TryParse(val, out zpos);
             //send the accelerometer vals to the bot using them  
-            bot1.GetComponent<botBehavior>().rotateBot(xpos, ypos, zpos); // move the bot by the x, y, z positions 
             //if the btn is down  & and it was not down in the last frame  
             if (btn == 1 && btn1Down == 0)
             {
@@ -353,8 +349,7 @@ public class BotData : MonoBehaviour
             val = compass[3] as string;
             int zpos;
             int.TryParse(val, out zpos);
-            //send the accelerometer vals to the bot using them  
-            bot2.GetComponent<botBehavior>().rotateBot(xpos, ypos, zpos); // move the bot by the x, y, z positions 
+          
 
             if (btn == 1 && btn2Down == 0)
             {
@@ -390,8 +385,6 @@ public class BotData : MonoBehaviour
             val = compass[3] as string;
             int zpos;
             int.TryParse(val, out zpos);
-            //send the accelerometer vals to the bot using them  
-            bot3.GetComponent<botBehavior>().rotateBot(xpos, ypos, zpos); // move the bot by the x, y, z positions 
 
             if (btn == 1 && btn3Down == 0)
             {

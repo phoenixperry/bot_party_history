@@ -4,20 +4,21 @@ using UnityEngine;
 
 public abstract class AbstractManager : MonoBehaviour {
 
-	/* 
-	 * Class: AbstractSceneManager
-	 * Extend AbstractSceneManager with your own class for your own scene.
-	 * Each of the methods of this class (except OnEnable and OnDisable)
-	 * Are events that are sent from the bots as certain things occur.
-	 * Your concrete implementation of a SceneManager should use this events
-	 * In order to produce whatever you're trying to do game-wise.
-	 * You should not modify any other code other than to create a subclass
-	 * of this class.
+    /* 
+	 * you need to implement this manager to gain access to all events you should use in your game for detecting changes in bots and writing LED data.
+     * For exmaple 
+     * public class MyGameScene : AbstractManager { 
+     *     in this class you will need to implement all of the functions for events below 
+     * } 
+     * 
 	 */
 
-	public GameObject bot1;
+   //these are all our bots 
+    public GameObject bot1;
 	public GameObject bot2;
-	public GameObject bot3;
+	public GameObject bot3; 
+
+    //all the events every level will need with all their functions which must be implemented. 
 	public void OnEnable()
 	{
 		TouchManager.OnBoxOneTwoTouched += BoxOneTwoConnected;
@@ -242,6 +243,7 @@ public abstract class AbstractManager : MonoBehaviour {
 
 	}
 
+    //these events are just for the LED changes   
 	public delegate void LEDChange(int led, LED_CHANGES type, int parameter);
 	public static event LEDChange DoLEDChange;
 

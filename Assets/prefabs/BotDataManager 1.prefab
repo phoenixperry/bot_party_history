@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4835238284337062}
   - component: {fileID: 114913391577563878}
-  - component: {fileID: 114402947184027482}
   m_Layer: 0
   m_Name: BotDataManager 1
   m_TagString: Untagged
@@ -41,21 +40,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114402947184027482
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1833050285031130}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31661a1258ab473439b59cd3aad80140, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  btn: {fileID: 0}
-  bot1: {fileID: 0}
-  bot2: {fileID: 0}
-  bot3: {fileID: 0}
 --- !u!114 &114913391577563878
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -67,9 +51,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4df70d4e6b06f14889584551539a73b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bot1: {fileID: 1932919955570368, guid: 9e7220cfa2add154382d8a16fd0f7be0, type: 2}
-  bot2: {fileID: 1619519887230192, guid: 9e7220cfa2add154382d8a16fd0f7be0, type: 2}
-  bot3: {fileID: 1711377590913822, guid: 9e7220cfa2add154382d8a16fd0f7be0, type: 2}
   integratedCompass: 0
   bot1_mv_avg: 0
   bot2_mv_avg: 0

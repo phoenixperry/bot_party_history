@@ -40,7 +40,7 @@ public class MenuManager : AbstractManager
 
     public void TouchTouchRevolution()
     {
-        SceneManager.LoadScene("TouchTouchRevolution", LoadSceneMode.Single);
+        SceneManager.LoadScene("TouchTouchTransmission", LoadSceneMode.Single);
     }
 
     void Update()

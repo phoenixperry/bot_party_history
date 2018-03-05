@@ -28,7 +28,7 @@ public class HelmScriptingTest : MonoBehaviour {
 
         /* ok to pull of changing a patch while the game is running you need to watch this: https://unity3d.com/learn/tutorials/topics/audio/exposed-audiomixer-parameters (you can ignore the part where they map it to on screen UI)
         There's stuff to set up in the editor. You need to go into the patch on the master channel and expose it's parameter. Then you need to rename it's parameter. You could call it cat butt but for sanity here I just named it what it was */
-        helmMixer.SetFloat("resoance", note/15.0f);//here's setting the resonace based on note 
+        helmMixer.SetFloat("resonance", note/15.0f);//here's setting the resonace based on note 
         helmMixer.SetFloat("osc1waveform" ,note); //heres messing with the osc waveform based on the note 
 
         float val = 0.0f;
