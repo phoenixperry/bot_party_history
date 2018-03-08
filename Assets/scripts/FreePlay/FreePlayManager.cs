@@ -8,7 +8,10 @@ public class FreePlayManager : AbstractManager {
 	public ArrayList touchsound = new ArrayList();
 	public AudioClip onetwo, twothree, onethree, allthree;
 	public GameObject btnInterface;
+	TestMarkovMusic markov_piano;
+
 	void Start() {
+		markov_piano = new TestMarkovMusic ();
 		touchsound.Add (onetwo);
 		touchsound.Add (twothree);
 		touchsound.Add (onethree);
@@ -44,6 +47,7 @@ public class FreePlayManager : AbstractManager {
 	public override void BoxOneButtonDown ()
 	{
 		TurnOnLEDOne ();
+		BoxOneStartMoving (10f);
 		Button button = btnInterface.transform.Find ("botBtn1").GetComponent<Button> ();
 		ColorBlock cb = button.colors;
 		cb.normalColor = Color.red;
@@ -53,6 +57,7 @@ public class FreePlayManager : AbstractManager {
 	public override void BoxOneButtonUp ()
 	{
 		TurnOffLEDOne ();
+		BoxOneStopMoving ();
 		Button button = btnInterface.transform.Find ("botBtn1").GetComponent<Button> ();
 		ColorBlock cb = button.colors;
 		cb.normalColor = Color.green;
@@ -100,21 +105,25 @@ public class FreePlayManager : AbstractManager {
 
 	public override void BoxOneStartMoving(double speed)
 	{
-		BoxOneContinueMoving (speed);
 		gameObject.transform.Find ("Move1").GetComponent<TextMesh> ().text = "1: Moving";
+		GameObject midibot = gameObject.transform.Find ("Bot1Midi").gameObject;
+		midibot.GetComponent<HelmSequencer> ().enabled = true;
+		//markov_piano.addNextBeats (1024, midibot.GetComponent<HelmSequencer>());
+		midibot.GetComponent<AudioSource> ().Play ();
 	}
 
 	public override void BoxOneContinueMoving(double speed)
 	{
-		// So this plays notes proportional to speed of box one from the octave C3 to C4.
-		gameObject.transform.Find ("Bot1Midi").GetComponent<HelmController> ().AllNotesOff ();
-		// Note 48 = C3. 
-		gameObject.transform.Find ("Bot1Midi").GetComponent<HelmController> ().NoteOn ((int)(48 + Mathf.Max(0f,(float)(speed-5))*2));
+
 	}
 
 	public override void BoxOneStopMoving()
 	{
-		gameObject.transform.Find ("Bot1Midi").GetComponent<HelmController> ().AllNotesOff();
+		GameObject midibot = gameObject.transform.Find ("Bot1Midi").gameObject;
+		midibot.GetComponent<AudioSource> ().Stop ();
+		midibot.GetComponent<HelmSequencer> ().Clear ();
+		midibot.GetComponent<HelmSequencer> ().currentIndex = -1;
+		midibot.GetComponent<HelmSequencer> ().enabled = false;
 		gameObject.transform.Find ("Move1").GetComponent<TextMesh> ().text = "1: At rest";
 	}
 

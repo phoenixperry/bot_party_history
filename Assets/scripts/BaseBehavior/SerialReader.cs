@@ -34,7 +34,7 @@ public class SerialReader : AbstractInputReader
 		checkForWrites (); //makes sure if there's data in our writeQueue, it sends. 
 	}
 	void checkForWrites() {
-		while (writeQueue.Count > 0) {
+		while (writeQueue.Count > 0 && stream != null) {
 			stream.Write (writeQueue.Dequeue(),0,2); //this sends the first byte in the writeQueue, it starts with the first byte in the buffer and sends 2 bytes of data. we are sending only 2 bytes to arduino this way to save memory and increase speed. 
 		}
 	}

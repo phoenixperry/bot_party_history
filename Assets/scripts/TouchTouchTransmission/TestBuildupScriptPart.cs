@@ -1,15 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using AudioHelm;
 
 public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
 
 	float nextTime = 0;
 	int currentPart = 0;
 	public override void startPart() {
+		gameObject.transform.Find("Resol").Find ("ResolBass").GetComponent<HelmSequencer> ().enabled = true;
+		gameObject.transform.Find("Resol").Find ("ResolLead").GetComponent<HelmSequencer> ().enabled = true;
+		gameObject.transform.Find("Resol").Find ("ResolDrum").GetComponent<SampleSequencer> ().enabled = true;
 		Debug.Log ("Test buildup start");
 		currentPart = 1;
 		partOne ();
+	}
+	public override void stopPart() {
+		gameObject.transform.Find("Resol").Find ("ResolBass").GetComponent<HelmSequencer> ().enabled = false;
+		gameObject.transform.Find("Resol").Find ("ResolLead").GetComponent<HelmSequencer> ().enabled = false;
+		gameObject.transform.Find("Resol").Find ("ResolDrum").GetComponent<SampleSequencer> ().enabled = false;
+
 	}
 	void Update() {
 		if (currentPart == 1 && nextTime <= Time.time) {
@@ -36,11 +46,11 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
 	void partOne() {
 		nextTime = Time.time + 45;
 		SendPlayVoice(Resources.Load ("TouchTouchTransmission/capage-drafts/test-buildup-start") as AudioClip);
-		SendNewTarget (TouchState.None, 30);
+		SendNewTarget (TouchState.None, 70);
 	}
 	void partTwo() {
 		SendClearTargets ();
-		nextTime = Time.time + 6;
+		nextTime = Time.time + 5;
 		SendPlayVoice (Resources.Load ("TouchTouchTransmission/capage-drafts/test-buildup-end") as AudioClip);
 	}
 	void partThree() {

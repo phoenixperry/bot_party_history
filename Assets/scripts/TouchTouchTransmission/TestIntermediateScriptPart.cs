@@ -1,15 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using AudioHelm;
 public class TestIntermediateTTTScriptPart : AbstractTTTScriptPart {
 
 	float nextTime = 0;
 	int currentPart = 0;
 	public override void startPart() {
+		gameObject.transform.Find("Inter").Find("InterLead").GetComponent<HelmSequencer> ().enabled = true;
+		gameObject.transform.Find("Inter").Find ("InterBass").GetComponent<HelmSequencer> ().enabled = true;
+		gameObject.transform.Find("Inter").Find ("InterDrum").GetComponent<SampleSequencer> ().enabled = true;
 		Debug.Log ("Test intermediate start");
 		currentPart = 1;
 		partOne ();
+	}
+	public override void stopPart() {
+		gameObject.transform.Find("Inter").Find("InterLead").GetComponent<HelmSequencer> ().enabled = false;
+		gameObject.transform.Find("Inter").Find ("InterBass").GetComponent<HelmSequencer> ().enabled = false;
+		gameObject.transform.Find("Inter").Find ("InterDrum").GetComponent<SampleSequencer> ().enabled = false;
 	}
 	void Update() {
 		if (currentPart == 1 && nextTime <= Time.time) {
