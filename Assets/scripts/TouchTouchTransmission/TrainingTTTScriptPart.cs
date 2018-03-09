@@ -47,13 +47,13 @@ public class TrainingTTTScriptPart : AbstractTTTScriptPart {
 		nextTime = Time.time + 4;
 	}
 	void partTwo() {
-		SendNewTarget (TouchState.OneTwo,250);
+		SendNewTarget (TouchState.OneTwo,250, 0);
 	}
 	void partThree() {
-		SendNewTarget (TouchState.TwoThree,250);
+		SendNewTarget (TouchState.TwoThree,250, 1);
 	}
 	void partFour() {
-		SendNewTarget (TouchState.OneThree,250);
+		SendNewTarget (TouchState.OneThree,250, 1);
 	}
 	void partFive() {
 		SendClearTargets ();
@@ -61,7 +61,7 @@ public class TrainingTTTScriptPart : AbstractTTTScriptPart {
 		nextTime = Time.time + 2;
 	}
 	void partSix() {
-		SendNewTarget (TouchState.AllConnected, 250);
+		SendNewTarget (TouchState.AllConnected, 250, 1);
 	}
 	void partSeven() {
 		SendClearTargets ();

@@ -11,7 +11,8 @@ public class FreePlayManager : AbstractManager {
 	TestMarkovMusic markov_piano;
 
 	void Start() {
-		markov_piano = new TestMarkovMusic ();
+		TextAsset noteasy = Resources.Load("MarkovFiles/NotEasyBeingGreen") as TextAsset;
+		markov_piano = new TestMarkovMusic (noteasy.text);
 		touchsound.Add (onetwo);
 		touchsound.Add (twothree);
 		touchsound.Add (onethree);
@@ -107,14 +108,16 @@ public class FreePlayManager : AbstractManager {
 	{
 		gameObject.transform.Find ("Move1").GetComponent<TextMesh> ().text = "1: Moving";
 		GameObject midibot = gameObject.transform.Find ("Bot1Midi").gameObject;
+		midibot.GetComponent<AudioHelmClock> ().Reset ();
 		midibot.GetComponent<HelmSequencer> ().enabled = true;
-		//markov_piano.addNextBeats (1024, midibot.GetComponent<HelmSequencer>());
+		HelmSequencer seq = midibot.GetComponent<HelmSequencer> ();
+		markov_piano.addNextBeats (seq.length, seq);
 		midibot.GetComponent<AudioSource> ().Play ();
 	}
 
 	public override void BoxOneContinueMoving(double speed)
 	{
-
+		gameObject.transform.Find ("Move1").GetComponent<TextMesh> ().text = "1: "+speed;
 	}
 
 	public override void BoxOneStopMoving()

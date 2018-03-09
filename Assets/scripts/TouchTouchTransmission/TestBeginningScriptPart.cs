@@ -31,16 +31,17 @@ public class TestBeginningTTTScriptPart : AbstractTTTScriptPart {
 	}
 	public override void targetSuccess() {
 		SendPlayGameSound (Resources.Load ("TouchTouchTransmission/capage-drafts/success-ping") as AudioClip);
-		SendNewTarget (TouchState.None, 70);
+		SendNewTarget (TouchState.None, 70, 1);
 	}
 	public override void targetFailure() {
+		Debug.Log ("Target failure");
 		SendPlayGameSound (Resources.Load ("TouchTouchTransmission/capage-drafts/screech") as AudioClip);
-		SendNewTarget (TouchState.None,70);
+		SendNewTarget (TouchState.None,70, 1);
 	}
 	void partOne() {
-		nextTime = Time.time + 25;
+		nextTime = Time.time + 35;
 		SendPlayVoice(Resources.Load ("TouchTouchTransmission/capage-drafts/test-beginning-start") as AudioClip);
-		SendNewTarget (TouchState.None, 70);
+		SendNewTarget (TouchState.None, 70, 1);
 	}
 	void partTwo() {
 		nextTime = Time.time + 10;

@@ -9,7 +9,7 @@ public class AbstractTTTScriptPart : MonoBehaviour {
 	public delegate void ClearTargets();
 	public static event ClearTargets OnClearTargets;
 
-	public delegate void NewTarget(TouchState target, int duration);
+	public delegate void NewTarget(TouchState target, int duration, float pause);
 	public static event NewTarget OnNewTarget;
 
 	public delegate void PlayVoice(AudioClip clip);
@@ -44,9 +44,9 @@ public class AbstractTTTScriptPart : MonoBehaviour {
 			OnClearTargets();
 		}
 	}
-	protected void SendNewTarget(TouchState target, int duration) {
+	protected void SendNewTarget(TouchState target, int duration, float pause) {
 		if (OnNewTarget != null) {
-			OnNewTarget (target, duration);
+			OnNewTarget (target, duration, pause);
 		}
 	}
 
@@ -63,6 +63,34 @@ public class AbstractTTTScriptPart : MonoBehaviour {
 
 	}
 	public virtual void targetCleared() {
+
+	}
+
+	public virtual void BoxOneStartMoving(double speed) {
+
+	}
+	public virtual void BoxOneContinueMoving(double speed) {
+
+	}
+	public virtual void BoxOneStopMoving() {
+
+	}
+	public virtual void BoxTwoStartMoving(double speed) {
+
+	}
+	public virtual void BoxTwoContinueMoving(double speed) {
+
+	}
+	public virtual void BoxTwoStopMoving() {
+
+	}
+	public virtual void BoxThreeStartMoving(double speed) {
+
+	}
+	public virtual void BoxThreeContinueMoving(double speed) {
+
+	}
+	public virtual void BoxThreeStopMoving() {
 
 	}
 }

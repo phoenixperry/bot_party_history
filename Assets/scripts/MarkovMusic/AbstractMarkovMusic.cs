@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using AudioHelm;
 using System;
+using System.Text;
 
 public class QuickTuple<T1, T2> {
 	public T1 first { get; private set;}
@@ -26,31 +27,54 @@ public class AbstractMarkovMusic : object {
 	}
 	public AbstractMarkovMusic(string file_data) {
 		training_data = new Dictionary<string, List<int>> ();
-		// TODO: Parsing the file data here.
+		string[] lines = file_data.Split(new char[] {';'});
+		for (int i = 0; i < lines.Length; i++) {
+			string[] key_data = lines [i].Split (new char[] { ',' });
+			if (key_data.Length != 2) {
+				continue;
+			}
+			string key = key_data [0].Replace("\n","").Replace("\r","");
+			string[] all_data = key_data [1].Split (new char[] { ' '});
+			if (!training_data.ContainsKey (key)) {
+				training_data [key] = new List<int> ();
+			}
+			int next_data;
+			for (int j = 0; j < all_data.Length; j++) {
+				int.TryParse (all_data [j], out next_data);
+				if (next_data != null && next_data != 0) {
+					training_data [key].Add (next_data);
+				}
+			}
+		}
 	}
-public QuickTuple<int, float> getNextNote(int second_last, int last) {
+	public QuickTuple<int, float> getNextNote(int second_last, int last) {
 		return new QuickTuple<int, float> (getNextNotePitch (second_last, last), getNextNoteLength (second_last, last));
 	}
 
 	public int getNextNotePitch(int second_last, int last) {
-		string key = second_last + "_" + last;
-		Debug.Log ("Key is...");
+		string key = last + "_" + second_last;
 		if (training_data.ContainsKey (key)) {
-			Debug.Log ("Key in dict");
 			List<int> result = training_data [key];
 			if (result.Count == 0) {
 				return defaultNotePitch (second_last, last);
 			}
-			Debug.Log ("result.count > 0");
 			return result [UnityEngine.Random.Range (0, result.Count)];
 		} else {
-			Debug.Log ("Key not in dict");
 			return defaultNotePitch (second_last, last);
 		}
 	}
 
 	public virtual int defaultNotePitch(int second_last, int last) {
-		return 72;
+		string key;
+		if (training_data.Count == 0) { 
+			return 72;
+		}
+		int rand = UnityEngine.Random.Range (0, training_data.Count);
+		List<int> possibilities = training_data[new List<string>(training_data.Keys)[rand]];
+		if (possibilities.Count == 0) {
+			return 72;
+		}
+		return possibilities [UnityEngine.Random.Range (0, possibilities.Count)];
 	}
 
 	public virtual float getNextNoteLength(int second_last, int last) {
@@ -81,8 +105,6 @@ public QuickTuple<int, float> getNextNote(int second_last, int last) {
 				last = 0;
 			}
 			QuickTuple<int, float> nextNote = getNextNote (second_last, last);
-			Debug.Log ("next note is... (" + nextNote.first + "," + nextNote.last+")");
-			Debug.Log ("Current end is..."+currentEnd);
 			sequencer.AddNote (nextNote.first, currentEnd, currentEnd + nextNote.last);
 			last_two = getLastTwoNotes (sequencer);
 			currentEnd = last_two.last.end;
@@ -91,8 +113,6 @@ public QuickTuple<int, float> getNextNote(int second_last, int last) {
 
 	public QuickTuple<Note, Note> getLastTwoNotes(HelmSequencer sequencer) {
 		List<Note> notes = sequencer.GetAllNoteOnsInRange (0, sequencer.length);
-		Debug.Log ("Notes: " + notes);
-		Debug.Log ("There are " + notes.Count + " Notes here");
 		if (notes.Count == 0) { 
 			return new QuickTuple<Note, Note> (null, null);
 		} else if (notes.Count == 1) {

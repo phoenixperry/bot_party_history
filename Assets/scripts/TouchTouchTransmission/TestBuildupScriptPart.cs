@@ -33,7 +33,7 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
 	public override void targetSuccess() {
 		if (currentPart == 1 || currentPart == 2) {
 			SendPlayGameSound (Resources.Load ("TouchTouchTransmission/capage-drafts/success-ping") as AudioClip);
-			SendNewTarget (TouchState.None, 30);
+			SendNewTarget (TouchState.None, 30, 1);
 		} else if (currentPart == 3) {
 			currentPart = 4;
 			partFour ();
@@ -41,12 +41,12 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
 	}
 	public override void targetFailure() {
 		SendPlayGameSound (Resources.Load ("TouchTouchTransmission/capage-drafts/screech") as AudioClip);
-		SendNewTarget (TouchState.None,30);
+		SendNewTarget (TouchState.None,30, 1);
 	}
 	void partOne() {
-		nextTime = Time.time + 45;
+		nextTime = Time.time + 60;
 		SendPlayVoice(Resources.Load ("TouchTouchTransmission/capage-drafts/test-buildup-start") as AudioClip);
-		SendNewTarget (TouchState.None, 70);
+		SendNewTarget (TouchState.None, 70, 1);
 	}
 	void partTwo() {
 		SendClearTargets ();
@@ -54,11 +54,36 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
 		SendPlayVoice (Resources.Load ("TouchTouchTransmission/capage-drafts/test-buildup-end") as AudioClip);
 	}
 	void partThree() {
-		SendNewTarget (TouchState.AllConnected, 255);
+		SendNewTarget (TouchState.AllConnected, 255, 0);
 	}
 	void partFour() {
 		SendPlayGameSound (Resources.Load ("TouchTouchTransmission/capage-drafts/test-transmission-end") as AudioClip);
 		SendClearTargets ();
 		SendEndScriptPart ();
+	}
+	// Copy pasted from bridge test script
+	public override void BoxOneStartMoving(double speed) {
+		gameObject.transform.Find ("Motion").Find ("Motion1").GetComponent<HelmSequencer> ().enabled = true;
+		Debug.Log ("Playing motion1");
+	}
+	public override void BoxOneStopMoving() {
+		gameObject.transform.Find ("Motion").Find ("Motion1").GetComponent<HelmSequencer> ().enabled = false;
+	}
+
+	public override void BoxTwoStartMoving(double speed) {
+		gameObject.transform.Find ("Motion").Find ("Motion2").GetComponent<HelmSequencer> ().enabled = true;
+		Debug.Log ("Playing motion2");
+	}
+	public override void BoxTwoStopMoving() {
+		gameObject.transform.Find ("Motion").Find ("Motion2").GetComponent<HelmSequencer> ().enabled = false;
+	}
+
+
+	public override void BoxThreeStartMoving(double speed) {
+		gameObject.transform.Find ("Motion").Find ("Motion3").GetComponent<SampleSequencer> ().enabled = true;
+		Debug.Log ("Playing motion3");
+	}
+	public override void BoxThreeStopMoving() {
+		gameObject.transform.Find ("Motion").Find ("Motion3").GetComponent<SampleSequencer> ().enabled = false;
 	}
 }

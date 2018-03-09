@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TestMarkovMusic : AbstractMarkovMusic {
-
-	public override int defaultNotePitch(int second_last, int last) {
-		return 70;
+	public TestMarkovMusic() : base() {
+	}
+	public TestMarkovMusic(string file_data) : base(file_data) {
+	}
+	public override float getNextNoteLength (int second_last, int last)
+	{
+		return UnityEngine.Random.Range (1, 4) * 4;
 	}
 }

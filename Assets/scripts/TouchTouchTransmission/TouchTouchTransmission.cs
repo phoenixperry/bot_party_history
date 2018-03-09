@@ -13,7 +13,7 @@ public class TouchTouchTransmission : AbstractManager {
 	void OnEnable() {
 		base.OnEnable ();
 		AbstractTTTScriptPart.OnPlayVoice += playBotVoice;
-		AbstractTTTScriptPart.OnNewTarget += addNewTarget;
+		AbstractTTTScriptPart.OnNewTarget += newTarget;
 		AbstractTTTScriptPart.OnClearTargets += clearTargets;
 		AbstractTTTScriptPart.OnPlayGameSound += playGameSound;
 		AbstractTTTScriptPart.OnEndScriptPart += endScriptPart;
@@ -21,7 +21,7 @@ public class TouchTouchTransmission : AbstractManager {
 	void OnDisable() {
 		base.OnDisable();
 		AbstractTTTScriptPart.OnPlayVoice -= playBotVoice;
-		AbstractTTTScriptPart.OnNewTarget -= addNewTarget;
+		AbstractTTTScriptPart.OnNewTarget -= newTarget;
 		AbstractTTTScriptPart.OnClearTargets -= clearTargets;
 		AbstractTTTScriptPart.OnPlayGameSound -= playGameSound;
 		AbstractTTTScriptPart.OnEndScriptPart -= endScriptPart;
@@ -30,6 +30,7 @@ public class TouchTouchTransmission : AbstractManager {
 	void Update() {
 		if (target != TouchState.None && nextTime <= Time.time) {
 			fail ();
+			target = TouchState.None;
 		}
 	}
 	public void clearTargets() {
@@ -50,6 +51,17 @@ public class TouchTouchTransmission : AbstractManager {
 		gameSpeaker.clip = clip;
 		gameSpeaker.Play ();
 	}
+	public void newTarget(TouchState new_target, int duration, float pause) {
+		lightUp (TouchState.None, 0);
+		//Pause goes here
+
+		StartCoroutine(targetAddWrapper(new_target, duration,pause)); // I hate I have to do this and not invoke, but...
+	}
+	IEnumerator targetAddWrapper(TouchState new_target, int duration, float pause) {
+		yield return new WaitForSeconds(pause);
+
+		addNewTarget (new_target, duration);
+	}
 	public void addNewTarget(TouchState new_target, int duration) {
 		if (new_target == TouchState.None) {
 			while (new_target == target || new_target == TouchState.None) {
@@ -58,7 +70,6 @@ public class TouchTouchTransmission : AbstractManager {
 		}
 		target = new_target;
 		nextTime = Time.time + (duration / 10);
-		Debug.Log (target);
 		lightUp (target, duration);
 		gameObject.transform.Find("TargetText").GetComponent<TextMesh>().text = "Target: "+target;
 	}
@@ -99,7 +110,6 @@ public class TouchTouchTransmission : AbstractManager {
 		if (!enabled)
 			return;
 
-		Debug.Log ("Test match: " + input);
 		if (input == target) {
 			success ();
 			//newTarget ();
@@ -110,9 +120,9 @@ public class TouchTouchTransmission : AbstractManager {
 			//fail ();
 		}
 
-		if (score >= TO_WIN) {
-			enabled = false;
-		}
+	//if (score >= TO_WIN) {
+	//		enabled = false;
+	//	}
 	}
 
 	public override void BoxOneTwoConnected()
@@ -130,5 +140,35 @@ public class TouchTouchTransmission : AbstractManager {
 
 	public override void AllConnected() {
 		checkMatch (TouchState.AllConnected);
+	}
+
+	public override void BoxOneStartMoving(double speed) {
+		script.BoxOneStartMoving (speed);
+	}
+	public override void BoxOneContinueMoving(double speed) {
+		script.BoxOneContinueMoving (speed);
+	}
+	public override void BoxOneStopMoving() {
+		script.BoxOneStopMoving ();
+	}
+
+	public override void BoxTwoStartMoving(double speed) {
+		script.BoxTwoStartMoving (speed);
+	}
+	public override void BoxTwoContinueMoving(double speed) {
+		script.BoxTwoContinueMoving (speed);
+	}
+	public override void BoxTwoStopMoving() {
+		script.BoxTwoStopMoving ();
+	}
+
+	public override void BoxThreeStartMoving(double speed) {
+		script.BoxThreeStartMoving (speed);
+	}
+	public override void BoxThreeContinueMoving(double speed) {
+		script.BoxThreeContinueMoving (speed);
+	}
+	public override void BoxThreeStopMoving() {
+		script.BoxThreeStopMoving ();
 	}
 }

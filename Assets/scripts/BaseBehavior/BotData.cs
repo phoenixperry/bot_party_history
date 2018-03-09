@@ -117,10 +117,10 @@ public class BotData : MonoBehaviour
 		processCompass (b2, b1);
 
 	}
-	public static double DELTA = 0.25;
-	public static double THRESHOLD = 4;
+	public static double DELTA = 0.6	;
+	public static double THRESHOLD = 5;
 	public static double CAP = 10;
-	public static double STICKINESS = 0.5;
+	public static double STICKINESS = 2;
 	public double bot1_mv_avg = 0.0;
 	public double bot2_mv_avg = 0.0;
 	public double bot3_mv_avg = 0.0;

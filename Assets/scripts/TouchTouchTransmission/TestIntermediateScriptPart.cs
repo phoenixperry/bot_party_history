@@ -30,16 +30,16 @@ public class TestIntermediateTTTScriptPart : AbstractTTTScriptPart {
 	}
 	public override void targetSuccess() {
 		SendPlayGameSound (Resources.Load ("TouchTouchTransmission/capage-drafts/success-ping") as AudioClip);
-		SendNewTarget (TouchState.None, 50);
+		SendNewTarget (TouchState.None, 50, 1);
 	}
 	public override void targetFailure() {
 		SendPlayGameSound (Resources.Load ("TouchTouchTransmission/capage-drafts/screech") as AudioClip);
-		SendNewTarget (TouchState.None,50);
+		SendNewTarget (TouchState.None,50, 1);
 	}
 	void partOne() {
 		nextTime = Time.time + 35;
 		SendPlayVoice(Resources.Load ("TouchTouchTransmission/capage-drafts/test-intermediate-start") as AudioClip);
-		SendNewTarget (TouchState.None, 50);
+		SendNewTarget (TouchState.None, 50, 1);
 	}
 	void partTwo() {
 		nextTime = Time.time + 10;

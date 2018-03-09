@@ -22,6 +22,51 @@ public class AbstractTTTScript : MonoBehaviour {
 			scriptParts [currentPart].targetCleared ();
 		}
 	}
+	public void BoxOneStartMoving(double speed) {
+		if (currentPart < scriptParts.Count) {
+			scriptParts [currentPart].BoxOneStartMoving (speed);
+		}
+	}
+	public void BoxOneContinueMoving(double speed) {
+		if (currentPart < scriptParts.Count) {
+			scriptParts [currentPart].BoxOneContinueMoving (speed);
+		}
+	}	
+	public void BoxOneStopMoving() {
+		if (currentPart < scriptParts.Count) {
+			scriptParts [currentPart].BoxOneStopMoving ();
+		}
+	}
+	public void BoxTwoStartMoving(double speed) {
+		if (currentPart < scriptParts.Count) {
+			scriptParts [currentPart].BoxTwoStartMoving (speed);
+		}
+	}
+	public void BoxTwoContinueMoving(double speed) {
+		if (currentPart < scriptParts.Count) {
+			scriptParts [currentPart].BoxTwoContinueMoving (speed);
+		}
+	}	
+	public void BoxTwoStopMoving() {
+		if (currentPart < scriptParts.Count) {
+			scriptParts [currentPart].BoxTwoStopMoving ();
+		}
+	}
+	public void BoxThreeStartMoving(double speed) {
+		if (currentPart < scriptParts.Count) {
+			scriptParts [currentPart].BoxThreeStartMoving (speed);
+		}
+	}
+	public void BoxThreeContinueMoving(double speed) {
+		if (currentPart < scriptParts.Count) {
+			scriptParts [currentPart].BoxThreeContinueMoving (speed);
+		}
+	}	
+	public void BoxThreeStopMoving() {
+		if (currentPart < scriptParts.Count) {
+			scriptParts [currentPart].BoxThreeStopMoving ();
+		}
+	}
 
 	public void startNextScript() {
 		Debug.Log ("startNextScript");
