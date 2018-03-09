@@ -80,8 +80,11 @@ public class AbstractMarkovMusic : object {
 	public virtual float getNextNoteLength(int second_last, int last) {
 		return 8;
 	}
-
-	public void addNextBeats(int beats, HelmSequencer sequencer) {
+	public void fillSequencer(HelmSequencer sequencer) {
+		sequencer.Clear ();
+		addNextBeats (sequencer.length, sequencer);
+	}
+	void addNextBeats(int beats, HelmSequencer sequencer) {
 		QuickTuple<Note, Note> last_two;
 		last_two = getLastTwoNotes (sequencer);
 		float start;

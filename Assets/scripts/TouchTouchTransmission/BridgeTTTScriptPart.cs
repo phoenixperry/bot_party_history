@@ -26,8 +26,8 @@ public class BridgeTTTScriptPart : AbstractTTTScriptPart {
 		Transform motion2 = gameObject.transform.Find ("Motion").Find ("Motion2");
 		HelmSequencer seq1 = motion1.GetComponent<HelmSequencer> ();
 		HelmSequencer seq2 = motion2.GetComponent<HelmSequencer> ();
-		markov_motion1.addNextBeats (seq1.length, seq1);
-		markov_motion2.addNextBeats (seq2.length, seq2);
+		markov_motion1.fillSequencer(seq1);
+		markov_motion2.fillSequencer(seq2);
 
 	}
 	public override void stopPart() {

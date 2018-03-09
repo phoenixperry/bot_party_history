@@ -239,7 +239,12 @@ namespace AudioHelm
 
         protected void AddSortedNoteEvents(Note note)
         {
-            sortedNoteOns.Add(NoteOnPosition(note), note);
+			//Debug.Log ("addsortednoteevents");
+			try {
+            	sortedNoteOns.Add(NoteOnPosition(note), note);
+			} catch (System.Exception) {
+				Debug.Log ("CAP patch fixes AddSortedNoteEvents");
+			} //-- CAP Patch
             NotePosition offPosition = NoteOffPosition(note);
             if (!sortedNoteOffs.ContainsKey(offPosition))
                 sortedNoteOffs.Add(offPosition, note);

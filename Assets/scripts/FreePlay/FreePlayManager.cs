@@ -48,7 +48,6 @@ public class FreePlayManager : AbstractManager {
 	public override void BoxOneButtonDown ()
 	{
 		TurnOnLEDOne ();
-		BoxOneStartMoving (10f);
 		Button button = btnInterface.transform.Find ("botBtn1").GetComponent<Button> ();
 		ColorBlock cb = button.colors;
 		cb.normalColor = Color.red;
@@ -58,7 +57,6 @@ public class FreePlayManager : AbstractManager {
 	public override void BoxOneButtonUp ()
 	{
 		TurnOffLEDOne ();
-		BoxOneStopMoving ();
 		Button button = btnInterface.transform.Find ("botBtn1").GetComponent<Button> ();
 		ColorBlock cb = button.colors;
 		cb.normalColor = Color.green;
@@ -111,7 +109,7 @@ public class FreePlayManager : AbstractManager {
 		midibot.GetComponent<AudioHelmClock> ().Reset ();
 		midibot.GetComponent<HelmSequencer> ().enabled = true;
 		HelmSequencer seq = midibot.GetComponent<HelmSequencer> ();
-		markov_piano.addNextBeats (seq.length, seq);
+		markov_piano.fillSequencer (seq);
 		midibot.GetComponent<AudioSource> ().Play ();
 	}
 
