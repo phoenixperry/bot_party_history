@@ -5,6 +5,7 @@ using UnityEngine;
 public class TrainingTTTScriptPart : AbstractTTTScriptPart {
 
 	int currentPart;
+	int times_failed = 0;
 	float nextTime = 0;
 	void Update() {
 		if (currentPart == 1 && nextTime <= Time.time) {
@@ -40,11 +41,30 @@ public class TrainingTTTScriptPart : AbstractTTTScriptPart {
 			partSeven ();
 		}
 	}
+	public override void targetFailure() {
+		times_failed += 1;
+		if (times_failed <= 2) {
+			currentPart = 1;
+			partOne (true);
+		} else {
+			SendTerminate ();
+		}
+	}
 
 	void partOne() {
-		// Instructions, 4s wait.
-		SendPlayVoice (Resources.Load ("TouchTouchTransmission/capage-drafts/instructions") as AudioClip);
-		nextTime = Time.time + 4;
+				partOne(false);
+	}
+	void partOne(bool nudge) {
+		List<AudioClip> clips;
+		if (!nudge) {
+			clips = new List<AudioClip> () { Resources.Load ("TouchTouchTransmission/dialog/Engaging Human Int Train Mode") as AudioClip, 
+				Resources.Load ("TouchTouchTransmission/dialog/Humans Touch Light Up") as AudioClip
+			};
+		} else {
+			clips = new List<AudioClip> () { Resources.Load ("TouchTouchTransmission/dialog/Remember Touch LIght Up") as AudioClip };	
+		}
+		SendPlayVoices (clips);
+		nextTime = Time.time + TouchTouchTransmission.getTotalTimeToPlay (clips);
 	}
 	void partTwo() {
 		SendNewTarget (TouchState.OneTwo,250, 0);
@@ -57,16 +77,20 @@ public class TrainingTTTScriptPart : AbstractTTTScriptPart {
 	}
 	void partFive() {
 		SendClearTargets ();
-		SendPlayVoice (Resources.Load ("TouchTouchTransmission/capage-drafts/pre-end-training") as AudioClip);
-		nextTime = Time.time + 2;
+		List<AudioClip> clips = new List<AudioClip>() { Resources.Load ("TouchTouchTransmission/dialog/Basic Succes Adv Tech") as AudioClip 
+		};
+		SendPlayVoices (clips);
+		nextTime = Time.time + TouchTouchTransmission.getTotalTimeToPlay (clips);
 	}
 	void partSix() {
 		SendNewTarget (TouchState.AllConnected, 250, 1);
 	}
 	void partSeven() {
 		SendClearTargets ();
-		SendPlayVoice (Resources.Load ("TouchTouchTransmission/capage-drafts/end-training") as AudioClip);
-		nextTime = Time.time + 6;
+		List<AudioClip> clips = new List<AudioClip>() { Resources.Load ("TouchTouchTransmission/dialog/Humans Op Param") as AudioClip 
+		};
+		SendPlayVoices (clips);
+		nextTime = Time.time + TouchTouchTransmission.getTotalTimeToPlay (clips);
 	}
 	void partEight() {
 		SendEndScriptPart ();

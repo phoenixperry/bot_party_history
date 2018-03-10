@@ -14,14 +14,34 @@ public class AbstractTTTScriptPart : MonoBehaviour {
 
 	public delegate void PlayVoice(AudioClip clip);
 	public static event PlayVoice OnPlayVoice;
+	public delegate void PlayVoices(List<AudioClip> clip);
+	public static event PlayVoices OnPlayVoices;
 
 	public delegate void PlayGameSound(AudioClip clip);
 	public static event PlayGameSound OnPlayGameSound;
 
+	public delegate void UpdateScore();
+	public static event UpdateScore OnUpdateScore;
+
+	public delegate void Terminate ();
+	public static event Terminate OnTerminate;
+	protected QuickTuple<int, int> score;
+	public void updateScore(QuickTuple<int, int> score) {
+		score = score;
+	}
 	protected void OnDisable() {
 		SendClearTargets ();
 	}
-
+	protected void SendUpdateScore() {
+		if (OnUpdateScore != null) {
+			OnUpdateScore ();
+		}
+	}
+	protected void SendTerminate() {
+		if (OnTerminate != null) {
+			OnTerminate ();
+		}
+	}
 	protected void SendPlayGameSound(AudioClip clip) {
 		if (OnPlayGameSound != null) {
 			OnPlayGameSound (clip);
@@ -31,6 +51,12 @@ public class AbstractTTTScriptPart : MonoBehaviour {
 	protected void SendPlayVoice(AudioClip clip) {
 		if (OnPlayVoice != null) {
 			OnPlayVoice (clip);
+		}
+	}
+
+	protected void SendPlayVoices(List<AudioClip> clips) {
+		if (OnPlayVoices != null) {
+			OnPlayVoices (clips);
 		}
 	}
 

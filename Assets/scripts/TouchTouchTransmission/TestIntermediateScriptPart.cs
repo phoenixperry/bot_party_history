@@ -38,11 +38,12 @@ public class TestIntermediateTTTScriptPart : AbstractTTTScriptPart {
 	}
 	void partOne() {
 		nextTime = Time.time + 35;
-		SendPlayVoice(Resources.Load ("TouchTouchTransmission/capage-drafts/test-intermediate-start") as AudioClip);
 		SendNewTarget (TouchState.None, 50, 1);
 	}
 	void partTwo() {
-		nextTime = Time.time + 10;
-		SendPlayVoice (Resources.Load ("TouchTouchTransmission/capage-drafts/test-intermediate-end") as AudioClip);
+		List<AudioClip> clips = new List<AudioClip>() { Resources.Load ("TouchTouchTransmission/dialog/Tranmiss Op Engage Accel") as AudioClip 
+		};
+		SendPlayVoices (clips);
+		nextTime = Time.time + TouchTouchTransmission.getTotalTimeToPlay (clips);
 	}
 }

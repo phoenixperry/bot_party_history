@@ -16,6 +16,7 @@ public class MenuManager : AbstractManager
 
 	void OnEnable() {
 		base.OnEnable ();
+		// TODO: Proper idle sounds
 		clipNames.Add ("Menu/capage-drafts/human-can-you-help");
 		clipNames.Add ("Menu/capage-drafts/pick-us-up");
 		clips = new List<AudioClip> ();
@@ -32,13 +33,26 @@ public class MenuManager : AbstractManager
 			}
 		}
 	}
+	public void MenuWrapper() {
+		Menu ();
+	}
+	public void FreePlayWrapper() {
+		FreePlay ();
+	}
+	public void TouchTouchRevolutionWrapper() {
+		TouchTouchRevolution ();
+	}
 
-    public void FreePlay()
+	public static void Menu() {
+		SceneManager.LoadScene ("Menu", LoadSceneMode.Single);
+	}
+
+    public static void FreePlay()
     {
         SceneManager.LoadScene("FreePlay", LoadSceneMode.Single);
     }
 
-    public void TouchTouchRevolution()
+    public static void TouchTouchRevolution()
     {
         SceneManager.LoadScene("TouchTouchTransmission", LoadSceneMode.Single);
     }

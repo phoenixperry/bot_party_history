@@ -39,12 +39,17 @@ public class TestBeginningTTTScriptPart : AbstractTTTScriptPart {
 		SendNewTarget (TouchState.None,70, 1);
 	}
 	void partOne() {
-		nextTime = Time.time + 35;
-		SendPlayVoice(Resources.Load ("TouchTouchTransmission/capage-drafts/test-beginning-start") as AudioClip);
+		nextTime = Time.time + 40;
+		List<AudioClip> clips = new List<AudioClip>() { Resources.Load ("TouchTouchTransmission/dialog/Beginning Transmiss 1") as AudioClip 
+		};
+		SendPlayVoices (clips);
 		SendNewTarget (TouchState.None, 70, 1);
 	}
 	void partTwo() {
-		nextTime = Time.time + 10;
-		SendPlayVoice (Resources.Load ("TouchTouchTransmission/capage-drafts/test-beginning-end") as AudioClip);
+		List<AudioClip> clips = new List<AudioClip>() { Resources.Load ("TouchTouchTransmission/dialog/Tranmiss Insuff") as AudioClip,
+			Resources.Load ("TouchTouchTransmission/dialog/Engage Proto Inc Through") as AudioClip
+		};
+		SendPlayVoices (clips);
+		nextTime = Time.time + TouchTouchTransmission.getTotalTimeToPlay (clips);
 	}
 }

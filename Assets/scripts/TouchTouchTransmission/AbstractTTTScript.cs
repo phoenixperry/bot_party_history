@@ -6,7 +6,11 @@ public class AbstractTTTScript : MonoBehaviour {
 
 	public List<AbstractTTTScriptPart> scriptParts;
 	int currentPart = 0;
-
+	public void updateScore(QuickTuple<int, int> score) {
+		if (currentPart < scriptParts.Count) {
+			scriptParts [currentPart].updateScore (score);
+		}
+	}
 	public void targetSuccess() {
 		if (currentPart < scriptParts.Count) {
 			scriptParts [currentPart].targetSuccess ();

@@ -5,13 +5,24 @@ using UnityEngine;
 public enum TouchState { None=0, OneTwo, TwoThree, OneThree, AllConnected };
 public class TouchTouchTransmission : AbstractManager {
 	public AbstractTTTScript script;
-	int TO_WIN = 10;
 	TouchState target;
+	static float DELAY_BETWEEN_CLIPS = 0.2f;
 	int score = 0;
+	int TO_WIN = 40;
 	float nextTime = 0;
 	public AudioClip Sound_Win, Sound_Success, Sound_Fail;
+	public static float getTotalTimeToPlay(List<AudioClip> clips) {
+		float time = -DELAY_BETWEEN_CLIPS;
+		foreach (AudioClip c in clips) {
+			time += c.length + DELAY_BETWEEN_CLIPS;
+		}
+		return time;
+	}
 	void OnEnable() {
 		base.OnEnable ();
+		AbstractTTTScriptPart.OnTerminate += terminate;
+		AbstractTTTScriptPart.OnUpdateScore += provideScoreUpdate;
+		AbstractTTTScriptPart.OnPlayVoices += playBotVoices;
 		AbstractTTTScriptPart.OnPlayVoice += playBotVoice;
 		AbstractTTTScriptPart.OnNewTarget += newTarget;
 		AbstractTTTScriptPart.OnClearTargets += clearTargets;
@@ -20,6 +31,9 @@ public class TouchTouchTransmission : AbstractManager {
 	}
 	void OnDisable() {
 		base.OnDisable();
+		AbstractTTTScriptPart.OnTerminate += terminate;
+		AbstractTTTScriptPart.OnUpdateScore += provideScoreUpdate;
+		AbstractTTTScriptPart.OnPlayVoices -= playBotVoices;
 		AbstractTTTScriptPart.OnPlayVoice -= playBotVoice;
 		AbstractTTTScriptPart.OnNewTarget -= newTarget;
 		AbstractTTTScriptPart.OnClearTargets -= clearTargets;
@@ -27,13 +41,21 @@ public class TouchTouchTransmission : AbstractManager {
 		AbstractTTTScriptPart.OnEndScriptPart -= endScriptPart;
 
 	}
+	void terminate() {
+		Debug.Log ("TERMINATE HIT");
+		MenuManager.Menu ();
+	}
 	void Update() {
 		if (target != TouchState.None && nextTime <= Time.time) {
 			fail ();
 			target = TouchState.None;
 		}
 	}
+	public void provideScoreUpdate() {
+		script.updateScore (new QuickTuple<int, int> (score, TO_WIN));
+	}
 	public void clearTargets() {
+		// This needs to clear ones that are in the addTarget queue too
 		target = TouchState.None;
 		gameObject.transform.Find("TargetText").GetComponent<TextMesh>().text = "Target: "+target;
 		lightUp (target, 0);
@@ -46,13 +68,24 @@ public class TouchTouchTransmission : AbstractManager {
 		botSpeaker.clip = clip;
 		botSpeaker.Play ();
 	}
+	public void playBotVoices(List<AudioClip> clips) {
+		GameObject botSpeaker = gameObject.transform.Find ("BotSpeaker").gameObject;
+		float time = (float) AudioSettings.dspTime; 
+		foreach (AudioClip c in clips) {
+			Debug.Log ("Playing clip in " + time);
+			AudioSource newSpeaker = botSpeaker.AddComponent<AudioSource> ();
+			newSpeaker.clip = c;
+			newSpeaker.PlayScheduled(time);
+			time += c.length + DELAY_BETWEEN_CLIPS;
+		}
+	}
 	public void playGameSound(AudioClip clip) {
 		AudioSource gameSpeaker = gameObject.transform.Find ("GameSpeaker").GetComponent<AudioSource> ();
 		gameSpeaker.clip = clip;
 		gameSpeaker.Play ();
 	}
 	public void newTarget(TouchState new_target, int duration, float pause) {
-		lightUp (TouchState.None, 0);
+		clearTargets ();
 		//Pause goes here
 
 		StartCoroutine(targetAddWrapper(new_target, duration,pause)); // I hate I have to do this and not invoke, but...

@@ -631,6 +631,7 @@ MonoBehaviour:
   Bot1_Move_Sound: {fileID: 0}
   Bot2_Move_Sound: {fileID: 0}
   Bot3_Move_Sound: {fileID: 0}
+  clipNames: []
   clips: []
 --- !u!4 &1586097421
 Transform:
@@ -976,7 +977,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Play Touch Touch Revolution!
+  m_Text: Play Secret Little Ciphers!
 --- !u!222 &1738325809
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1141,7 +1142,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1586097420}
-        m_MethodName: TouchTouchRevolution
+        m_MethodName: TouchTouchRevolutionWrapper
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1363,7 +1364,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1586097420}
-        m_MethodName: FreePlay
+        m_MethodName: FreePlayWrapper
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

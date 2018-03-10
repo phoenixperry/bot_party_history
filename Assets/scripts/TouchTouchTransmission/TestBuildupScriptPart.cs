@@ -31,7 +31,7 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
 		}
 	}
 	public override void targetSuccess() {
-		if (currentPart == 1 || currentPart == 2) {
+		if (currentPart == 1) {
 			SendPlayGameSound (Resources.Load ("TouchTouchTransmission/capage-drafts/success-ping") as AudioClip);
 			SendNewTarget (TouchState.None, 30, 1);
 		} else if (currentPart == 3) {
@@ -40,18 +40,24 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
 		}
 	}
 	public override void targetFailure() {
-		SendPlayGameSound (Resources.Load ("TouchTouchTransmission/capage-drafts/screech") as AudioClip);
-		SendNewTarget (TouchState.None,30, 1);
+		if (currentPart == 1) {
+			SendPlayGameSound (Resources.Load ("TouchTouchTransmission/capage-drafts/screech") as AudioClip);
+			SendNewTarget (TouchState.None, 30, 1);
+		}	
+		// Deal with Just One More Time Human
 	}
 	void partOne() {
 		nextTime = Time.time + 60;
-		SendPlayVoice(Resources.Load ("TouchTouchTransmission/capage-drafts/test-buildup-start") as AudioClip);
+		//SendPlayVoice(Resources.Load ("TouchTouchTransmission/capage-drafts/test-buildup-start") as AudioClip);
 		SendNewTarget (TouchState.None, 70, 1);
 	}
 	void partTwo() {
 		SendClearTargets ();
-		nextTime = Time.time + 5;
-		SendPlayVoice (Resources.Load ("TouchTouchTransmission/capage-drafts/test-buildup-end") as AudioClip);
+		List<AudioClip> clips = new List<AudioClip>() { Resources.Load ("TouchTouchTransmission/dialog/Transmiss Compl") as AudioClip,
+			Resources.Load ("TouchTouchTransmission/dialog/Just One More TIme HUm") as AudioClip
+		};
+		SendPlayVoices (clips);
+		nextTime = Time.time + TouchTouchTransmission.getTotalTimeToPlay (clips);
 	}
 	void partThree() {
 		SendNewTarget (TouchState.AllConnected, 255, 0);
@@ -59,7 +65,8 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
 	void partFour() {
 		SendPlayGameSound (Resources.Load ("TouchTouchTransmission/capage-drafts/test-transmission-end") as AudioClip);
 		SendClearTargets ();
-		SendEndScriptPart ();
+		//SendEndScriptPart ();
+		SendTerminate ();
 	}
 	// Copy pasted from bridge test script
 	public override void BoxOneStartMoving(double speed) {
