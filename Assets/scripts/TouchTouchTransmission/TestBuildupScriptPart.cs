@@ -28,6 +28,8 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
 		} else if (currentPart == 2 && nextTime <= Time.time) {
 			currentPart = 3;
 			partThree ();
+		} else if (currentPart == 4 && nextTime <= Time.time) {
+			partFive ();
 		}
 	}
 	public override void targetSuccess() {
@@ -47,7 +49,7 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
 		// Deal with Just One More Time Human
 	}
 	void partOne() {
-		nextTime = Time.time + 60;
+		nextTime = Time.time + 15;
 		//SendPlayVoice(Resources.Load ("TouchTouchTransmission/capage-drafts/test-buildup-start") as AudioClip);
 		SendNewTarget (TouchState.None, 70, 1);
 	}
@@ -63,10 +65,31 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
 		SendNewTarget (TouchState.AllConnected, 255, 0);
 	}
 	void partFour() {
-		SendPlayGameSound (Resources.Load ("TouchTouchTransmission/capage-drafts/test-transmission-end") as AudioClip);
+		List<AudioClip> clips = new List<AudioClip> () {
+			Resources.Load ("TouchTouchTransmission/capage-drafts/test-transmission-end") as AudioClip,
+			Resources.Load ("TouchTouchTransmission/dialog/You Broadcast") as AudioClip,
+		};
+		clips.AddRange(TouchTouchTransmission.binaryToClips (getScore()));
+		clips.Add (Resources.Load ("TouchTouchTransmission/dialog/Gigabytes 1") as AudioClip);
+		clips.Add (Resources.Load ("TouchTouchTransmission/dialog/Translation 1") as AudioClip);
+		clips.AddRange(TouchTouchTransmission.numberToClips (getScore()));
+		clips.Add (Resources.Load ("TouchTouchTransmission/dialog/Points") as AudioClip);
+		if (getScore () < getScoreWin ()) {
+			clips.Add (Resources.Load ("TouchTouchTransmission/dialog/Bitrate Low 1") as AudioClip);
+			clips.Add (Resources.Load ("TouchTouchTransmission/dialog/Recon Hum Int Train Proto") as AudioClip);
+
+		} else if (getScore () > getScoreWin () * 1.5) {
+			clips.Add (Resources.Load ("TouchTouchTransmission/dialog/Hu Op Efficiency") as AudioClip);
+		} else {
+			clips.Add (Resources.Load ("TouchTouchTransmission/dialog/Hu Perf Adeq 1") as AudioClip);
+		}
+		// Resetting system...
+		SendPlayVoices(clips);
 		SendClearTargets ();
-		//SendEndScriptPart ();
-		SendTerminate ();
+		nextTime = Time.time + TouchTouchTransmission.getTotalTimeToPlay (clips);
+	}
+	void partFive() {
+		SendTerminate();
 	}
 	// Copy pasted from bridge test script
 	public override void BoxOneStartMoving(double speed) {

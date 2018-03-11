@@ -26,8 +26,20 @@ public class AbstractTTTScriptPart : MonoBehaviour {
 	public delegate void Terminate ();
 	public static event Terminate OnTerminate;
 	protected QuickTuple<int, int> score;
-	public void updateScore(QuickTuple<int, int> score) {
-		score = score;
+	public void updateScore(QuickTuple<int, int> newScore) {
+		score = newScore;
+	}
+	protected int getScore() {
+		if (score != null) {
+			return score.first;	
+		}
+		return 0;
+	}
+	protected int getScoreWin() {
+		if (score != null) {
+			return score.last;
+		}
+		return 0;
 	}
 	protected void OnDisable() {
 		SendClearTargets ();

@@ -10,11 +10,104 @@ public class TouchTouchTransmission : AbstractManager {
 	int score = 0;
 	int TO_WIN = 40;
 	float nextTime = 0;
+	bool hasBeenCleared = false;
 	public AudioClip Sound_Win, Sound_Success, Sound_Fail;
+	public static List<AudioClip> binaryToClips(int number) {
+		List<AudioClip> lst = new List<AudioClip>();
+		if (number < 0 || number > 255) {
+			// pass
+		} else {
+			int pow = 128;
+			while (pow >= 1) {
+				if ((number / pow) % 2 == 1) {
+					lst.Add (Resources.Load ("TouchTouchTransmission/dialog/1 ") as AudioClip);
+				} else {
+					lst.Add (Resources.Load ("TouchTouchTransmission/dialog/0 ") as AudioClip);
+				}
+				pow /= 2;
+			}
+		}
+		return lst;
+	}
+	public static List<AudioClip> numberToClips(int number) {
+		List<AudioClip> lst = new List<AudioClip> ();
+		if (number < 0 || number > 199) {
+			// pass
+		} else if (number > 100) {
+			lst = numberToClips (100);
+			lst.AddRange(numberToClips (number - 100));
+		} else if (number > 20 && number < 99) {
+			lst = numberToClips (10 * (number / 10));
+			lst.AddRange(numberToClips (number % 10));
+		} else {
+			if (number == 0) {
+				lst.Add (Resources.Load ("TouchTouchTransmission/dialog/0 ") as AudioClip);
+			} else if (number == 1) {
+				lst.Add (Resources.Load ("TouchTouchTransmission/dialog/1 ") as AudioClip);
+			} else if (number == 2) {
+				lst.Add (Resources.Load ("TouchTouchTransmission/dialog/2 ") as AudioClip);
+			} else if (number == 3) {
+				lst.Add (Resources.Load ("TouchTouchTransmission/dialog/3 ") as AudioClip);
+			} else if (number == 4) {
+				lst.Add (Resources.Load ("TouchTouchTransmission/dialog/4 ") as AudioClip);
+			} else if (number == 5) {
+				lst.Add (Resources.Load ("TouchTouchTransmission/dialog/5 ") as AudioClip);
+			} else if (number == 6) {
+				lst.Add (Resources.Load ("TouchTouchTransmission/dialog/6 ") as AudioClip);
+			} else if (number == 7) {
+				lst.Add (Resources.Load ("TouchTouchTransmission/dialog/7 ") as AudioClip);
+			} else if (number == 8) {
+				lst.Add (Resources.Load ("TouchTouchTransmission/dialog/8 ") as AudioClip);
+			} else if (number == 9) {
+				lst.Add (Resources.Load ("TouchTouchTransmission/dialog/9 ") as AudioClip);
+			} else if (number == 10) {
+				lst.Add (Resources.Load ("TouchTouchTransmission/dialog/10 ") as AudioClip);
+			} else if (number == 11) {
+				lst.Add (Resources.Load ("TouchTouchTransmission/dialog/11 ") as AudioClip);
+			} else if (number == 12) {
+				lst.Add (Resources.Load ("TouchTouchTransmission/dialog/12 ") as AudioClip);
+			} else if (number == 13) {
+				lst.Add (Resources.Load ("TouchTouchTransmission/dialog/13 ") as AudioClip);
+			} else if (number == 14) {
+				lst.Add (Resources.Load ("TouchTouchTransmission/dialog/14 ") as AudioClip);
+			} else if (number == 15) {
+				lst.Add (Resources.Load ("TouchTouchTransmission/dialog/15 ") as AudioClip);
+			} else if (number == 16) {
+				lst.Add (Resources.Load ("TouchTouchTransmission/dialog/16 ") as AudioClip);
+			} else if (number == 17) {
+				lst.Add (Resources.Load ("TouchTouchTransmission/dialog/17 ") as AudioClip);
+			} else if (number == 18) {
+				lst.Add (Resources.Load ("TouchTouchTransmission/dialog/18 ") as AudioClip);
+			} else if (number == 19) {
+				lst.Add (Resources.Load ("TouchTouchTransmission/dialog/19 ") as AudioClip);
+			} else if (number == 20) {
+				lst.Add (Resources.Load ("TouchTouchTransmission/dialog/20 ") as AudioClip);
+			} else if (number == 30) {
+				lst.Add (Resources.Load ("TouchTouchTransmission/dialog/30 ") as AudioClip);
+			} else if (number == 40) {
+				lst.Add (Resources.Load ("TouchTouchTransmission/dialog/40 ") as AudioClip);
+			} else if (number == 50) {
+				lst.Add (Resources.Load ("TouchTouchTransmission/dialog/50 ") as AudioClip);
+			} else if (number == 60) {
+				lst.Add (Resources.Load ("TouchTouchTransmission/dialog/60 ") as AudioClip);
+			} else if (number == 70) {
+				lst.Add (Resources.Load ("TouchTouchTransmission/dialog/70 ") as AudioClip);
+			} else if (number == 80) {
+				lst.Add (Resources.Load ("TouchTouchTransmission/dialog/80 ") as AudioClip);
+			} else if (number == 90) {
+				lst.Add (Resources.Load ("TouchTouchTransmission/dialog/90 ") as AudioClip);
+			} else if (number == 100) {
+				lst.Add (Resources.Load ("TouchTouchTransmission/dialog/100 ") as AudioClip);
+			}    
+		}
+		return lst;
+	}
 	public static float getTotalTimeToPlay(List<AudioClip> clips) {
 		float time = -DELAY_BETWEEN_CLIPS;
 		foreach (AudioClip c in clips) {
-			time += c.length + DELAY_BETWEEN_CLIPS;
+			if (c != null) {
+				time += c.length + DELAY_BETWEEN_CLIPS;
+			}
 		}
 		return time;
 	}
@@ -59,9 +152,11 @@ public class TouchTouchTransmission : AbstractManager {
 		target = TouchState.None;
 		gameObject.transform.Find("TargetText").GetComponent<TextMesh>().text = "Target: "+target;
 		lightUp (target, 0);
+		hasBeenCleared = true;
 	}
 	public void endScriptPart() {
 		script.startNextScript ();
+		provideScoreUpdate ();
 	}
 	public void playBotVoice(AudioClip clip) {
 		AudioSource botSpeaker = gameObject.transform.Find ("BotSpeaker").GetComponent<AudioSource> ();
@@ -72,11 +167,15 @@ public class TouchTouchTransmission : AbstractManager {
 		GameObject botSpeaker = gameObject.transform.Find ("BotSpeaker").gameObject;
 		float time = (float) AudioSettings.dspTime; 
 		foreach (AudioClip c in clips) {
-			Debug.Log ("Playing clip in " + time);
-			AudioSource newSpeaker = botSpeaker.AddComponent<AudioSource> ();
-			newSpeaker.clip = c;
-			newSpeaker.PlayScheduled(time);
-			time += c.length + DELAY_BETWEEN_CLIPS;
+			if (c == null) { 
+				Debug.Log ("ERROR! Clip is null");
+			} else {
+				Debug.Log ("Playing clip in " + time);
+				AudioSource newSpeaker = botSpeaker.AddComponent<AudioSource> ();
+				newSpeaker.clip = c;
+				newSpeaker.PlayScheduled (time);
+				time += c.length + DELAY_BETWEEN_CLIPS;
+			}
 		}
 	}
 	public void playGameSound(AudioClip clip) {
@@ -86,6 +185,7 @@ public class TouchTouchTransmission : AbstractManager {
 	}
 	public void newTarget(TouchState new_target, int duration, float pause) {
 		clearTargets ();
+		hasBeenCleared = false;
 		//Pause goes here
 
 		StartCoroutine(targetAddWrapper(new_target, duration,pause)); // I hate I have to do this and not invoke, but...
@@ -96,15 +196,18 @@ public class TouchTouchTransmission : AbstractManager {
 		addNewTarget (new_target, duration);
 	}
 	public void addNewTarget(TouchState new_target, int duration) {
-		if (new_target == TouchState.None) {
-			while (new_target == target || new_target == TouchState.None) {
-				new_target = (TouchState) (Random.Range (1, 5));
+		if (!hasBeenCleared) {
+			if (new_target == TouchState.None) {
+				while (new_target == target || new_target == TouchState.None) {
+					new_target = (TouchState)(Random.Range (1, 5));
+				}
 			}
+			target = new_target;
+			nextTime = Time.time + (duration / 10);
+			lightUp (target, duration);
+			gameObject.transform.Find ("TargetText").GetComponent<TextMesh> ().text = "Target: " + target;
 		}
-		target = new_target;
-		nextTime = Time.time + (duration / 10);
-		lightUp (target, duration);
-		gameObject.transform.Find("TargetText").GetComponent<TextMesh>().text = "Target: "+target;
+		hasBeenCleared = false;
 	}
 
 	void Start() {
@@ -133,10 +236,14 @@ public class TouchTouchTransmission : AbstractManager {
 
 	void success() {
 		script.targetSuccess ();
+		score += 1;
+		provideScoreUpdate ();
 	}
 
 	void fail() {
 		script.targetFailure ();
+		score += 1;
+		provideScoreUpdate ();
 	}
 
 	void checkMatch(TouchState input) {
