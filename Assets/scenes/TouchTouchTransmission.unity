@@ -6409,6 +6409,8 @@ MonoBehaviour:
   bot2: {fileID: 0}
   bot3: {fileID: 0}
   script: {fileID: 0}
+  speechGroup: {fileID: 243134853292804364, guid: 158f54de10885d445bb1394b26cdc210,
+    type: 2}
   Sound_Win: {fileID: 0}
   Sound_Success: {fileID: 0}
   Sound_Fail: {fileID: 0}

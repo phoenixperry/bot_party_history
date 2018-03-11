@@ -49,7 +49,7 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
 		// Deal with Just One More Time Human
 	}
 	void partOne() {
-		nextTime = Time.time + 15;
+		nextTime = Time.time + 60;
 		//SendPlayVoice(Resources.Load ("TouchTouchTransmission/capage-drafts/test-buildup-start") as AudioClip);
 		SendNewTarget (TouchState.None, 70, 1);
 	}
@@ -69,7 +69,7 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
 			Resources.Load ("TouchTouchTransmission/capage-drafts/test-transmission-end") as AudioClip,
 			Resources.Load ("TouchTouchTransmission/dialog/You Broadcast") as AudioClip,
 		};
-		clips.AddRange(TouchTouchTransmission.binaryToClips (getScore()));
+		clips.AddRange(TouchTouchTransmission.numberToClips (getScore()));
 		clips.Add (Resources.Load ("TouchTouchTransmission/dialog/Gigabytes 1") as AudioClip);
 		clips.Add (Resources.Load ("TouchTouchTransmission/dialog/Translation 1") as AudioClip);
 		clips.AddRange(TouchTouchTransmission.numberToClips (getScore()));

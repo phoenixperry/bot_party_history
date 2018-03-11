@@ -1,14 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public enum TouchState { None=0, OneTwo, TwoThree, OneThree, AllConnected };
 public class TouchTouchTransmission : AbstractManager {
 	public AbstractTTTScript script;
+	public AudioMixerGroup speechGroup;
 	TouchState target;
-	static float DELAY_BETWEEN_CLIPS = 0.2f;
+	static float DELAY_BETWEEN_CLIPS = 0.1f;
 	int score = 0;
-	int TO_WIN = 40;
+	int TO_WIN = 30;
 	float nextTime = 0;
 	bool hasBeenCleared = false;
 	public AudioClip Sound_Win, Sound_Success, Sound_Fail;
@@ -36,7 +38,7 @@ public class TouchTouchTransmission : AbstractManager {
 		} else if (number > 100) {
 			lst = numberToClips (100);
 			lst.AddRange(numberToClips (number - 100));
-		} else if (number > 20 && number < 99) {
+		} else if (number > 20 && number < 99 && !((number % 10) == 0)) {
 			lst = numberToClips (10 * (number / 10));
 			lst.AddRange(numberToClips (number % 10));
 		} else {
@@ -172,6 +174,7 @@ public class TouchTouchTransmission : AbstractManager {
 			} else {
 				Debug.Log ("Playing clip in " + time);
 				AudioSource newSpeaker = botSpeaker.AddComponent<AudioSource> ();
+				newSpeaker.outputAudioMixerGroup = speechGroup;
 				newSpeaker.clip = c;
 				newSpeaker.PlayScheduled (time);
 				time += c.length + DELAY_BETWEEN_CLIPS;
@@ -207,7 +210,7 @@ public class TouchTouchTransmission : AbstractManager {
 			lightUp (target, duration);
 			gameObject.transform.Find ("TargetText").GetComponent<TextMesh> ().text = "Target: " + target;
 		}
-		hasBeenCleared = false;
+		hasBeenCleared = false;	
 	}
 
 	void Start() {
