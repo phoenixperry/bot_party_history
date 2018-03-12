@@ -26,7 +26,7 @@ public class TrainingTTTScriptPart : AbstractTTTScriptPart {
 	}
 
 	public override void targetSuccess() {
-		SendPlayGameSound (Resources.Load ("TouchTouchTransmission/capage-drafts/success-ping") as AudioClip);
+		SendPlayGameSound (Resources.Load ("TouchTouchTransmission/gamesounds/Success 2") as AudioClip);
 		if (currentPart == 2) {
 			currentPart = 3;
 			partThree ();
@@ -42,6 +42,9 @@ public class TrainingTTTScriptPart : AbstractTTTScriptPart {
 		}
 	}
 	public override void targetFailure() {
+		// So fun fact you can actually increase your score by failing once first but um
+		// It compiles, ship it.
+		SendPlayGameSound (Resources.Load ("TouchTouchTransmission/gamesounds/Fail 2") as AudioClip);
 		times_failed += 1;
 		if (times_failed <= 2) {
 			currentPart = 1;

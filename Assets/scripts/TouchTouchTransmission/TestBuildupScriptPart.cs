@@ -34,7 +34,7 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
 	}
 	public override void targetSuccess() {
 		if (currentPart == 1) {
-			SendPlayGameSound (Resources.Load ("TouchTouchTransmission/capage-drafts/success-ping") as AudioClip);
+			SendPlayGameSound (Resources.Load ("TouchTouchTransmission/gamesounds/Success 2") as AudioClip);
 			SendNewTarget (TouchState.None, 30, 1);
 		} else if (currentPart == 3) {
 			currentPart = 4;
@@ -43,7 +43,7 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
 	}
 	public override void targetFailure() {
 		if (currentPart == 1) {
-			SendPlayGameSound (Resources.Load ("TouchTouchTransmission/capage-drafts/screech") as AudioClip);
+			SendPlayGameSound (Resources.Load ("TouchTouchTransmission/gamesounds/Fail 2") as AudioClip);
 			SendNewTarget (TouchState.None, 30, 1);
 		}	
 		// Deal with Just One More Time Human
@@ -66,7 +66,7 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
 	}
 	void partFour() {
 		List<AudioClip> clips = new List<AudioClip> () {
-			Resources.Load ("TouchTouchTransmission/capage-drafts/test-transmission-end") as AudioClip,
+			Resources.Load ("TouchTouchTransmission/gamesounds/fanfare v2") as AudioClip,
 			Resources.Load ("TouchTouchTransmission/dialog/You Broadcast") as AudioClip,
 		};
 		clips.AddRange(TouchTouchTransmission.numberToClips (getScore()));
@@ -83,7 +83,10 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
 		} else {
 			clips.Add (Resources.Load ("TouchTouchTransmission/dialog/Hu Perf Adeq 1") as AudioClip);
 		}
-		// Resetting system...
+		// Resetting system dialog line goes here
+		gameObject.transform.Find("Resol").Find ("ResolBass").GetComponent<HelmSequencer> ().enabled = false;
+		gameObject.transform.Find("Resol").Find ("ResolLead").GetComponent<HelmSequencer> ().enabled = false;
+		gameObject.transform.Find("Resol").Find ("ResolDrum").GetComponent<SampleSequencer> ().enabled = false;
 		SendPlayVoices(clips);
 		SendClearTargets ();
 		nextTime = Time.time + TouchTouchTransmission.getTotalTimeToPlay (clips);
@@ -91,7 +94,7 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
 	void partFive() {
 		SendTerminate();
 	}
-	// Copy pasted from bridge test script
+	// TODO: Disable this in part 4
 	public override void BoxOneStartMoving(double speed) {
 		gameObject.transform.Find ("Motion").Find ("Motion1").GetComponent<HelmSequencer> ().enabled = true;
 		Debug.Log ("Playing motion1");

@@ -29,11 +29,11 @@ public class TestIntermediateTTTScriptPart : AbstractTTTScriptPart {
 		}
 	}
 	public override void targetSuccess() {
-		SendPlayGameSound (Resources.Load ("TouchTouchTransmission/capage-drafts/success-ping") as AudioClip);
+		SendPlayGameSound (Resources.Load ("TouchTouchTransmission/gamesounds/Success 2") as AudioClip);
 		SendNewTarget (TouchState.None, 50, 1);
 	}
 	public override void targetFailure() {
-		SendPlayGameSound (Resources.Load ("TouchTouchTransmission/capage-drafts/screech") as AudioClip);
+		SendPlayGameSound (Resources.Load ("TouchTouchTransmission/gamesounds/Fail 2") as AudioClip);
 		SendNewTarget (TouchState.None,50, 1);
 	}
 	void partOne() {
