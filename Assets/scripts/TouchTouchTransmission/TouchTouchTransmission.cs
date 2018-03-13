@@ -8,6 +8,7 @@ public class TouchTouchTransmission : AbstractManager {
 	public AbstractTTTScript script;
 	public AudioMixerGroup speechGroup;
 	TouchState target;
+	TouchState last_target = TouchState.None;
 	static float DELAY_BETWEEN_CLIPS = 0.1f;
 	int score = 0;
 	int TO_WIN = 30;
@@ -209,7 +210,7 @@ public class TouchTouchTransmission : AbstractManager {
 	public void addNewTarget(TouchState new_target, int duration) {
 		if (!hasBeenCleared) {
 			if (new_target == TouchState.None) {
-				while (new_target == target || new_target == TouchState.None) {
+				while (new_target == target || new_target == TouchState.None || new_target == last_target) {
 					new_target = (TouchState)(Random.Range (1, 5));
 				}
 			}
@@ -250,12 +251,14 @@ public class TouchTouchTransmission : AbstractManager {
 	}
 
 	void success() {
+		last_target = target;
 		script.targetSuccess ();
 		score += 1;
 		provideScoreUpdate ();
 	}
 
 	void fail() {
+		last_target = target;
 		script.targetFailure ();
 		score += 1;
 		provideScoreUpdate ();
