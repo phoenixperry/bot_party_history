@@ -37,7 +37,8 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
 	public override void targetSuccess() {
 		if (currentPart == 1) {
 			SendPlayGameSound (Resources.Load ("TouchTouchTransmission/gamesounds/Success 2") as AudioClip);
-			SendNewTarget (TouchState.None, (int)Mathf.Floor(45f*getTimeReduction()), 0.8f * getTimeReduction());		} else if (currentPart == 3) {
+			SendNewTarget (TouchState.None, (int)Mathf.Floor(45f*getTimeReduction()), 0.8f * getTimeReduction());		} 
+		else if (currentPart == 3) {
 			currentPart = 4;
 			partFour ();
 		}
@@ -45,9 +46,11 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
 	public override void targetFailure() {
 		if (currentPart == 1) {
 			SendPlayGameSound (Resources.Load ("TouchTouchTransmission/gamesounds/Fail 2") as AudioClip);
-			SendNewTarget (TouchState.None, (int)Mathf.Floor(45f*getTimeReduction()), 0.8f * getTimeReduction());
-		}	
-		// Deal with Just One More Time Human
+			SendNewTarget (TouchState.None, (int)Mathf.Floor (45f * getTimeReduction ()), 0.8f * getTimeReduction ());
+		} else if (currentPart == 3) {
+			currentPart = 4;
+			partFour ();
+		}
 	}
 	public float getTimeReduction() {
 		double speed = (box1speed + box2speed + box3speed) / 3;
