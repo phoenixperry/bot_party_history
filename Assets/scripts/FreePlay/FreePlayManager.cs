@@ -17,6 +17,12 @@ public class FreePlayManager : AbstractManager {
 		touchsound.Add (twothree);
 		touchsound.Add (onethree);
 		touchsound.Add (allthree);
+		TurnOffLEDOne ();
+		TurnOffLEDTwo ();
+		TurnOffLEDThree ();
+		TurnOnLEDOne ();
+		TurnOnLEDTwo ();
+		TurnOnLEDThree ();
 	}
 	public override void BoxOneTwoConnected() {
 		if (!gameObject.GetComponent<AudioSource> ().isPlaying) {
@@ -47,7 +53,7 @@ public class FreePlayManager : AbstractManager {
 
 	public override void BoxOneButtonDown ()
 	{
-		TurnOnLEDOne ();
+		SetLEDOne (128);
 		Button button = btnInterface.transform.Find ("botBtn1").GetComponent<Button> ();
 		ColorBlock cb = button.colors;
 		cb.normalColor = Color.red;
@@ -56,7 +62,7 @@ public class FreePlayManager : AbstractManager {
 	}
 	public override void BoxOneButtonUp ()
 	{
-		TurnOffLEDOne ();
+		TurnOnLEDOne ();
 		Button button = btnInterface.transform.Find ("botBtn1").GetComponent<Button> ();
 		ColorBlock cb = button.colors;
 		cb.normalColor = Color.green;
@@ -66,7 +72,7 @@ public class FreePlayManager : AbstractManager {
 
 	public override void BoxTwoButtonDown ()
 	{
-		TurnOnLEDTwo ();
+		SetLEDTwo (128);
 		Button button = btnInterface.transform.Find ("botBtn2").GetComponent<Button> ();
 		ColorBlock cb = button.colors;
 		cb.normalColor = Color.red;
@@ -75,7 +81,7 @@ public class FreePlayManager : AbstractManager {
 	}
 	public override void BoxTwoButtonUp ()
 	{
-		TurnOffLEDTwo ();
+		TurnOnLEDTwo ();
 		Button button = btnInterface.transform.Find ("botBtn2").GetComponent<Button> ();
 		ColorBlock cb = button.colors;
 		cb.normalColor = Color.green;
@@ -85,7 +91,7 @@ public class FreePlayManager : AbstractManager {
 
 	public override void BoxThreeButtonDown ()
 	{
-		TurnOnLEDThree ();
+		SetLEDThree (128);
 		Button button = btnInterface.transform.Find ("botBtn3").GetComponent<Button> ();
 		ColorBlock cb = button.colors;
 		cb.normalColor = Color.red;
@@ -94,7 +100,7 @@ public class FreePlayManager : AbstractManager {
 	}
 	public override void BoxThreeButtonUp ()
 	{
-		TurnOffLEDThree ();
+		TurnOnLEDThree ();
 		Button button = btnInterface.transform.Find ("botBtn3").GetComponent<Button> ();
 		ColorBlock cb = button.colors;
 		cb.normalColor = Color.green;
@@ -136,9 +142,9 @@ public class FreePlayManager : AbstractManager {
 	}
 
 	public override void BoxTwoContinueMoving(double speed) {
-		gameObject.transform.Find ("Bot2Midi").GetComponent<HelmController> ().AllNotesOff ();
+		gameObject.transform.Find ("Bot2Midi").GetComponent<HelmSequencer> ().Clear ();
 		// Note 60 = C3
-		gameObject.transform.Find ("Bot2Midi").GetComponent<HelmController> ().NoteOn ((int)(60 + Mathf.Max(0f,(float)(speed-5))*2));
+		gameObject.transform.Find ("Bot2Midi").GetComponent<HelmController> ().NoteOn (60 + (int)(speed/3));
 	}
 
 	public override void BoxTwoStopMoving()
@@ -201,5 +207,15 @@ public class FreePlayManager : AbstractManager {
 	public override void BoxThreeStopRotating() {
 		gameObject.transform.Find ("Rotate3").GetComponent<TextMesh> ().text = "3: Not Spinning!";
 		gameObject.transform.Find ("Bot3Midi").GetComponent<HelmController> ().SetParameterPercent (Param.kResonance, 0);
+	}
+	float last_menu_freeplay = 0.0f;
+	public override void MenuSecretCiphers() {
+		MenuManager.TouchTouchRevolution ();
+	}
+	public override void MenuFreePlay() {
+		if (last_menu_freeplay + 1 > Time.time) {
+			MenuManager.Menu ();
+		}
+		last_menu_freeplay = Time.time;
 	}
 }

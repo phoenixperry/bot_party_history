@@ -14,6 +14,14 @@ public class TouchTouchTransmission : AbstractManager {
 	float nextTime = 0;
 	bool hasBeenCleared = false;
 	public AudioClip Sound_Win, Sound_Success, Sound_Fail;
+	float last_menu_secret = 0.0f;
+	public override void MenuSecretCiphers() {
+		if (last_menu_secret + 1 > Time.time) {
+			MenuManager.Menu ();
+		}
+		last_menu_secret = Time.time;
+	}
+
 	public static List<AudioClip> binaryToClips(int number) {
 		List<AudioClip> lst = new List<AudioClip>();
 		if (number < 0 || number > 255) {
@@ -215,8 +223,12 @@ public class TouchTouchTransmission : AbstractManager {
 
 	void Start() {
 		score = 0;
+		TurnOffLEDOne ();
+		TurnOffLEDTwo ();
+		TurnOffLEDThree ();
 		script = gameObject.AddComponent<TestTTTScript>();
 		script.startCurrentScript();
+
 	}
 		
 	void lightUp(TouchState newTarget, int time) {

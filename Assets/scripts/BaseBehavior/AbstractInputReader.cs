@@ -94,6 +94,20 @@ public class AbstractInputReader : MonoBehaviour {
 	protected void passOnTouch(TouchedBots t_) {
 		if (OnTouch != null) OnTouch (t_);
 	}
+	public delegate void MenuFreePlayPushed ();
+	public static event MenuFreePlayPushed OnMenuFreePlayPushed;
+	public delegate void MenuSecretCiphersPushed();
+	public static event MenuSecretCiphersPushed OnMenuSecretCiphersPushed;
+	protected void MenuFreePlay() {
+		if (OnMenuFreePlayPushed != null) {
+			OnMenuFreePlayPushed ();
+		}
+	}
+	protected void MenuSecretCiphers() {
+		if (OnMenuSecretCiphersPushed != null) {
+			OnMenuSecretCiphersPushed ();
+		}
+	}
 		
 
 	// Update is called once per frame

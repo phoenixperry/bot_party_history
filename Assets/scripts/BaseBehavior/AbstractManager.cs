@@ -65,10 +65,17 @@ public abstract class AbstractManager : MonoBehaviour {
 		BotData.OnBoxThreeStartRotating += BoxThreeStartRotating;
 		BotData.OnBoxThreeContinueRotating += BoxThreeContinueRotating;
 		BotData.OnBoxThreeStopRotating += BoxThreeStopRotating;
+	
+		AbstractInputReader.OnMenuFreePlayPushed += MenuFreePlay;
+		AbstractInputReader.OnMenuSecretCiphersPushed += MenuSecretCiphers;
 	}
 	//here's how to unsubscibe - if you do one, you must do the other! 
 	public void OnDisable()
 	{
+		Debug.Log ("Turning off leds...");
+		TurnOffLEDOne ();
+		TurnOffLEDTwo ();
+		TurnOffLEDThree ();
 		TouchManager.OnBoxOneTwoTouched -= BoxOneTwoConnected;
 		TouchManager.OnBoxOneTwoReleased -= BoxOneTwoReleased;
 
@@ -114,6 +121,8 @@ public abstract class AbstractManager : MonoBehaviour {
 		BotData.OnBoxThreeContinueRotating -= BoxThreeContinueRotating;
 		BotData.OnBoxThreeStopRotating -= BoxThreeStopRotating;
 
+		AbstractInputReader.OnMenuFreePlayPushed -= MenuFreePlay;
+		AbstractInputReader.OnMenuSecretCiphersPushed -= MenuSecretCiphers;
 	}
 
 	/* This section contains all of the events for boxes touching eachother.
@@ -240,6 +249,13 @@ public abstract class AbstractManager : MonoBehaviour {
 
 	}
 	public virtual void BoxThreeStopRotating() {
+
+	}
+
+	public virtual void MenuFreePlay() {
+
+	}
+	public virtual void MenuSecretCiphers() {
 
 	}
 

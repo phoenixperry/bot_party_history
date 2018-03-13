@@ -13,7 +13,11 @@ public class MenuManager : AbstractManager
 	public List<AudioClip> clips;
     public static int frameCount;
     public int RandomNumber { get; private set; }
-
+	void Start() {
+		TurnOffLEDOne ();
+		TurnOffLEDTwo ();
+		TurnOffLEDThree ();
+	}
 	void OnEnable() {
 		base.OnEnable ();
 		// TODO: Proper idle sounds
@@ -22,7 +26,12 @@ public class MenuManager : AbstractManager
 		clips = new List<AudioClip> ();
 		populateClips ();
 	}
-
+	public override void MenuFreePlay() {
+		FreePlay ();
+	}
+	public override void MenuSecretCiphers() {
+		TouchTouchRevolution ();
+	}
 	void populateClips() {
 		for (int i = 0; i < clipNames.Count; i++) {
 			AudioClip c = Resources.Load(clipNames [i]) as AudioClip;

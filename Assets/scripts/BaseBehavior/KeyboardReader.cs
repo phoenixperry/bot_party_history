@@ -49,5 +49,13 @@ public class KeyboardReader : AbstractInputReader {
 			passOnBotDataReceived(new Bot("botThree","0","0","0","0","0"));
 		}
 
+		if (Input.GetKeyDown (KeyCode.P)) {
+			Debug.Log ("P pressed");
+			MenuSecretCiphers ();
+		}
+		if (Input.GetKeyDown (KeyCode.O)) {
+			MenuFreePlay ();
+		}
+
 	}
 }
