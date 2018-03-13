@@ -30,11 +30,11 @@ public class BridgeTTTScriptPart : AbstractTTTScriptPart {
 		AbstractMarkovMusic markov_motion1 = new TestMarkovMusic (noteasy.text);
 		// TODO: should 1 be a markov chain or just a random sustain thing?
 		AbstractMarkovMusic markov_motion2 = new TestMarkovMusic (noteasy.text);
-		Transform motion1 = gameObject.transform.Find ("Motion").Find ("Motion1");
+		//Transform motion1 = gameObject.transform.Find ("Motion").Find ("Motion1");
 		Transform motion2 = gameObject.transform.Find ("Motion").Find ("Motion2");
-		HelmSequencer seq1 = motion1.GetComponent<HelmSequencer> ();
+		//HelmSequencer seq1 = motion1.GetComponent<HelmSequencer> ();
 		HelmSequencer seq2 = motion2.GetComponent<HelmSequencer> ();
-		markov_motion1.fillSequencer(seq1);
+		//markov_motion1.fillSequencer(seq1);
 		markov_motion2.fillSequencer(seq2);
 
 	}
@@ -83,11 +83,20 @@ public class BridgeTTTScriptPart : AbstractTTTScriptPart {
 		gameObject.transform.Find ("Motion").Find ("Motion1").GetComponent<HelmSequencer> ().enabled = true;
 		Debug.Log ("Playing motion1");
 		one_moved = true;
+		BoxOneContinueMoving (speed);
 	}
 	public override void BoxOneContinueMoving(double speed) {
 		one_moved = true;
-		// Motion sound changes go here
+		gameObject.transform.Find ("Motion").Find ("Motion1").GetComponent<HelmSequencer> ().enabled = true;
+		HelmController control = gameObject.transform.Find ("Motion").Find ("Motion1").GetComponent<HelmController>();
+		control.SetParameterPercent(Param.kFilterCutoff,(float) (0.4+(speed/15)*0.6));
+		control.SetParameterPercent (Param.kMonoLfo1Amplitude,(float) (0.5 + (speed / 15) * 0.5));
+		control.SetParameterPercent (Param.kMonoLfo1Frequency, (float)(0.4 + (speed / 15) * 0.6));
+		control.SetParameterPercent(Param.kDelayFrequency, (float)(0.5 + (speed / 15) * 0.5));
+		control.SetParameterPercent (Param.kDelayDryWet, (float)((speed / 15) * 0.5));
+
 	}
+
 	public override void BoxOneStopMoving() {
 		gameObject.transform.Find ("Motion").Find ("Motion1").GetComponent<HelmSequencer> ().enabled = false;
 	}
@@ -96,9 +105,14 @@ public class BridgeTTTScriptPart : AbstractTTTScriptPart {
 		gameObject.transform.Find ("Motion").Find ("Motion2").GetComponent<HelmSequencer> ().enabled = true;
 		Debug.Log ("Playing motion2");
 		two_moved = true;
+		BoxTwoContinueMoving (speed);
 	}
 	public override void BoxTwoContinueMoving(double speed) {
 		two_moved = true;
+		gameObject.transform.Find ("Motion").Find ("Motion2").GetComponent<HelmSequencer> ().enabled = true;
+		HelmController control = gameObject.transform.Find ("Motion").Find ("Motion2").GetComponent<HelmController>();
+		control.SetParameterPercent (Param.kFilterCutoff, (float)(0.4 + (speed / 15) * 0.4));
+		control.SetParameterPercent (Param.kReverbDryWet,(float)((speed / 15) * 0.6));
 		// Motion sound changes go here
 	}
 	public override void BoxTwoStopMoving() {
@@ -110,8 +124,10 @@ public class BridgeTTTScriptPart : AbstractTTTScriptPart {
 		gameObject.transform.Find ("Motion").Find ("Motion3").GetComponent<SampleSequencer> ().enabled = true;
 		Debug.Log ("Playing motion3");
 		three_moved = true;
+		BoxThreeContinueMoving (speed);
 	}
 	public override void BoxThreeContinueMoving(double speed) {
+		gameObject.transform.Find ("Motion").Find ("Motion3").GetComponent<SampleSequencer> ().enabled = true;
 		three_moved = true;
 	}
 	public override void BoxThreeStopMoving() {
