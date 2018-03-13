@@ -28,6 +28,7 @@ public class BridgeTTTScriptPart : AbstractTTTScriptPart {
 		partOne ();
 		TextAsset noteasy = Resources.Load("MarkovFiles/NotEasyBeingGreen") as TextAsset;
 		AbstractMarkovMusic markov_motion1 = new TestMarkovMusic (noteasy.text);
+		// TODO: should 1 be a markov chain or just a random sustain thing?
 		AbstractMarkovMusic markov_motion2 = new TestMarkovMusic (noteasy.text);
 		Transform motion1 = gameObject.transform.Find ("Motion").Find ("Motion1");
 		Transform motion2 = gameObject.transform.Find ("Motion").Find ("Motion2");
@@ -83,6 +84,10 @@ public class BridgeTTTScriptPart : AbstractTTTScriptPart {
 		Debug.Log ("Playing motion1");
 		one_moved = true;
 	}
+	public override void BoxOneContinueMoving(double speed) {
+		one_moved = true;
+		// Motion sound changes go here
+	}
 	public override void BoxOneStopMoving() {
 		gameObject.transform.Find ("Motion").Find ("Motion1").GetComponent<HelmSequencer> ().enabled = false;
 	}
@@ -92,6 +97,10 @@ public class BridgeTTTScriptPart : AbstractTTTScriptPart {
 		Debug.Log ("Playing motion2");
 		two_moved = true;
 	}
+	public override void BoxTwoContinueMoving(double speed) {
+		two_moved = true;
+		// Motion sound changes go here
+	}
 	public override void BoxTwoStopMoving() {
 		gameObject.transform.Find ("Motion").Find ("Motion2").GetComponent<HelmSequencer> ().enabled = false;
 	}
@@ -100,6 +109,9 @@ public class BridgeTTTScriptPart : AbstractTTTScriptPart {
 	public override void BoxThreeStartMoving(double speed) {
 		gameObject.transform.Find ("Motion").Find ("Motion3").GetComponent<SampleSequencer> ().enabled = true;
 		Debug.Log ("Playing motion3");
+		three_moved = true;
+	}
+	public override void BoxThreeContinueMoving(double speed) {
 		three_moved = true;
 	}
 	public override void BoxThreeStopMoving() {

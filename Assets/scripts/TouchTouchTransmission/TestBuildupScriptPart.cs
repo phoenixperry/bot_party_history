@@ -4,7 +4,9 @@ using UnityEngine;
 using AudioHelm;
 
 public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
-
+	double box1speed = 0;
+	double box2speed = 0;
+	double box3speed = 0;
 	float nextTime = 0;
 	int currentPart = 0;
 	public override void startPart() {
@@ -35,8 +37,7 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
 	public override void targetSuccess() {
 		if (currentPart == 1) {
 			SendPlayGameSound (Resources.Load ("TouchTouchTransmission/gamesounds/Success 2") as AudioClip);
-			SendNewTarget (TouchState.None, 30, 1);
-		} else if (currentPart == 3) {
+			SendNewTarget (TouchState.None, (int)Mathf.Floor(45f*getTimeReduction()), 0.8f * getTimeReduction());		} else if (currentPart == 3) {
 			currentPart = 4;
 			partFour ();
 		}
@@ -44,9 +45,16 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
 	public override void targetFailure() {
 		if (currentPart == 1) {
 			SendPlayGameSound (Resources.Load ("TouchTouchTransmission/gamesounds/Fail 2") as AudioClip);
-			SendNewTarget (TouchState.None, 30, 1);
+			SendNewTarget (TouchState.None, (int)Mathf.Floor(45f*getTimeReduction()), 0.8f * getTimeReduction());
 		}	
 		// Deal with Just One More Time Human
+	}
+	public float getTimeReduction() {
+		double speed = (box1speed + box2speed + box3speed) / 3;
+		if (speed == 0) {
+			return 1;
+		}
+		return (float) (1 - (speed / 20));
 	}
 	void partOne() {
 		nextTime = Time.time + 60;
@@ -87,6 +95,9 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
 		gameObject.transform.Find("Resol").Find ("ResolBass").GetComponent<HelmSequencer> ().enabled = false;
 		gameObject.transform.Find("Resol").Find ("ResolLead").GetComponent<HelmSequencer> ().enabled = false;
 		gameObject.transform.Find("Resol").Find ("ResolDrum").GetComponent<SampleSequencer> ().enabled = false;
+		BoxOneStopMoving ();
+		BoxTwoStopMoving ();
+		BoxThreeStopMoving ();
 		SendPlayVoices(clips);
 		SendClearTargets ();
 		nextTime = Time.time + TouchTouchTransmission.getTotalTimeToPlay (clips);
@@ -96,27 +107,55 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
 	}
 	// TODO: Disable this in part 4
 	public override void BoxOneStartMoving(double speed) {
-		gameObject.transform.Find ("Motion").Find ("Motion1").GetComponent<HelmSequencer> ().enabled = true;
-		Debug.Log ("Playing motion1");
+		if (currentPart < 4) {
+			gameObject.transform.Find ("Motion").Find ("Motion1").GetComponent<HelmSequencer> ().enabled = true;
+			Debug.Log ("Playing motion1");
+			BoxOneContinueMoving (speed);
+		}
+	}
+	public override void BoxOneContinueMoving(double speed) {
+		if (currentPart < 4) {
+			box1speed = speed;
+		}
 	}
 	public override void BoxOneStopMoving() {
 		gameObject.transform.Find ("Motion").Find ("Motion1").GetComponent<HelmSequencer> ().enabled = false;
+		box1speed = 0;
 	}
 
 	public override void BoxTwoStartMoving(double speed) {
-		gameObject.transform.Find ("Motion").Find ("Motion2").GetComponent<HelmSequencer> ().enabled = true;
-		Debug.Log ("Playing motion2");
+		if (currentPart < 4) {
+			gameObject.transform.Find ("Motion").Find ("Motion2").GetComponent<HelmSequencer> ().enabled = true;
+			Debug.Log ("Playing motion2");
+			BoxTwoContinueMoving (speed);
+
+		}
+	}
+	public override void BoxTwoContinueMoving(double speed) {
+		if (currentPart < 4) {
+			box2speed = speed;
+		}
 	}
 	public override void BoxTwoStopMoving() {
 		gameObject.transform.Find ("Motion").Find ("Motion2").GetComponent<HelmSequencer> ().enabled = false;
+		box2speed = 0;
 	}
 
 
 	public override void BoxThreeStartMoving(double speed) {
-		gameObject.transform.Find ("Motion").Find ("Motion3").GetComponent<SampleSequencer> ().enabled = true;
-		Debug.Log ("Playing motion3");
+		if (currentPart < 4) {
+			gameObject.transform.Find ("Motion").Find ("Motion3").GetComponent<SampleSequencer> ().enabled = true;
+			Debug.Log ("Playing motion3");
+			BoxThreeContinueMoving (speed);
+		}
+	}
+	public override void BoxThreeContinueMoving(double speed) {
+		if (currentPart < 4) {
+			box3speed = speed;
+		}
 	}
 	public override void BoxThreeStopMoving() {
 		gameObject.transform.Find ("Motion").Find ("Motion3").GetComponent<SampleSequencer> ().enabled = false;
+		box3speed = 0;
 	}
 }
