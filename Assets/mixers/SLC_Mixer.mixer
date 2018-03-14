@@ -5,8 +5,8 @@ AudioMixerController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: FreePlay_Mixer
-  m_OutputGroup: {fileID: 0}
+  m_Name: SLC_Mixer
+  m_OutputGroup: {fileID: 24300002, guid: 7d4268c558a39e643a02c2708a5356d0, type: 2}
   m_MasterGroup: {fileID: 24300002}
   m_Snapshots:
   - {fileID: 24500006}
@@ -1051,6 +1051,7 @@ AudioMixerSnapshotController:
     d6235377a28bc5c42a9268f87c596b7d: 0
     ca3c9377b05c5eb47bac01702c9858e1: 0.5
     31b026778ac0b0f4dbbabe1d026ca175: 6
+    d5377877cae4c224dbfb214139d3ecdb: 15
     1c375a774fa79c94c94ec146a66e5fad: 1.0000002
     0853af7750f1d4942aece5023d2e6418: 0
     855860876344ebb4c8e945dcc0c029e1: 0.32412493
@@ -2235,7 +2236,7 @@ AudioMixerGroupController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: FreePlayGroup
+  m_Name: FreePlayGroup_todoremove
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: a944d1b36ce8a36409be36ebec39e84a
   m_Children:

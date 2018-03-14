@@ -355,7 +355,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243007930724134922, guid: 158f54de10885d445bb1394b26cdc210,
     type: 2}
-  m_audioClip: {fileID: 310489096}
+  m_audioClip: {fileID: 405459781}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -465,9 +465,37 @@ Transform:
   m_Children:
   - {fileID: 401392105}
   - {fileID: 342039194}
+  - {fileID: 936182940}
   m_Father: {fileID: 2063064390}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!83 &189895238
+AudioClip:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: helm
+  m_LoadType: 0
+  m_Channels: 1
+  m_Frequency: 48000
+  m_BitsPerSample: 32
+  m_Length: 0
+  m_IsTrackerFormat: 0
+  m_Ambisonic: 0
+  m_SubsoundIndex: 0
+  m_PreloadAudioData: 1
+  m_LoadInBackground: 0
+  m_Legacy3D: 0
+  m_Resource:
+    m_Source: 
+    m_Offset: 0
+    m_Size: 0
+  m_CompressionFormat: 0
+  m_EditorResource:
+    m_Source: 
+    m_Offset: 0
+    m_Size: 0
+  m_EditorCompressionFormat: 0
 --- !u!1 &217536708
 GameObject:
   m_ObjectHideFlags: 0
@@ -805,7 +833,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243595278871154204, guid: 158f54de10885d445bb1394b26cdc210,
     type: 2}
-  m_audioClip: {fileID: 1221077751}
+  m_audioClip: {fileID: 295517005}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -888,7 +916,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bpm_: 120
---- !u!83 &310489096
+--- !u!83 &295517005
 AudioClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -1272,7 +1300,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243983480382985750, guid: 158f54de10885d445bb1394b26cdc210,
     type: 2}
-  m_audioClip: {fileID: 1400685376}
+  m_audioClip: {fileID: 895381087}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1429,6 +1457,175 @@ Prefab:
       propertyPath: length
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012762969920, guid: 7c88a706cd482274e9fce3e628aea181,
+        type: 2}
+      propertyPath: allNotes.Array.data[60].notes.Array.data[0].note_
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012762969920, guid: 7c88a706cd482274e9fce3e628aea181,
+        type: 2}
+      propertyPath: allNotes.Array.data[60].notes.Array.data[0].end_
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012762969920, guid: 7c88a706cd482274e9fce3e628aea181,
+        type: 2}
+      propertyPath: allNotes.Array.data[60].notes.Array.data[0].velocity_
+      value: 0.77165353
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012762969920, guid: 7c88a706cd482274e9fce3e628aea181,
+        type: 2}
+      propertyPath: allNotes.Array.data[60].notes.Array.data[0].parent
+      value: 
+      objectReference: {fileID: 342039195}
+    - target: {fileID: 114000012762969920, guid: 7c88a706cd482274e9fce3e628aea181,
+        type: 2}
+      propertyPath: allNotes.Array.data[60].notes.Array.data[1].note_
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012762969920, guid: 7c88a706cd482274e9fce3e628aea181,
+        type: 2}
+      propertyPath: allNotes.Array.data[60].notes.Array.data[1].start_
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012762969920, guid: 7c88a706cd482274e9fce3e628aea181,
+        type: 2}
+      propertyPath: allNotes.Array.data[60].notes.Array.data[1].end_
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012762969920, guid: 7c88a706cd482274e9fce3e628aea181,
+        type: 2}
+      propertyPath: allNotes.Array.data[60].notes.Array.data[1].velocity_
+      value: 0.77165353
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012762969920, guid: 7c88a706cd482274e9fce3e628aea181,
+        type: 2}
+      propertyPath: allNotes.Array.data[60].notes.Array.data[1].parent
+      value: 
+      objectReference: {fileID: 342039195}
+    - target: {fileID: 114000012762969920, guid: 7c88a706cd482274e9fce3e628aea181,
+        type: 2}
+      propertyPath: allNotes.Array.data[61].notes.Array.data[0].note_
+      value: 61
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012762969920, guid: 7c88a706cd482274e9fce3e628aea181,
+        type: 2}
+      propertyPath: allNotes.Array.data[61].notes.Array.data[0].start_
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012762969920, guid: 7c88a706cd482274e9fce3e628aea181,
+        type: 2}
+      propertyPath: allNotes.Array.data[61].notes.Array.data[0].end_
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012762969920, guid: 7c88a706cd482274e9fce3e628aea181,
+        type: 2}
+      propertyPath: allNotes.Array.data[61].notes.Array.data[0].velocity_
+      value: 0.7637795
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012762969920, guid: 7c88a706cd482274e9fce3e628aea181,
+        type: 2}
+      propertyPath: allNotes.Array.data[61].notes.Array.data[0].parent
+      value: 
+      objectReference: {fileID: 342039195}
+    - target: {fileID: 114000012762969920, guid: 7c88a706cd482274e9fce3e628aea181,
+        type: 2}
+      propertyPath: allNotes.Array.data[68].notes.Array.data[0].note_
+      value: 68
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012762969920, guid: 7c88a706cd482274e9fce3e628aea181,
+        type: 2}
+      propertyPath: allNotes.Array.data[68].notes.Array.data[0].end_
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012762969920, guid: 7c88a706cd482274e9fce3e628aea181,
+        type: 2}
+      propertyPath: allNotes.Array.data[68].notes.Array.data[0].velocity_
+      value: 0.77165353
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012762969920, guid: 7c88a706cd482274e9fce3e628aea181,
+        type: 2}
+      propertyPath: allNotes.Array.data[68].notes.Array.data[0].parent
+      value: 
+      objectReference: {fileID: 342039195}
+    - target: {fileID: 114000012762969920, guid: 7c88a706cd482274e9fce3e628aea181,
+        type: 2}
+      propertyPath: allNotes.Array.data[68].notes.Array.data[1].note_
+      value: 68
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012762969920, guid: 7c88a706cd482274e9fce3e628aea181,
+        type: 2}
+      propertyPath: allNotes.Array.data[68].notes.Array.data[1].start_
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012762969920, guid: 7c88a706cd482274e9fce3e628aea181,
+        type: 2}
+      propertyPath: allNotes.Array.data[68].notes.Array.data[1].end_
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012762969920, guid: 7c88a706cd482274e9fce3e628aea181,
+        type: 2}
+      propertyPath: allNotes.Array.data[68].notes.Array.data[1].velocity_
+      value: 0.77165353
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012762969920, guid: 7c88a706cd482274e9fce3e628aea181,
+        type: 2}
+      propertyPath: allNotes.Array.data[68].notes.Array.data[1].parent
+      value: 
+      objectReference: {fileID: 342039195}
+    - target: {fileID: 114000012762969920, guid: 7c88a706cd482274e9fce3e628aea181,
+        type: 2}
+      propertyPath: allNotes.Array.data[68].notes.Array.data[2].note_
+      value: 68
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012762969920, guid: 7c88a706cd482274e9fce3e628aea181,
+        type: 2}
+      propertyPath: allNotes.Array.data[68].notes.Array.data[2].start_
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012762969920, guid: 7c88a706cd482274e9fce3e628aea181,
+        type: 2}
+      propertyPath: allNotes.Array.data[68].notes.Array.data[2].end_
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012762969920, guid: 7c88a706cd482274e9fce3e628aea181,
+        type: 2}
+      propertyPath: allNotes.Array.data[68].notes.Array.data[2].velocity_
+      value: 0.77165353
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012762969920, guid: 7c88a706cd482274e9fce3e628aea181,
+        type: 2}
+      propertyPath: allNotes.Array.data[68].notes.Array.data[2].parent
+      value: 
+      objectReference: {fileID: 342039195}
+    - target: {fileID: 114000012762969920, guid: 7c88a706cd482274e9fce3e628aea181,
+        type: 2}
+      propertyPath: allNotes.Array.data[68].notes.Array.data[3].note_
+      value: 68
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012762969920, guid: 7c88a706cd482274e9fce3e628aea181,
+        type: 2}
+      propertyPath: allNotes.Array.data[68].notes.Array.data[3].start_
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012762969920, guid: 7c88a706cd482274e9fce3e628aea181,
+        type: 2}
+      propertyPath: allNotes.Array.data[68].notes.Array.data[3].end_
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012762969920, guid: 7c88a706cd482274e9fce3e628aea181,
+        type: 2}
+      propertyPath: allNotes.Array.data[68].notes.Array.data[3].velocity_
+      value: 0.77165353
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012762969920, guid: 7c88a706cd482274e9fce3e628aea181,
+        type: 2}
+      propertyPath: allNotes.Array.data[68].notes.Array.data[3].parent
+      value: 
+      objectReference: {fileID: 342039195}
+    - target: {fileID: 1000010177989902, guid: 7c88a706cd482274e9fce3e628aea181, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7c88a706cd482274e9fce3e628aea181, type: 2}
   m_IsPrefabParent: 0
@@ -1437,6 +1634,12 @@ Transform:
   m_PrefabParentObject: {fileID: 4000012930668840, guid: 7c88a706cd482274e9fce3e628aea181,
     type: 2}
   m_PrefabInternal: {fileID: 342039193}
+--- !u!114 &342039195 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114000012762969920, guid: 7c88a706cd482274e9fce3e628aea181,
+    type: 2}
+  m_PrefabInternal: {fileID: 342039193}
+  m_Script: {fileID: 11500000, guid: 1f6faed88bb01468fb8fd49178ba50fa, type: 3}
 --- !u!1 &401392104
 GameObject:
   m_ObjectHideFlags: 0
@@ -1455,7 +1658,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &401392105
 Transform:
   m_ObjectHideFlags: 0
@@ -1641,7 +1844,7 @@ MonoBehaviour:
   - notes: []
   - notes: []
   - notes: []
-  scrollPosition: {x: 0, y: 0}
+  scrollPosition: {x: 505.82892, y: 443.99963}
   autoScroll: 0
   division: 1
   zoom: 0.3
@@ -1669,7 +1872,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243454911204842248, guid: 158f54de10885d445bb1394b26cdc210,
     type: 2}
-  m_audioClip: {fileID: 925641828}
+  m_audioClip: {fileID: 1736481362}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1752,7 +1955,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bpm_: 120
---- !u!83 &462929725
+--- !u!83 &405459781
 AudioClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -3153,6 +3356,33 @@ Transform:
   m_PrefabParentObject: {fileID: 4000013256522064, guid: f411c93fc0bd3b146a2c8fa8915b6c3e,
     type: 2}
   m_PrefabInternal: {fileID: 622769078}
+--- !u!83 &654275221
+AudioClip:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: helm
+  m_LoadType: 0
+  m_Channels: 1
+  m_Frequency: 48000
+  m_BitsPerSample: 32
+  m_Length: 0
+  m_IsTrackerFormat: 0
+  m_Ambisonic: 0
+  m_SubsoundIndex: 0
+  m_PreloadAudioData: 1
+  m_LoadInBackground: 0
+  m_Legacy3D: 0
+  m_Resource:
+    m_Source: 
+    m_Offset: 0
+    m_Size: 0
+  m_CompressionFormat: 0
+  m_EditorResource:
+    m_Source: 
+    m_Offset: 0
+    m_Size: 0
+  m_EditorCompressionFormat: 0
 --- !u!1001 &682116923
 Prefab:
   m_ObjectHideFlags: 0
@@ -3195,33 +3425,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 18e9e91f3beedae45922245d8c1d3f2a, type: 2}
   m_IsPrefabParent: 0
---- !u!83 &776210892
-AudioClip:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: helm
-  m_LoadType: 0
-  m_Channels: 1
-  m_Frequency: 48000
-  m_BitsPerSample: 32
-  m_Length: 0
-  m_IsTrackerFormat: 0
-  m_Ambisonic: 0
-  m_SubsoundIndex: 0
-  m_PreloadAudioData: 1
-  m_LoadInBackground: 0
-  m_Legacy3D: 0
-  m_Resource:
-    m_Source: 
-    m_Offset: 0
-    m_Size: 0
-  m_CompressionFormat: 0
-  m_EditorResource:
-    m_Source: 
-    m_Offset: 0
-    m_Size: 0
-  m_EditorCompressionFormat: 0
 --- !u!1 &805636851
 GameObject:
   m_ObjectHideFlags: 0
@@ -3459,7 +3662,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243152823895745808, guid: 158f54de10885d445bb1394b26cdc210,
     type: 2}
-  m_audioClip: {fileID: 966023025}
+  m_audioClip: {fileID: 189895238}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -3542,7 +3745,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bpm_: 120
---- !u!83 &925641828
+--- !u!83 &848955664
+AudioClip:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: helm
+  m_LoadType: 0
+  m_Channels: 1
+  m_Frequency: 48000
+  m_BitsPerSample: 32
+  m_Length: 0
+  m_IsTrackerFormat: 0
+  m_Ambisonic: 0
+  m_SubsoundIndex: 0
+  m_PreloadAudioData: 1
+  m_LoadInBackground: 0
+  m_Legacy3D: 0
+  m_Resource:
+    m_Source: 
+    m_Offset: 0
+    m_Size: 0
+  m_CompressionFormat: 0
+  m_EditorResource:
+    m_Source: 
+    m_Offset: 0
+    m_Size: 0
+  m_EditorCompressionFormat: 0
+--- !u!83 &895381087
 AudioClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -4169,33 +4399,116 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 934959244}
   m_Script: {fileID: 11500000, guid: 1f6faed88bb01468fb8fd49178ba50fa, type: 3}
---- !u!83 &966023025
-AudioClip:
+--- !u!1 &936182939
+GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: helm
-  m_LoadType: 0
-  m_Channels: 1
-  m_Frequency: 48000
-  m_BitsPerSample: 32
-  m_Length: 0
-  m_IsTrackerFormat: 0
-  m_Ambisonic: 0
-  m_SubsoundIndex: 0
-  m_PreloadAudioData: 1
-  m_LoadInBackground: 0
-  m_Legacy3D: 0
-  m_Resource:
-    m_Source: 
-    m_Offset: 0
-    m_Size: 0
-  m_CompressionFormat: 0
-  m_EditorResource:
-    m_Source: 
-    m_Offset: 0
-    m_Size: 0
-  m_EditorCompressionFormat: 0
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 936182940}
+  - component: {fileID: 936182941}
+  m_Layer: 0
+  m_Name: BridgeWav
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &936182940
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 936182939}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 142522997}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &936182941
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 936182939}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 243622740980032692, guid: 158f54de10885d445bb1394b26cdc210,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: 327ff3d1ca706f1468dbd6a772fff37b, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1 &1055986026
 GameObject:
   m_ObjectHideFlags: 0
@@ -4292,60 +4605,6 @@ Transform:
   m_Father: {fileID: 2063064390}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!83 &1142483939
-AudioClip:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: helm
-  m_LoadType: 0
-  m_Channels: 1
-  m_Frequency: 48000
-  m_BitsPerSample: 32
-  m_Length: 0
-  m_IsTrackerFormat: 0
-  m_Ambisonic: 0
-  m_SubsoundIndex: 0
-  m_PreloadAudioData: 1
-  m_LoadInBackground: 0
-  m_Legacy3D: 0
-  m_Resource:
-    m_Source: 
-    m_Offset: 0
-    m_Size: 0
-  m_CompressionFormat: 0
-  m_EditorResource:
-    m_Source: 
-    m_Offset: 0
-    m_Size: 0
-  m_EditorCompressionFormat: 0
---- !u!83 &1221077751
-AudioClip:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: helm
-  m_LoadType: 0
-  m_Channels: 1
-  m_Frequency: 48000
-  m_BitsPerSample: 32
-  m_Length: 0
-  m_IsTrackerFormat: 0
-  m_Ambisonic: 0
-  m_SubsoundIndex: 0
-  m_PreloadAudioData: 1
-  m_LoadInBackground: 0
-  m_Legacy3D: 0
-  m_Resource:
-    m_Source: 
-    m_Offset: 0
-    m_Size: 0
-  m_CompressionFormat: 0
-  m_EditorResource:
-    m_Source: 
-    m_Offset: 0
-    m_Size: 0
-  m_EditorCompressionFormat: 0
 --- !u!1001 &1234886072
 Prefab:
   m_ObjectHideFlags: 0
@@ -5409,7 +5668,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243107507763435488, guid: 158f54de10885d445bb1394b26cdc210,
     type: 2}
-  m_audioClip: {fileID: 1142483939}
+  m_audioClip: {fileID: 848955664}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -5523,34 +5782,7 @@ Transform:
   m_Father: {fileID: 2063064390}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!83 &1312504093
-AudioClip:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: helm
-  m_LoadType: 0
-  m_Channels: 1
-  m_Frequency: 48000
-  m_BitsPerSample: 32
-  m_Length: 0
-  m_IsTrackerFormat: 0
-  m_Ambisonic: 0
-  m_SubsoundIndex: 0
-  m_PreloadAudioData: 1
-  m_LoadInBackground: 0
-  m_Legacy3D: 0
-  m_Resource:
-    m_Source: 
-    m_Offset: 0
-    m_Size: 0
-  m_CompressionFormat: 0
-  m_EditorResource:
-    m_Source: 
-    m_Offset: 0
-    m_Size: 0
-  m_EditorCompressionFormat: 0
---- !u!83 &1400685376
+--- !u!83 &1278002880
 AudioClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -5913,7 +6145,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243641942890444102, guid: 158f54de10885d445bb1394b26cdc210,
     type: 2}
-  m_audioClip: {fileID: 776210892}
+  m_audioClip: {fileID: 654275221}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -6169,6 +6401,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bpm_: 120
+--- !u!83 &1612043358
+AudioClip:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: helm
+  m_LoadType: 0
+  m_Channels: 1
+  m_Frequency: 48000
+  m_BitsPerSample: 32
+  m_Length: 0
+  m_IsTrackerFormat: 0
+  m_Ambisonic: 0
+  m_SubsoundIndex: 0
+  m_PreloadAudioData: 1
+  m_LoadInBackground: 0
+  m_Legacy3D: 0
+  m_Resource:
+    m_Source: 
+    m_Offset: 0
+    m_Size: 0
+  m_CompressionFormat: 0
+  m_EditorResource:
+    m_Source: 
+    m_Offset: 0
+    m_Size: 0
+  m_EditorCompressionFormat: 0
 --- !u!1 &1614132335
 GameObject:
   m_ObjectHideFlags: 0
@@ -6387,7 +6646,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243458445077112644, guid: 158f54de10885d445bb1394b26cdc210,
     type: 2}
-  m_audioClip: {fileID: 462929725}
+  m_audioClip: {fileID: 1612043358}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -6596,6 +6855,33 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1234886072}
   m_Script: {fileID: 11500000, guid: 1f6faed88bb01468fb8fd49178ba50fa, type: 3}
+--- !u!83 &1736481362
+AudioClip:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: helm
+  m_LoadType: 0
+  m_Channels: 1
+  m_Frequency: 48000
+  m_BitsPerSample: 32
+  m_Length: 0
+  m_IsTrackerFormat: 0
+  m_Ambisonic: 0
+  m_SubsoundIndex: 0
+  m_PreloadAudioData: 1
+  m_LoadInBackground: 0
+  m_Legacy3D: 0
+  m_Resource:
+    m_Source: 
+    m_Offset: 0
+    m_Size: 0
+  m_CompressionFormat: 0
+  m_EditorResource:
+    m_Source: 
+    m_Offset: 0
+    m_Size: 0
+  m_EditorCompressionFormat: 0
 --- !u!1 &1767235059
 GameObject:
   m_ObjectHideFlags: 0
@@ -6833,7 +7119,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243834198768937588, guid: 158f54de10885d445bb1394b26cdc210,
     type: 2}
-  m_audioClip: {fileID: 1312504093}
+  m_audioClip: {fileID: 1278002880}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

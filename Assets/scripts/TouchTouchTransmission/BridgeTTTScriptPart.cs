@@ -21,8 +21,9 @@ public class BridgeTTTScriptPart : AbstractTTTScriptPart {
 		}
 	}
 	public override void startPart() {
-		gameObject.transform.Find("Bridge").Find ("BridgeBass").GetComponent<HelmSequencer> ().enabled = true;
-		gameObject.transform.Find("Bridge").Find ("BridgeDrum").GetComponent<SampleSequencer> ().enabled = true;
+		//gameObject.transform.Find("Bridge").Find ("BridgeBass").GetComponent<HelmSequencer> ().enabled = true;
+		//gameObject.transform.Find("Bridge").Find ("BridgeDrum").GetComponent<SampleSequencer> ().enabled = true;
+		gameObject.transform.Find("Bridge").Find("BridgeWav").GetComponent<AudioSource>().Play();
 		Debug.Log ("BRIDGE BEGIN");
 		currentPart = 1;
 		partOne ();
@@ -39,8 +40,9 @@ public class BridgeTTTScriptPart : AbstractTTTScriptPart {
 
 	}
 	public override void stopPart() {
-		gameObject.transform.Find("Bridge").Find ("BridgeBass").GetComponent<HelmSequencer> ().enabled = false;
-		gameObject.transform.Find("Bridge").Find ("BridgeDrum").GetComponent<SampleSequencer> ().enabled = false;
+		//gameObject.transform.Find("Bridge").Find ("BridgeBass").GetComponent<HelmSequencer> ().enabled = false;
+		//gameObject.transform.Find("Bridge").Find ("BridgeDrum").GetComponent<SampleSequencer> ().enabled = false;
+		gameObject.transform.Find("Bridge").Find("BridgeWav").GetComponent<AudioSource>().Stop();
 	}
 
 	void partOne() {
