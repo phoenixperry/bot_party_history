@@ -20,6 +20,26 @@ public struct Bot {
 	public string zpos;
 	public string btn;
 }
+public struct MenuButtonState {
+	public MenuButtonState(string oc_button, string slc_button) {
+		if (oc_button.Equals ("1")) {
+			oc = true;
+		} else {
+			oc = false;
+		}
+
+		if (slc_button.Equals ("1")) {
+			slc = true;
+		} else {
+			slc = false;
+		}
+		def = true;
+	}
+
+	public bool slc;
+	public bool oc;
+	public bool def;
+}
 
 //data strcuture holding the two bots touching 
 public struct TouchedBots {
@@ -98,12 +118,15 @@ public class AbstractInputReader : MonoBehaviour {
 	public static event MenuFreePlayPushed OnMenuFreePlayPushed;
 	public delegate void MenuSecretCiphersPushed();
 	public static event MenuSecretCiphersPushed OnMenuSecretCiphersPushed;
+	bool freeplay_down, secret_down;
 	protected void MenuFreePlay() {
+		freeplay_down = true;
 		if (OnMenuFreePlayPushed != null) {
-			OnMenuFreePlayPushed ();
+				OnMenuFreePlayPushed ();
 		}
 	}
 	protected void MenuSecretCiphers() {
+		secret_down = true;
 		if (OnMenuSecretCiphersPushed != null) {
 			OnMenuSecretCiphersPushed ();
 		}

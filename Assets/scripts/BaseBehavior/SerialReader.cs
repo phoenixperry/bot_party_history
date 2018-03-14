@@ -17,6 +17,8 @@ public class SerialReader : AbstractInputReader
     
 	SerialPort stream; //serial port data 
 
+	MenuButtonState menu_state;
+
     string incommingData; //data coming in through the port 
 
     //list the port names and return the first serial port in the stack of possible serial ports on your machine, this is usually your arduino
@@ -75,7 +77,7 @@ public class SerialReader : AbstractInputReader
 		{
 		//Debug.Log(incommingData);
 		string [] sensors = incommingData.Split(' ');
-		if (sensors.Length > 1 && sensors.Length < 4)
+		if (sensors.Length > 1 && sensors.Length < 3)
 		{
 		passOnTouch(new TouchedBots(sensors[0], sensors[1])); //creates a new touchedBots struct and passes in data.  
 	
@@ -87,10 +89,23 @@ public class SerialReader : AbstractInputReader
 
 		//if (OnBotDataReceived != null) {
 		passOnBotDataReceived(new Bot(sensors[0], sensors[1], sensors[2], sensors[3], sensors[4], sensors[5])); 
-		//} 
+		} 
+		else if (sensors.Length == 3) {
+			// Menu Button update
+			MenuButtonState newMenu = new MenuButtonState(sensors[1], sensors[2]);
+			if (!menu_state.def) {
+				if (newMenu.oc && !menu_state.oc) {
+					MenuFreePlay();
+				} 
 
-
+				if (newMenu.slc && !menu_state.slc) {
+					MenuSecretCiphers();
+				} 
+			}
+				menu_state = newMenu;
 		}
+
+
 
 		},     // Callback
 		() => Debug.LogError("Error!"), // Error callback
@@ -140,6 +155,8 @@ public class SerialReader : AbstractInputReader
             fail();
         yield return null;
     }
+
+
 
 
 
