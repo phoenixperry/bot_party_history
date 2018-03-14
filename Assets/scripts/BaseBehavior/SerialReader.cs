@@ -93,7 +93,7 @@ public class SerialReader : AbstractInputReader
 		else if (sensors.Length == 3) {
 			// Menu Button update
 			MenuButtonState newMenu = new MenuButtonState(sensors[1], sensors[2]);
-			if (!menu_state.def) {
+			if (menu_state.def) {
 				if (newMenu.oc && !menu_state.oc) {
 					MenuFreePlay();
 				} 
