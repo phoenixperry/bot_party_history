@@ -9,6 +9,6 @@ public class TestMarkovMusic : AbstractMarkovMusic {
 	}
 	public override float getNextNoteLength (int second_last, int last)
 	{
-		return UnityEngine.Random.Range (1, 4) * 4;
+		return UnityEngine.Random.Range (1, 4) * 2;
 	}
 }

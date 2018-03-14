@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/scenes/Menu.unity
     guid: 9dad543e82529324fb7ffa85a0e644c1
-  - enabled: 1
+  - enabled: 0
     path: Assets/scenes/FreePlay.unity
     guid: 9e11339097146404dabeb4960730b52b
   - enabled: 0
@@ -20,3 +20,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/scenes/TouchTouchTransmission.unity
     guid: abcfcf2f7f1801049a95ca93d1628558
+  - enabled: 1
+    path: Assets/scenes/OpenCommunication.unity
+    guid: f72fffeb651a4824fab7bf24f3a29495

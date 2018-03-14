@@ -108,7 +108,7 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
 	void partFive() {
 		SendTerminate();
 	}
-	// TODO: Disable this in part 4
+
 	public override void BoxOneStartMoving(double speed) {
 		if (currentPart < 4) {
 			gameObject.transform.Find ("Motion").Find ("Motion1").GetComponent<HelmSequencer> ().enabled = true;
@@ -119,6 +119,12 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
 	public override void BoxOneContinueMoving(double speed) {
 		if (currentPart < 4) {
 			box1speed = speed;
+			HelmController control = gameObject.transform.Find ("Motion").Find ("Motion1").GetComponent<HelmController>();
+			control.SetParameterPercent(Param.kFilterCutoff,(float) (0.4+(speed/15)*0.6));
+			control.SetParameterPercent (Param.kMonoLfo1Amplitude,(float) (0.5 + (speed / 15) * 0.5));
+			control.SetParameterPercent (Param.kMonoLfo1Frequency, (float)(0.4 + (speed / 15) * 0.6));
+			control.SetParameterPercent(Param.kDelayFrequency, (float)(0.5 + (speed / 15) * 0.5));
+			control.SetParameterPercent (Param.kDelayDryWet, (float)((speed / 15) * 0.5));
 		}
 	}
 	public override void BoxOneStopMoving() {
@@ -137,6 +143,9 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
 	public override void BoxTwoContinueMoving(double speed) {
 		if (currentPart < 4) {
 			box2speed = speed;
+			HelmController control = gameObject.transform.Find ("Motion").Find ("Motion2").GetComponent<HelmController>();
+			control.SetParameterPercent (Param.kFilterCutoff, (float)(0.4 + (speed / 15) * 0.4));
+			control.SetParameterPercent (Param.kReverbDryWet,(float)((speed / 15) * 0.6));
 		}
 	}
 	public override void BoxTwoStopMoving() {

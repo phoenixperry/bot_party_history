@@ -58,7 +58,7 @@ public class MenuManager : AbstractManager
 
     public static void FreePlay()
     {
-        SceneManager.LoadScene("FreePlay", LoadSceneMode.Single);
+        SceneManager.LoadScene("OpenCommunication", LoadSceneMode.Single);
     }
 
     public static void TouchTouchRevolution()
