@@ -252,6 +252,7 @@ public class TouchTouchTransmission : AbstractManager {
 
 	void success() {
 		last_target = target;
+		clearTargets ();
 		script.targetSuccess ();
 		score += 1;
 		provideScoreUpdate ();
@@ -259,6 +260,7 @@ public class TouchTouchTransmission : AbstractManager {
 
 	void fail() {
 		last_target = target;
+		clearTargets ();
 		script.targetFailure ();
 		score += 1;
 		provideScoreUpdate ();
@@ -272,10 +274,11 @@ public class TouchTouchTransmission : AbstractManager {
 			success ();
 			//newTarget ();
 
-		} else if (target == TouchState.AllConnected) {
+		} else if (target == TouchState.AllConnected || target == TouchState.None) {
 			// pass. Reason why is because otherwise getting to a three-touch would cause a fail noise.
+			// Or if theyre touching while there's no active one
 		} else {
-			//fail ();
+			fail ();
 		}
 
 	//if (score >= TO_WIN) {

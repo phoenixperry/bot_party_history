@@ -122,6 +122,12 @@ public class FreePlayManager : AbstractManager {
 	public override void BoxOneContinueMoving(double speed)
 	{
 		gameObject.transform.Find ("Move1").GetComponent<TextMesh> ().text = "1: "+speed;
+		HelmController control = gameObject.transform.Find ("Bot1Midi").GetComponent<HelmController>();
+		control.SetParameterPercent(Param.kFilterCutoff,(float) (0.4+(speed/15)*0.6));
+		control.SetParameterPercent (Param.kMonoLfo1Amplitude,(float) (0.5 + (speed / 15) * 0.5));
+		control.SetParameterPercent (Param.kMonoLfo1Frequency, (float)(0.4 + (speed / 15) * 0.6));
+		control.SetParameterPercent(Param.kDelayFrequency, (float)(0.5 + (speed / 15) * 0.5));
+		control.SetParameterPercent (Param.kDelayDryWet, (float)((speed / 15) * 0.5));
 	}
 
 	public override void BoxOneStopMoving()
@@ -138,19 +144,22 @@ public class FreePlayManager : AbstractManager {
 	{
 		gameObject.transform.Find ("Move2").GetComponent<TextMesh> ().text = "2: Moving";
 		BoxTwoContinueMoving (speed);
+		gameObject.transform.Find ("Bot2Midi").GetComponent<HelmSequencer> ().enabled = true;
 
 	}
 
 	public override void BoxTwoContinueMoving(double speed) {
-		gameObject.transform.Find ("Bot2Midi").GetComponent<HelmSequencer> ().Clear ();
-		// Note 60 = C3
-		gameObject.transform.Find ("Bot2Midi").GetComponent<HelmController> ().NoteOn (60 + (int)(speed/3));
+
+		gameObject.transform.Find ("Bot2Midi").GetComponent<HelmSequencer> ().enabled = true;
+		HelmController control = gameObject.transform.Find ("Bot2Midi").GetComponent<HelmController>();
+		control.SetParameterPercent (Param.kFilterCutoff, (float)(0.4 + (speed / 15) * 0.4));
+		control.SetParameterPercent (Param.kReverbDryWet,(float)((speed / 15) * 0.6));
 	}
 
 	public override void BoxTwoStopMoving()
 	{
 		gameObject.transform.Find ("Move2").GetComponent<TextMesh> ().text = "2: At rest";
-		gameObject.transform.Find ("Bot2Midi").GetComponent<HelmController> ().AllNotesOff ();
+		gameObject.transform.Find ("Bot2Midi").GetComponent<HelmSequencer> ().enabled = false;
 	}
 
 	public override void BoxThreeStartMoving(double speed)

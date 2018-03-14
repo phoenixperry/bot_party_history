@@ -73,7 +73,7 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
 		nextTime = Time.time + TouchTouchTransmission.getTotalTimeToPlay (clips);
 	}
 	void partThree() {
-		SendNewTarget (TouchState.AllConnected, 255, 0);
+		SendNewTarget (TouchState.AllConnected, 255, 0.5f);
 	}
 	void partFour() {
 		List<AudioClip> clips = new List<AudioClip> () {

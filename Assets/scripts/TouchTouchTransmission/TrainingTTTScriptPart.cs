@@ -46,7 +46,7 @@ public class TrainingTTTScriptPart : AbstractTTTScriptPart {
 		// It compiles, ship it.
 		SendPlayGameSound (Resources.Load ("TouchTouchTransmission/gamesounds/Fail 2") as AudioClip);
 		times_failed += 1;
-		if (times_failed <= 2) {
+		if (times_failed <= 5) {
 			currentPart = 1;
 			partOne (true);
 		} else {
@@ -70,7 +70,7 @@ public class TrainingTTTScriptPart : AbstractTTTScriptPart {
 		nextTime = Time.time + TouchTouchTransmission.getTotalTimeToPlay (clips);
 	}
 	void partTwo() {
-		SendNewTarget (TouchState.OneTwo,250, 0);
+		SendNewTarget (TouchState.OneTwo,250, 0.2f);
 	}
 	void partThree() {
 		SendNewTarget (TouchState.TwoThree,250, 1);
@@ -86,7 +86,7 @@ public class TrainingTTTScriptPart : AbstractTTTScriptPart {
 		nextTime = Time.time + TouchTouchTransmission.getTotalTimeToPlay (clips);
 	}
 	void partSix() {
-		SendNewTarget (TouchState.AllConnected, 250, 0);
+		SendNewTarget (TouchState.AllConnected, 250, 0.2f);
 	}
 	void partSeven() {
 		SendClearTargets ();
