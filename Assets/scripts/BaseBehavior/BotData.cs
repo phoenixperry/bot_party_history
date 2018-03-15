@@ -191,10 +191,10 @@ public class BotData : MonoBehaviour
 	 * if v(t+1) < T and v(t) > T then Stop Rotate event
 	 * If new > CAP then new = cap (to stop large movement frames from skewing the data too much)
 	 */
-	public static double COMPASS_DELTA = 0.2;
+	public static double COMPASS_DELTA = 0.15;
 	public static double COMPASS_THRESHOLD = 15;
 	public static double COMPASS_CAP = 40;
-	public static double COMPASS_STICKINESS = 3;
+	public static double COMPASS_STICKINESS = 5;
 	public double bot1_mv_avg_angle = 0.0;
 	public double bot2_mv_avg_angle = 0.0;
 	public double bot3_mv_avg_angle = 0.0;

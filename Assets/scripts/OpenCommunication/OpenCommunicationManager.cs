@@ -159,7 +159,7 @@ public class OpenCommunicationManager : AbstractManager {
 
 	public override void BoxTwoContinueMoving(double speed) {
 		HelmController ctrl = bot2_sound.transform.Find("MotionSound").GetComponent<HelmController>();
-		ctrl.SetParameterPercent(Param.kResonance,(float)((speed-5)/10));
+		ctrl.SetParameterPercent(Param.kResonance,(float)((speed-5)/5));
 	}
 
 	public override void BoxTwoStopMoving()
@@ -180,10 +180,13 @@ public class OpenCommunicationManager : AbstractManager {
 
 	public override void BoxThreeContinueMoving(double speed)
 	{
-
+		AudioHelmClock clock = bot2_sound.transform.Find("MotionSound").GetComponent<AudioHelmClock>();
+		clock.bpm = 120 + ((int)((speed -5)* 4));
 	}
 	public override void BoxThreeStopMoving()
 	{
+		AudioHelmClock clock = bot2_sound.transform.Find("MotionSound").GetComponent<AudioHelmClock>();
+		clock.bpm = 120;
 		SampleSequencer seq = bot3_sound.transform.Find ("MotionSound").GetComponent<SampleSequencer> ();
 		seq.enabled = false;
 	}
