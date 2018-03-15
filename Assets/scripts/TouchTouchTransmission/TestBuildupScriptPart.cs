@@ -94,7 +94,7 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
 		} else {
 			clips.Add (Resources.Load ("TouchTouchTransmission/dialog/Hu Perf Adeq 1") as AudioClip);
 		}
-		// Resetting system dialog line goes here
+		clips.Add (Resources.Load ("Menu/capage-drafts/Reseting System") as AudioClip);
 		gameObject.transform.Find("Resol").Find ("ResolBass").GetComponent<HelmSequencer> ().enabled = false;
 		gameObject.transform.Find("Resol").Find ("ResolLead").GetComponent<HelmSequencer> ().enabled = false;
 		gameObject.transform.Find("Resol").Find ("ResolDrum").GetComponent<SampleSequencer> ().enabled = false;

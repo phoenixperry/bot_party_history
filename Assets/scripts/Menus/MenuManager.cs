@@ -17,12 +17,19 @@ public class MenuManager : AbstractManager
 		TurnOffLEDOne ();
 		TurnOffLEDTwo ();
 		TurnOffLEDThree ();
+		FRAME_NEXT_SOUND = Time.frameCount + 600;
+		AudioSource speaker = gameObject.transform.Find ("RandomSound").GetComponent<AudioSource> ();
+		speaker.clip = Resources.Load ("Menu/capage-drafts/Standby Mode Initiated") as AudioClip;
+		speaker.Play ();
 	}
 	void OnEnable() {
 		base.OnEnable ();
+		string BASE_DIR = "Menu/capage-drafts/";
 		// TODO: Proper idle sounds
-		clipNames.Add ("Menu/capage-drafts/human-can-you-help");
-		clipNames.Add ("Menu/capage-drafts/pick-us-up");
+		clipNames.Add (BASE_DIR+"Assist Us");
+		clipNames.Add (BASE_DIR+"Awaiting Mode Instructions");
+		clipNames.Add (BASE_DIR+"Choose Your Transfer Proto");
+		clipNames.Add (BASE_DIR+"Open Communication");
 		clips = new List<AudioClip> ();
 		populateClips ();
 	}
@@ -72,7 +79,7 @@ public class MenuManager : AbstractManager
         if (Time.frameCount >= FRAME_NEXT_SOUND)
         {
             playRandomSound();
-            FRAME_NEXT_SOUND = Time.frameCount + Random.Range(300, 900);
+            FRAME_NEXT_SOUND = Time.frameCount + Random.Range(600, 900);
         }
 
     }

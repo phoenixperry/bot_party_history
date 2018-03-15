@@ -21,20 +21,32 @@ public class OpenCommunicationManager : AbstractManager {
 	}
 	// Box touches
 	public override void BoxOneTwoConnected() {
-
+		AudioSource touching = gameObject.transform.Find ("Touches").Find ("Touch12").gameObject.GetComponent<AudioSource> ();
+		if (!touching.isPlaying && !gameObject.transform.Find ("Bots").Find ("All").Find ("Touching").gameObject.GetComponent<AudioSource>().isPlaying) {
+			touching.Play ();
+		}
 	}
 	public override void BoxTwoThreeConnected() {
-
+		AudioSource touching = gameObject.transform.Find ("Touches").Find ("Touch23").gameObject.GetComponent<AudioSource> ();
+		if (!touching.isPlaying && !gameObject.transform.Find ("Bots").Find ("All").Find ("Touching").gameObject.GetComponent<AudioSource>().isPlaying) {
+			touching.Play ();
+		}
 	}
 
 	public override void BoxOneThreeConnected() {
-
+		AudioSource touching = gameObject.transform.Find ("Touches").Find ("Touch13").gameObject.GetComponent<AudioSource> ();
+		if (!touching.isPlaying && !gameObject.transform.Find ("Bots").Find ("All").Find ("Touching").gameObject.GetComponent<AudioSource>().isPlaying) {
+			touching.Play ();
+		}
 	}
 
 	public override void AllConnected() {
-		AudioSource touching = gameObject.transform.Find ("Bots").Find ("All").Find ("Touching").gameObject.GetComponent<AudioSource>();
-		if (!touching.isPlaying) {
-			touching.Play ();
+		AudioSource all_touching = gameObject.transform.Find ("Bots").Find ("All").Find ("Touching").gameObject.GetComponent<AudioSource>();
+		if (!all_touching.isPlaying) {
+			gameObject.transform.Find ("Touches").Find ("Touch12").gameObject.GetComponent<AudioSource> ().Stop();
+			gameObject.transform.Find ("Touches").Find ("Touch23").gameObject.GetComponent<AudioSource> ().Stop();
+			gameObject.transform.Find ("Touches").Find ("Touch13").gameObject.GetComponent<AudioSource> ().Stop();
+			all_touching.Play ();
 			}
 	}
 
