@@ -262,7 +262,6 @@ public class TouchTouchTransmission : AbstractManager {
 		last_target = target;
 		clearTargets ();
 		script.targetFailure ();
-		score += 1;
 		provideScoreUpdate ();
 	}
 

@@ -80,6 +80,7 @@ public class MenuManager : AbstractManager
         {
             playRandomSound();
             FRAME_NEXT_SOUND = Time.frameCount + Random.Range(600, 900);
+			TouchTouchRevolution ();
         }
 
     }
