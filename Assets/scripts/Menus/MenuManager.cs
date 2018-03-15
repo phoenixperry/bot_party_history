@@ -100,27 +100,27 @@ public class MenuManager : AbstractManager
         //Destroy(source, clips[randomClip].length);
         //gameObject.GetComponent<AudioSource>().clip = Menu_Sound as AudioClip; //Menu_Sound as AudioClip;
         //gameObject.GetComponent<AudioSource>().Play();
-        Debug.Log("Play Me!");
+        //Debug.Log("Play Me!");
     }
 
     public override void BoxOneStartMoving(double speed)
     {
         gameObject.GetComponent<AudioSource>().clip = Bot1_Move_Sound as AudioClip;
         gameObject.GetComponent<AudioSource>().Play();
-        Debug.Log("You've woken up Bot1!");
+        //Debug.Log("You've woken up Bot1!");
     }
 
     public override void BoxTwoStartMoving(double speed)
     {
         gameObject.GetComponent<AudioSource>().clip = Bot2_Move_Sound as AudioClip;
         gameObject.GetComponent<AudioSource>().Play();
-        Debug.Log("You've woken up Bot2!");
+        //Debug.Log("You've woken up Bot2!");
     }
 
     public override void BoxThreeStartMoving(double speed)
     {
         gameObject.GetComponent<AudioSource>().clip = Bot3_Move_Sound as AudioClip;
         gameObject.GetComponent<AudioSource>().Play();
-        Debug.Log("You've woken up Bot3!");
+        //Debug.Log("You've woken up Bot3!");
     }
 }
