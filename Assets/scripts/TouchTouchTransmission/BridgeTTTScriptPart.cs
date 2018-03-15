@@ -114,7 +114,7 @@ public class BridgeTTTScriptPart : AbstractTTTScriptPart {
 		gameObject.transform.Find ("Motion").Find ("Motion2").GetComponent<HelmSequencer> ().enabled = true;
 		HelmController control = gameObject.transform.Find ("Motion").Find ("Motion2").GetComponent<HelmController>();
 		control.SetParameterPercent (Param.kFilterCutoff, (float)(0.4 + (speed / 15) * 0.4));
-		control.SetParameterPercent (Param.kReverbDryWet,(float)((speed / 15) * 0.6));
+		control.SetParameterPercent (Param.kReverbDryWet,(float)((speed / 15)));
 		// Motion sound changes go here
 	}
 	public override void BoxTwoStopMoving() {

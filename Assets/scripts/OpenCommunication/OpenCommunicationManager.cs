@@ -137,11 +137,14 @@ public class OpenCommunicationManager : AbstractManager {
 
 	public override void BoxOneContinueMoving(double speed)
 	{
-
+		HelmController ctrl = bot1_sound.transform.Find("MotionSound").GetComponent<HelmController>();
+		ctrl.SetParameterPercent(Param.kFilterCutoff,(float)((speed-5)/5));
 	}
 
 	public override void BoxOneStopMoving()
 	{
+		HelmController ctrl = bot1_sound.transform.Find("MotionSound").GetComponent<HelmController>();
+		ctrl.SetParameterPercent(Param.kFilterCutoff,0);
 		HelmSequencer seq = bot1_sound.transform.Find("MotionSound").GetComponent<HelmSequencer> ();
 		seq.currentIndex = 0;
 		seq.enabled = false;
@@ -155,11 +158,14 @@ public class OpenCommunicationManager : AbstractManager {
 	}
 
 	public override void BoxTwoContinueMoving(double speed) {
-		bot2_sound.transform.Find ("MotionSound").GetComponent<AudioSource> ().Play ();
+		HelmController ctrl = bot2_sound.transform.Find("MotionSound").GetComponent<HelmController>();
+		ctrl.SetParameterPercent(Param.kResonance,(float)((speed-5)/10));
 	}
 
 	public override void BoxTwoStopMoving()
 	{
+		HelmController ctrl = bot2_sound.transform.Find("MotionSound").GetComponent<HelmController>();
+		ctrl.SetParameterPercent(Param.kResonance,0);
 		HelmSequencer seq = bot2_sound.transform.Find("MotionSound").GetComponent<HelmSequencer> ();
 		seq.currentIndex = 0;
 		seq.enabled = false;
@@ -196,14 +202,16 @@ public class OpenCommunicationManager : AbstractManager {
 	}
 
 	public override void BoxTwoStartRotating(double angular_speed) {
-
+		BoxTwoContinueRotating (angular_speed);
 	}
 	public override void BoxTwoContinueRotating (double angular_speed)
 	{
-
+		HelmController control = bot2_sound.transform.Find("MotionSound").GetComponent<HelmController>();
+		control.SetParameterPercent (Param.kPitchBendRange, (float)(angular_speed / 60));
 	}
 	public override void BoxTwoStopRotating() {
-
+		HelmController control = bot2_sound.transform.Find("MotionSound").GetComponent<HelmController>();
+		control.SetParameterPercent (Param.kPitchBendRange, 0f);
 	}
 
 	public override void BoxThreeStartRotating(double angular_speed) {
