@@ -40,5 +40,6 @@ public class SpawnGame : MonoBehaviour {
 			serial = !serial;
 			switchControls (serial);
 		}
+        if (Input.GetKeyDown(KeyCode.Escape)) Application.Quit(); 
 	}
 }
