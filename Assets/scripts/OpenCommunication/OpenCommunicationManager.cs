@@ -141,7 +141,7 @@ public class OpenCommunicationManager : AbstractManager {
 		control.SetParameterPercent (Param.kFilterCutoff, (float)((speed / 15) * 0.4));
 		control.SetParameterPercent (Param.kReverbDryWet,(float)((speed / 15) * 0.2
 		));
-		int newNote = 72 + (int)Mathf.Max(0f,(float)(speed-5)*2);
+		int newNote = 72 + (int)Mathf.Max(0f,(float)(speed-5)*1.5f);
 		if (newNote != box1_current_note) {
 			control.AllNotesOff ();
 			control.NoteOn (newNote);
@@ -151,14 +151,19 @@ public class OpenCommunicationManager : AbstractManager {
 
 	public override void BoxOneStopMoving()
 	{
-		HelmSequencer seq = bot1_sound.transform.Find("MotionSound").GetComponent<HelmSequencer> ();
-		seq.currentIndex = 0;
-		seq.enabled = false;
+		HelmController control = bot1_sound.transform.Find("MotionSound").GetComponent<HelmController>();
+		//HelmSequencer seq = bot1_sound.transform.Find("MotionSound").GetComponent<HelmSequencer> ();
+		//seq.currentIndex = -1;
+		//seq.enabled = false;
+		control.AllNotesOff();
 	}
 	// Sustain effect
 	public override void BoxTwoStartMoving(double speed)
 	{
 		HelmSequencer seq = bot2_sound.transform.Find("MotionSound").GetComponent<HelmSequencer> ();
+		seq.currentIndex = -1;
+		AudioHelmClock clock = bot3_sound.transform.Find ("MotionSound").GetComponent<AudioHelmClock> ();
+		clock.Reset ();
 		seq.enabled = true;
 		BoxTwoContinueMoving (speed);
 	}
@@ -166,11 +171,11 @@ public class OpenCommunicationManager : AbstractManager {
 	int currentNoteOn = 0;
 	public override void BoxTwoContinueMoving(double speed) {
 		HelmController control = bot2_sound.transform.Find("MotionSound").GetComponent<HelmController>();
-		control.SetParameterPercent(Param.kFilterCutoff,(float) (0.4+(speed/15)*0.6));
+		/*control.SetParameterPercent(Param.kFilterCutoff,(float) (0.4+(speed/15)*0.6));
 		control.SetParameterPercent (Param.kMonoLfo1Amplitude,(float) (0.5 + (speed / 15) * 0.5));
 		control.SetParameterPercent (Param.kMonoLfo1Frequency, (float)(0.4 + (speed / 15) * 0.6));
 		control.SetParameterPercent(Param.kDelayFrequency, (float)(0.5 + (speed / 15) * 0.5));
-		control.SetParameterPercent (Param.kDelayDryWet, (float)((speed / 15) * 0.5));
+		control.SetParameterPercent (Param.kDelayDryWet, (float)((speed / 15) * 0.5));*/
 
 		//int newNote = (int)(59 + speed/2);
 		//if (newNote != currentNoteOn) {
@@ -186,20 +191,22 @@ public class OpenCommunicationManager : AbstractManager {
 		ctrl.AllNotesOff ();
 		currentNoteOn = 0;
 		HelmSequencer seq = bot2_sound.transform.Find("MotionSound").GetComponent<HelmSequencer> ();
-		seq.currentIndex = 0;
+		seq.currentIndex = -1;
 		seq.enabled = false;
 	}
 
 	public override void BoxThreeStartMoving(double speed)
 	{
 		SampleSequencer seq = bot3_sound.transform.Find ("MotionSound").GetComponent<SampleSequencer> ();
+		seq.currentIndex = -1;
 		seq.enabled = true;
 		BoxThreeContinueMoving (speed);
 	}
 
 	public override void BoxThreeContinueMoving(double speed)
 	{
-
+		AudioHelmClock clock = bot3_sound.transform.Find ("MotionSound").GetComponent<AudioHelmClock> ();
+		clock.bpm = 120 + (int)((speed - 5) * 5);
 	}
 	public override void BoxThreeStopMoving()
 	{

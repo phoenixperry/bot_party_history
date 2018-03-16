@@ -5,7 +5,7 @@ using UnityEngine;
 //data structure to hold all of the bot data. 
 public struct Bot {
 	public Bot(string name_, string compass_, string xpos_, string ypos_, string zpos_, string btn_) {
-		name = name_; compass = compass_; xpos = xpos_; ypos = ypos_; zpos = zpos_; btn = btn_;
+		name = name_; compass = compass_; xpos = xpos_; ypos = ypos_; zpos = zpos_; btn = btn_; def = true;
 	}
     //easy way to see the data each bot 
 	public void printBotData() {
@@ -19,6 +19,7 @@ public struct Bot {
 	public string ypos;
 	public string zpos;
 	public string btn;
+	public bool def;
 }
 public struct MenuButtonState {
 	public MenuButtonState(string oc_button, string slc_button) {

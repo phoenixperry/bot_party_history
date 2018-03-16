@@ -138,6 +138,9 @@ public class BotData : MonoBehaviour
 	private void processAccelerometer(Bot b1, Bot b2)
 	{
 		int b1x, b2x, b1y, b2y, b1z, b2z;
+		if (!b2.def) {
+			return;
+		}
 		int.TryParse(b1.xpos, out b1x); 		int.TryParse(b2.xpos, out b2x);
 		int.TryParse(b1.ypos, out b1y); 		int.TryParse(b2.ypos, out b2y);
 		int.TryParse(b1.zpos, out b1z); 		int.TryParse(b2.zpos, out b2z);
