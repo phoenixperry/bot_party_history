@@ -79,8 +79,8 @@ public class MenuManager : AbstractManager
         if (Time.frameCount >= FRAME_NEXT_SOUND)
         {
             playRandomSound();
-            FRAME_NEXT_SOUND = Time.frameCount + Random.Range(600, 900);
-			TouchTouchRevolution ();
+            FRAME_NEXT_SOUND = Time.frameCount + Random.Range(1000, 2000);
+			//TouchTouchRevolution (); //this little hack wiht just loop LSC 
         }
 
     }
