@@ -128,18 +128,25 @@ public class OpenCommunicationManager : AbstractManager {
 	// Box moving
 	public override void BoxOneStartMoving(double speed)
 	{
-		HelmSequencer seq = bot1_sound.transform.Find("MotionSound").GetComponent<HelmSequencer> ();
-		markov_piano.fillSequencer (seq);
-		seq.enabled = true;
-		bot1_sound.transform.Find("MotionSound").GetComponent<AudioSource> ().Play ();
+		//HelmSequencer seq = bot1_sound.transform.Find("MotionSound").GetComponent<HelmSequencer> ();
+		//markov_piano.fillSequencer (seq);
+		//seq.enabled = true;
+		//bot1_sound.transform.Find("MotionSound").GetComponent<AudioSource> ().Play ();
 		BoxOneContinueMoving (speed);
 	}
-
+	int box1_current_note = 0;
 	public override void BoxOneContinueMoving(double speed)
 	{
 		HelmController control = bot1_sound.transform.Find("MotionSound").GetComponent<HelmController>();
 		control.SetParameterPercent (Param.kFilterCutoff, (float)((speed / 15) * 0.4));
-		control.SetParameterPercent (Param.kReverbDryWet,(float)((speed / 15) * 0.2));
+		control.SetParameterPercent (Param.kReverbDryWet,(float)((speed / 15) * 0.2
+		));
+		int newNote = 72 + (int)Mathf.Max(0f,(float)(speed-5)*2);
+		if (newNote != box1_current_note) {
+			control.AllNotesOff ();
+			control.NoteOn (newNote);
+			box1_current_note = newNote;
+		}
 	}
 
 	public override void BoxOneStopMoving()
@@ -164,6 +171,7 @@ public class OpenCommunicationManager : AbstractManager {
 		control.SetParameterPercent (Param.kMonoLfo1Frequency, (float)(0.4 + (speed / 15) * 0.6));
 		control.SetParameterPercent(Param.kDelayFrequency, (float)(0.5 + (speed / 15) * 0.5));
 		control.SetParameterPercent (Param.kDelayDryWet, (float)((speed / 15) * 0.5));
+
 		//int newNote = (int)(59 + speed/2);
 		//if (newNote != currentNoteOn) {
 		//		Debug.Log ("Playing note: " + newNote);
