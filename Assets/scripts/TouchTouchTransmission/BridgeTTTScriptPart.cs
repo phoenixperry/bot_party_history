@@ -88,14 +88,12 @@ public class BridgeTTTScriptPart : AbstractTTTScriptPart {
 		BoxOneContinueMoving (speed);
 	}
 	public override void BoxOneContinueMoving(double speed) {
+		Debug.Log (speed);
 		one_moved = true;
 		gameObject.transform.Find ("Motion").Find ("Motion1").GetComponent<HelmSequencer> ().enabled = true;
 		HelmController control = gameObject.transform.Find ("Motion").Find ("Motion1").GetComponent<HelmController>();
-		control.SetParameterPercent(Param.kFilterCutoff,(float) (0.4+(speed/15)*0.6));
-		control.SetParameterPercent (Param.kMonoLfo1Amplitude,(float) (0.5 + (speed / 15) * 0.5));
-		control.SetParameterPercent (Param.kMonoLfo1Frequency, (float)(0.4 + (speed / 15) * 0.6));
-		control.SetParameterPercent(Param.kDelayFrequency, (float)(0.5 + (speed / 15) * 0.5));
-		control.SetParameterPercent (Param.kDelayDryWet, (float)((speed / 15) * 0.5));
+		control.SetParameterPercent (Param.kFilterCutoff, (float)(0.4 + ((speed-5)/5) * 0.4));
+		control.SetParameterPercent (Param.kReverbDryWet,(float)(((speed-5)/5)));
 
 	}
 
@@ -113,9 +111,11 @@ public class BridgeTTTScriptPart : AbstractTTTScriptPart {
 		two_moved = true;
 		gameObject.transform.Find ("Motion").Find ("Motion2").GetComponent<HelmSequencer> ().enabled = true;
 		HelmController control = gameObject.transform.Find ("Motion").Find ("Motion2").GetComponent<HelmController>();
-		control.SetParameterPercent (Param.kFilterCutoff, (float)(0.4 + (speed / 15) * 0.4));
-		control.SetParameterPercent (Param.kReverbDryWet,(float)((speed / 15)));
-		// Motion sound changes go here
+		control.SetParameterPercent(Param.kFilterCutoff,(float) (0.4+((speed-5)/5)*0.6));
+		control.SetParameterPercent (Param.kMonoLfo1Amplitude,(float) (0.5 + ((speed-5)/5) * 0.5));
+		control.SetParameterPercent (Param.kMonoLfo1Frequency, (float)(0.4 + ((speed-5)/5) * 0.6));
+		control.SetParameterPercent(Param.kDelayFrequency, (float)(0.5 + ((speed-5)/5) * 0.5));
+		control.SetParameterPercent (Param.kDelayDryWet, (float)(((speed-5)/5) * 0.5));	
 	}
 	public override void BoxTwoStopMoving() {
 		gameObject.transform.Find ("Motion").Find ("Motion2").GetComponent<HelmSequencer> ().enabled = false;
