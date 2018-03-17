@@ -37,7 +37,7 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
 	public override void targetSuccess() {
 		if (currentPart == 1) {
 			SendPlayGameSound (Resources.Load ("TouchTouchTransmission/gamesounds/Success 2") as AudioClip);
-			SendNewTarget (TouchState.None, (int)Mathf.Floor(45f*getTimeReduction()), 0.8f * getTimeReduction());		} 
+			SendNewTarget (TouchState.None, (int)Mathf.Floor(35f*getTimeReduction()), 0.6f * getTimeReduction());		} 
 		else if (currentPart == 3) {
 			currentPart = 4;
 			partFour ();
@@ -112,7 +112,6 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
 	public override void BoxOneStartMoving(double speed) {
 		if (currentPart < 4) {
 			gameObject.transform.Find ("Motion").Find ("Motion1").GetComponent<HelmSequencer> ().enabled = true;
-			Debug.Log ("Playing motion1");
 			BoxOneContinueMoving (speed);
 		}
 	}
@@ -135,7 +134,6 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
 	public override void BoxTwoStartMoving(double speed) {
 		if (currentPart < 4) {
 			gameObject.transform.Find ("Motion").Find ("Motion2").GetComponent<HelmSequencer> ().enabled = true;
-			Debug.Log ("Playing motion2");
 			BoxTwoContinueMoving (speed);
 
 		}
@@ -157,7 +155,6 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
 	public override void BoxThreeStartMoving(double speed) {
 		if (currentPart < 4) {
 			gameObject.transform.Find ("Motion").Find ("Motion3").GetComponent<SampleSequencer> ().enabled = true;
-			Debug.Log ("Playing motion3");
 			BoxThreeContinueMoving (speed);
 		}
 	}

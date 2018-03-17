@@ -73,20 +73,17 @@ public class AbstractTTTScript : MonoBehaviour {
 	}
 
 	public void startNextScript() {
-		Debug.Log ("startNextScript");
 		stopCurrentScript ();
 		currentPart += 1;
 		startCurrentScript ();
 	}
 	public void stopCurrentScript() {
-		Debug.Log ("Stopping current script...");
 		if (currentPart < scriptParts.Count) {
 			scriptParts [currentPart].stopPart ();
 			Destroy(scriptParts [currentPart]);
 		}
 	}
 	public void startCurrentScript() {
-		Debug.Log ("Starting current script...");
 		if (currentPart < scriptParts.Count) {
 			scriptParts [currentPart].startPart ();
 		}

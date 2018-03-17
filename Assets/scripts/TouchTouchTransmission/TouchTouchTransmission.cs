@@ -181,7 +181,6 @@ public class TouchTouchTransmission : AbstractManager {
 			if (c == null) { 
 				Debug.Log ("ERROR! Clip is null");
 			} else {
-				Debug.Log ("Playing clip in " + time);
 				AudioSource newSpeaker = botSpeaker.AddComponent<AudioSource> ();
 				newSpeaker.outputAudioMixerGroup = speechGroup;
 				newSpeaker.clip = c;

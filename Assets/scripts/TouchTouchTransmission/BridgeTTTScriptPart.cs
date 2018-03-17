@@ -46,7 +46,7 @@ public class BridgeTTTScriptPart : AbstractTTTScriptPart {
 	}
 
 	void partOne() {
-		partOne (30, false);
+		partOne (15, false);
 	}
 	void partOne(float time, bool nudge) {
 		
@@ -62,12 +62,11 @@ public class BridgeTTTScriptPart : AbstractTTTScriptPart {
 	}
 	// TODO: Nudge line
 	void partTwo() {
-		Debug.Log (times_failed);
 		if (one_moved && two_moved && three_moved) {
 			List<AudioClip> clips = new List<AudioClip> () { Resources.Load ("TouchTouchTransmission/dialog/Reengage Tr Proto") as AudioClip }; 
 			SendPlayVoices (clips);
 			nextTime = Time.time + TouchTouchTransmission.getTotalTimeToPlay (clips);
-		} else if (times_failed < 2) {
+		} else if (times_failed < 3) {
 			times_failed += 1;
 			currentPart = 1;
 			partOne (15f, true);
@@ -83,12 +82,10 @@ public class BridgeTTTScriptPart : AbstractTTTScriptPart {
 	}
 	public override void BoxOneStartMoving(double speed) {
 		gameObject.transform.Find ("Motion").Find ("Motion1").GetComponent<HelmSequencer> ().enabled = true;
-		Debug.Log ("Playing motion1");
 		one_moved = true;
 		BoxOneContinueMoving (speed);
 	}
 	public override void BoxOneContinueMoving(double speed) {
-		Debug.Log (speed);
 		one_moved = true;
 		gameObject.transform.Find ("Motion").Find ("Motion1").GetComponent<HelmSequencer> ().enabled = true;
 		HelmController control = gameObject.transform.Find ("Motion").Find ("Motion1").GetComponent<HelmController>();
@@ -103,7 +100,6 @@ public class BridgeTTTScriptPart : AbstractTTTScriptPart {
 
 	public override void BoxTwoStartMoving(double speed) {
 		gameObject.transform.Find ("Motion").Find ("Motion2").GetComponent<HelmSequencer> ().enabled = true;
-		Debug.Log ("Playing motion2");
 		two_moved = true;
 		BoxTwoContinueMoving (speed);
 	}
@@ -124,7 +120,6 @@ public class BridgeTTTScriptPart : AbstractTTTScriptPart {
 
 	public override void BoxThreeStartMoving(double speed) {
 		gameObject.transform.Find ("Motion").Find ("Motion3").GetComponent<SampleSequencer> ().enabled = true;
-		Debug.Log ("Playing motion3");
 		three_moved = true;
 		BoxThreeContinueMoving (speed);
 	}

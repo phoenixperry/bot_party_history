@@ -50,6 +50,11 @@ public class OpenCommunicationManager : AbstractManager {
 			}
 	}
 
+	public override void AllReleased() {
+		AudioSource all_touching = gameObject.transform.Find ("Bots").Find ("All").Find ("Touching").gameObject.GetComponent<AudioSource>();
+		all_touching.Stop ();
+	}
+
 	// Bot buttons
 	bool btn1, btn2, btn3 = false;
 	public override void BoxOneButtonDown ()

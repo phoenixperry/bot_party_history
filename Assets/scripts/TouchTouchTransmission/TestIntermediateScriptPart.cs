@@ -30,7 +30,7 @@ public class TestIntermediateTTTScriptPart : AbstractTTTScriptPart {
 	}
 	public override void targetSuccess() {
 		SendPlayGameSound (Resources.Load ("TouchTouchTransmission/gamesounds/Success 2") as AudioClip);
-		SendNewTarget (TouchState.None, 50, 1);
+		SendNewTarget (TouchState.None, 40, 1);
 	}
 	public override void targetFailure() {
 		SendPlayGameSound (Resources.Load ("TouchTouchTransmission/gamesounds/Fail 2") as AudioClip);
