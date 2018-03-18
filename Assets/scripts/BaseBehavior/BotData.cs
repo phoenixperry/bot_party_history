@@ -279,6 +279,7 @@ public class BotData : MonoBehaviour
 			OnBoxThreeButtonDown ();
 	}
     
+    // not using??? 
     public void updateData(string values)
 
     {
@@ -291,8 +292,8 @@ public class BotData : MonoBehaviour
         compass.Add(sensors[3]); //y
         compass.Add(sensors[4]); //z  
         int.TryParse(sensors[5], out btn); //btn
-
-        //Debug.Log("Bot Parsed: " + botName + " btn " + btn + "Compass vals" + compass[0] + " " + compass[1] + " " + compass[2] + " " + compass[3]);
+     
+        Debug.Log("Bot Parsed: " + botName + " btn " + btn + "Compass vals" + compass[0] + " " + compass[1] + " " + compass[2] + " " + compass[3]);
         //Debug.Log(botName+ botName.Length); 
         routeData();
     }
@@ -407,6 +408,7 @@ public class BotData : MonoBehaviour
                 //btn3.colors = colors;
             }
       }
+     }
     
-    }
- }
+
+}
