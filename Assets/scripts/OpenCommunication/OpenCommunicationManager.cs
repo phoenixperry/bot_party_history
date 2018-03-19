@@ -163,6 +163,7 @@ public class OpenCommunicationManager : AbstractManager {
 		BoxOneContinueMoving (speed);
 	}
 	int box1_current_note = 0;
+	bool hasBeeped = false;
 	public override void BoxOneContinueMoving(double speed)
 	{
 		HelmController control = bot1_sound.transform.Find("MotionSound").GetComponent<HelmController>();
@@ -170,10 +171,13 @@ public class OpenCommunicationManager : AbstractManager {
 		control.SetParameterPercent (Param.kReverbDryWet,(float)((speed / 15) * 0.2
 		));
 		int newNote = 72 + (int)Mathf.Max(0f,(float)(speed-5)*1.5f);
-		if (newNote != box1_current_note) {
+		if (newNote != box1_current_note || !hasBeeped) {
 			control.AllNotesOff ();
 			control.NoteOn (newNote);
 			box1_current_note = newNote;
+			hasBeeped = true;
+		} else {
+			hasBeeped = false;
 		}
 	}
 
