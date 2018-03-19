@@ -162,24 +162,30 @@ public class OpenCommunicationManager : AbstractManager {
 		//bot1_sound.transform.Find("MotionSound").GetComponent<AudioSource> ().Play ();
 		BoxOneContinueMoving (speed);
 	}
+	int box1_last_note = 0;
 	int box1_current_note = 0;
-	bool hasBeeped = false;
+	int lastBeep = 0;
 	public override void BoxOneContinueMoving(double speed)
 	{
 		HelmController control = bot1_sound.transform.Find("MotionSound").GetComponent<HelmController>();
 		control.SetParameterPercent (Param.kFilterCutoff, (float)((speed / 15) * 0.4));
 		control.SetParameterPercent (Param.kReverbDryWet,(float)((speed / 15) * 0.2
 		));
-		int newNote = 72 + (int)Mathf.Max(0f,(float)(speed-5)*1.5f);
-		if (newNote != box1_current_note || !hasBeeped) {
+		int newNote = markov_piano.getNextNote (box1_last_note, box1_current_note).first;
+		int nToNextBeep = (int)Mathf.Max(1f,4 - Mathf.Max((int) ((speed-5)/1.33),0));
+		Debug.Log ("last beep: "+lastBeep);
+		Debug.Log ("Next beep: " + nToNextBeep);
+		Debug.Log ("newNote: " + newNote);	
+		if (lastBeep >= nToNextBeep) {
 			control.AllNotesOff ();
 			control.NoteOn (newNote);
+			box1_last_note = box1_current_note;
 			box1_current_note = newNote;
-			hasBeeped = true;
+			lastBeep = 0;
 		} else {
-			hasBeeped = false;
+			lastBeep += 1;
 		}
-	}
+	}	
 
 	public override void BoxOneStopMoving()
 	{
