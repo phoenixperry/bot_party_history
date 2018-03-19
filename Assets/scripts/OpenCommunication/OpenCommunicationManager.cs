@@ -30,9 +30,9 @@ public class OpenCommunicationManager : AbstractManager {
 			gameObject.transform.Find ("Touches").Find ("Touch23").gameObject.GetComponent<AudioSource> ().clip = Resources.Load("OpenCommunication/TouchSounds/Animals/beta_gamma_touch-1") as AudioClip;
 			gameObject.transform.Find ("Touches").Find ("Touch13").gameObject.GetComponent<AudioSource> ().clip = Resources.Load("OpenCommunication/TouchSounds/Animals/alpha_gamma_touch-1") as AudioClip;
 		} else if (which == TouchMusicSet.Greeting) {
-			gameObject.transform.Find ("Touches").Find ("Touch12").gameObject.GetComponent<AudioSource> ().clip = Resources.Load("OpenCommunication/TouchSounds/Greetings/Hello tone") as AudioClip;
-			gameObject.transform.Find ("Touches").Find ("Touch23").gameObject.GetComponent<AudioSource> ().clip = Resources.Load("OpenCommunication/TouchSounds/Greetings/Hello tone 2") as AudioClip;
-			gameObject.transform.Find ("Touches").Find ("Touch13").gameObject.GetComponent<AudioSource> ().clip = Resources.Load("OpenCommunication/TouchSounds/Greetings/Hello tone 3") as AudioClip;
+			gameObject.transform.Find ("Touches").Find ("Touch12").gameObject.GetComponent<AudioSource> ().clip = Resources.Load("OpenCommunication/TouchSounds/Greetings/full-bear-owl") as AudioClip;
+			gameObject.transform.Find ("Touches").Find ("Touch23").gameObject.GetComponent<AudioSource> ().clip = Resources.Load("OpenCommunication/TouchSounds/Greetings/full-whimsy-owl") as AudioClip;
+			gameObject.transform.Find ("Touches").Find ("Touch13").gameObject.GetComponent<AudioSource> ().clip = Resources.Load("OpenCommunication/TouchSounds/Greetings/full-bear-whimsy") as AudioClip;
 		}
 	}
 	// Box touches
