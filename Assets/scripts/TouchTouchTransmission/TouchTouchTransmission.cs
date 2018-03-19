@@ -11,7 +11,7 @@ public class TouchTouchTransmission : AbstractManager {
 	TouchState last_target = TouchState.None;
 	static float DELAY_BETWEEN_CLIPS = 0.1f;
 	int score = 0;
-	int TO_WIN = 30;
+	int TO_WIN = 50;
 	float nextTime = 0;
 	bool hasBeenCleared = false;
 	public AudioClip Sound_Win, Sound_Success, Sound_Fail;

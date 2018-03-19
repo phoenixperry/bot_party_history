@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using AudioHelm;
-
+public enum TouchMusicSet { None=0, Animal=1, Greeting=2};
 public class OpenCommunicationManager : AbstractManager {
 	GameObject bot1_sound, bot2_sound, bot3_sound;
 	AbstractMarkovMusic markov_piano;
+	TouchMusicSet whichTouches;
 
 	void Start() {
 		TurnOnLEDOne ();
@@ -17,7 +18,22 @@ public class OpenCommunicationManager : AbstractManager {
 		bot3_sound = gameObject.transform.Find ("Bots").Find ("Bot3").gameObject;
 		TextAsset noteasy = Resources.Load("MarkovFiles/NotEasyBeingGreen") as TextAsset;
 		markov_piano = new TestMarkovMusic (noteasy.text);
+		whichTouches = TouchMusicSet.Greeting;
+		setTouchSound (whichTouches);
 
+	}
+	public void setTouchSound(TouchMusicSet which) {
+		if (which == TouchMusicSet.None) {
+			Debug.Log ("Error, touch music set not set.");
+		} else if (which == TouchMusicSet.Animal) {
+			gameObject.transform.Find ("Touches").Find ("Touch12").gameObject.GetComponent<AudioSource> ().clip = Resources.Load("OpenCommunication/TouchSounds/Animals/alpha_beta_touch-1") as AudioClip;
+			gameObject.transform.Find ("Touches").Find ("Touch23").gameObject.GetComponent<AudioSource> ().clip = Resources.Load("OpenCommunication/TouchSounds/Animals/beta_gamma_touch-1") as AudioClip;
+			gameObject.transform.Find ("Touches").Find ("Touch13").gameObject.GetComponent<AudioSource> ().clip = Resources.Load("OpenCommunication/TouchSounds/Animals/alpha_gamma_touch-1") as AudioClip;
+		} else if (which == TouchMusicSet.Greeting) {
+			gameObject.transform.Find ("Touches").Find ("Touch12").gameObject.GetComponent<AudioSource> ().clip = Resources.Load("OpenCommunication/TouchSounds/Greetings/Hello tone") as AudioClip;
+			gameObject.transform.Find ("Touches").Find ("Touch23").gameObject.GetComponent<AudioSource> ().clip = Resources.Load("OpenCommunication/TouchSounds/Greetings/Hello tone 2") as AudioClip;
+			gameObject.transform.Find ("Touches").Find ("Touch13").gameObject.GetComponent<AudioSource> ().clip = Resources.Load("OpenCommunication/TouchSounds/Greetings/Hello tone 3") as AudioClip;
+		}
 	}
 	// Box touches
 	public override void BoxOneTwoConnected() {
@@ -47,6 +63,13 @@ public class OpenCommunicationManager : AbstractManager {
 			gameObject.transform.Find ("Touches").Find ("Touch23").gameObject.GetComponent<AudioSource> ().Stop();
 			gameObject.transform.Find ("Touches").Find ("Touch13").gameObject.GetComponent<AudioSource> ().Stop();
 			all_touching.Play ();
+
+			if (whichTouches == TouchMusicSet.Animal) {
+				whichTouches = TouchMusicSet.Greeting;
+			} else if (whichTouches == TouchMusicSet.Greeting) {
+				whichTouches = TouchMusicSet.Animal;
+			}
+			setTouchSound (whichTouches);
 			}
 	}
 
