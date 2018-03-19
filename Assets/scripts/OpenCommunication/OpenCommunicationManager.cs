@@ -173,9 +173,6 @@ public class OpenCommunicationManager : AbstractManager {
 		));
 		int newNote = markov_piano.getNextNote (box1_last_note, box1_current_note).first;
 		int nToNextBeep = (int)Mathf.Max(1f,4 - Mathf.Max((int) ((speed-5)/1.33),0));
-		Debug.Log ("last beep: "+lastBeep);
-		Debug.Log ("Next beep: " + nToNextBeep);
-		Debug.Log ("newNote: " + newNote);	
 		if (lastBeep >= nToNextBeep) {
 			control.AllNotesOff ();
 			control.NoteOn (newNote);
