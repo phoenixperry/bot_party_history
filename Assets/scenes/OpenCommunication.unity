@@ -578,7 +578,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243669886504027786, guid: 854d33e3f1b9f334a965c8cfcd358378,
     type: 2}
-  m_audioClip: {fileID: 1194548475}
+  m_audioClip: {fileID: 959875350}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1337,6 +1337,33 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 18e9e91f3beedae45922245d8c1d3f2a, type: 2}
   m_IsPrefabParent: 0
+--- !u!83 &959875350
+AudioClip:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: helm
+  m_LoadType: 0
+  m_Channels: 1
+  m_Frequency: 48000
+  m_BitsPerSample: 32
+  m_Length: 0
+  m_IsTrackerFormat: 0
+  m_Ambisonic: 0
+  m_SubsoundIndex: 0
+  m_PreloadAudioData: 1
+  m_LoadInBackground: 0
+  m_Legacy3D: 0
+  m_Resource:
+    m_Source: 
+    m_Offset: 0
+    m_Size: 0
+  m_CompressionFormat: 0
+  m_EditorResource:
+    m_Source: 
+    m_Offset: 0
+    m_Size: 0
+  m_EditorCompressionFormat: 0
 --- !u!1001 &959917108
 Prefab:
   m_ObjectHideFlags: 0
@@ -2191,33 +2218,6 @@ MonoBehaviour:
   bot1: {fileID: 0}
   bot2: {fileID: 0}
   bot3: {fileID: 0}
---- !u!83 &1194548475
-AudioClip:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: helm
-  m_LoadType: 0
-  m_Channels: 1
-  m_Frequency: 48000
-  m_BitsPerSample: 32
-  m_Length: 0
-  m_IsTrackerFormat: 0
-  m_Ambisonic: 0
-  m_SubsoundIndex: 0
-  m_PreloadAudioData: 1
-  m_LoadInBackground: 0
-  m_Legacy3D: 0
-  m_Resource:
-    m_Source: 
-    m_Offset: 0
-    m_Size: 0
-  m_CompressionFormat: 0
-  m_EditorResource:
-    m_Source: 
-    m_Offset: 0
-    m_Size: 0
-  m_EditorCompressionFormat: 0
 --- !u!114 &1194563679 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114000012052126696, guid: e8c2ddbd2999544428e9799ccc8951ab,
@@ -2370,7 +2370,8 @@ AudioSource:
   m_GameObject: {fileID: 1374280751}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 243804325234135838, guid: 854d33e3f1b9f334a965c8cfcd358378,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 65c2f66d4e041fe4ea7ba3bfa699a814, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -2442,7 +2443,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!83 &1465267080
+--- !u!83 &1546447232
 AudioClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -2849,7 +2850,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243178627426742002, guid: 854d33e3f1b9f334a965c8cfcd358378,
     type: 2}
-  m_audioClip: {fileID: 1465267080}
+  m_audioClip: {fileID: 1546447232}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

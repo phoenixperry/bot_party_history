@@ -18,7 +18,7 @@ public class OpenCommunicationManager : AbstractManager {
 		bot3_sound = gameObject.transform.Find ("Bots").Find ("Bot3").gameObject;
 		TextAsset noteasy = Resources.Load("MarkovFiles/NotEasyBeingGreen") as TextAsset;
 		markov_piano = new TestMarkovMusic (noteasy.text);
-		whichTouches = TouchMusicSet.Greeting;
+		whichTouches = TouchMusicSet.Animal;
 		setTouchSound (whichTouches);
 
 	}
@@ -59,18 +59,19 @@ public class OpenCommunicationManager : AbstractManager {
 	public override void AllConnected() {
 		AudioSource all_touching = gameObject.transform.Find ("Bots").Find ("All").Find ("Touching").gameObject.GetComponent<AudioSource>();
 		if (!all_touching.isPlaying) {
-			gameObject.transform.Find ("Touches").Find ("Touch12").gameObject.GetComponent<AudioSource> ().Stop();
-			gameObject.transform.Find ("Touches").Find ("Touch23").gameObject.GetComponent<AudioSource> ().Stop();
-			gameObject.transform.Find ("Touches").Find ("Touch13").gameObject.GetComponent<AudioSource> ().Stop();
+			gameObject.transform.Find ("Touches").Find ("Touch12").gameObject.GetComponent<AudioSource> ().Stop ();
+			gameObject.transform.Find ("Touches").Find ("Touch23").gameObject.GetComponent<AudioSource> ().Stop ();
+			gameObject.transform.Find ("Touches").Find ("Touch13").gameObject.GetComponent<AudioSource> ().Stop ();
 			all_touching.Play ();
 
-			if (whichTouches == TouchMusicSet.Animal) {
+			/*if (whichTouches == TouchMusicSet.Animal) {
 				whichTouches = TouchMusicSet.Greeting;
 			} else if (whichTouches == TouchMusicSet.Greeting) {
 				whichTouches = TouchMusicSet.Animal;
 			}
 			setTouchSound (whichTouches);
-			}
+			*/
+		}
 	}
 
 	public override void AllReleased() {
