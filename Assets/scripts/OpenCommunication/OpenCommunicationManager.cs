@@ -156,9 +156,9 @@ public class OpenCommunicationManager : AbstractManager {
 	// Box moving
 	public override void BoxOneStartMoving(double speed)
 	{
-		//HelmSequencer seq = bot1_sound.transform.Find("MotionSound").GetComponent<HelmSequencer> ();
-		//markov_piano.fillSequencer (seq);
-		//seq.enabled = true;
+		HelmSequencer seq = bot1_sound.transform.Find("MotionSound").GetComponent<HelmSequencer> ();
+		markov_piano.fillSequencer (seq);
+		seq.enabled = true;
 		//bot1_sound.transform.Find("MotionSound").GetComponent<AudioSource> ().Play ();
 		BoxOneContinueMoving (speed);
 	}
@@ -171,7 +171,7 @@ public class OpenCommunicationManager : AbstractManager {
 		control.SetParameterPercent (Param.kFilterCutoff, (float)((speed / 15) * 0.4));
 		control.SetParameterPercent (Param.kReverbDryWet,(float)((speed / 15) * 0.2
 		));
-		int newNote = markov_piano.getNextNote (box1_last_note, box1_current_note).first;
+		/*int newNote = markov_piano.getNextNote (box1_last_note, box1_current_note).first;
 		int nToNextBeep = (int)Mathf.Max(1f,4 - Mathf.Max((int) ((speed-5)/1.33),0));
 		if (lastBeep >= nToNextBeep) {
 			control.AllNotesOff ();
@@ -181,16 +181,16 @@ public class OpenCommunicationManager : AbstractManager {
 			lastBeep = 0;
 		} else {
 			lastBeep += 1;
-		}
+		}*/
 	}	
 
 	public override void BoxOneStopMoving()
 	{
 		HelmController control = bot1_sound.transform.Find("MotionSound").GetComponent<HelmController>();
-		//HelmSequencer seq = bot1_sound.transform.Find("MotionSound").GetComponent<HelmSequencer> ();
-		//seq.currentIndex = -1;
-		//seq.enabled = false;
-		control.AllNotesOff();
+		HelmSequencer seq = bot1_sound.transform.Find("MotionSound").GetComponent<HelmSequencer> ();
+
+		seq.enabled = false;
+		//control.AllNotesOff();
 	}
 	// Sustain effect
 	public override void BoxTwoStartMoving(double speed)
