@@ -19,6 +19,8 @@ public class SerialReader : AbstractInputReader
 
 	MenuButtonState menu_state;
 
+	IEnumerator read_coroutine;
+
     string incommingData; //data coming in through the port 
 
     //list the port names and return the first serial port in the stack of possible serial ports on your machine, this is usually your arduino
@@ -65,12 +67,13 @@ public class SerialReader : AbstractInputReader
 		OnWriteToSerial -= queueWrite;
 		if (stream != null) {
 			Debug.Log ("Closing stream.");
+			StopCoroutine (read_coroutine);
 			stream.Close ();
 		}
 		}
         //this coroutine starts up when the serial port is opened successfully. It reads the data coming in from arduino and sends it to the right data sctructures.  
 		public void startProcessCoroutine() {
-		StartCoroutine
+		read_coroutine =
 		(
 		AsynchronousReadFromArduino
 		(incommingData =>
@@ -112,6 +115,7 @@ public class SerialReader : AbstractInputReader
 		10000f                          // Timeout (milliseconds)
 		)
 		);
+		StartCoroutine (read_coroutine);
 		}
 		
     //queues up data to write to the serial port 
