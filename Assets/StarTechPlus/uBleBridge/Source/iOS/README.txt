@@ -1,0 +1,1 @@
+For Unity 5.0.0 compatablility the source files were removed from this folder, they are however located in the Plugins/iOS folder.
