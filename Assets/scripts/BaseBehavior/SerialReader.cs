@@ -49,8 +49,8 @@ public class SerialReader : AbstractInputReader
         }
 
         stream = new SerialPort(port, 115200); //opens the serial port 
-        stream.WriteTimeout = 1000; //this is long. - we might want to test this. 
-        stream.ReadTimeout = 1000; // Need to nicely handle this.
+        stream.WriteTimeout = 10; //this is long. - we might want to test this. 
+        stream.ReadTimeout = 10; // Need to nicely handle this.
         Debug.Log("Opening stream...");
         stream.Open();
         return true; 
@@ -103,11 +103,11 @@ public class SerialReader : AbstractInputReader
     public void SetIncomingDataToGameData(string[] sensors) {
         //this is the touch passes
         //Debug.Log(sensors[0] + "this much data"); 
-        if (sensors.Length > 1 && sensors.Length < 3)
+        if (sensors.Length == 2)
         {
             passOnTouch(new TouchedBots(sensors[0], sensors[1])); //creates a new touchedBots struct and passes in data.  
 
-
+            Debug.Log(sensors[0] + sensors[1]);
         }
         //this is the accelerometers 
         else if (sensors.Length == 6)
@@ -150,71 +150,14 @@ public class SerialReader : AbstractInputReader
 		writeQueue = new Queue<byte[]>();
         openStream = OpenStream();
         Debug.Log ("Starting stream coroutine...");    
-		startProcessCoroutine (); 
+	 
 	}
 
-        
-        //this coroutine starts up when the serial port is opened successfully. It reads the data coming in from arduino and sends it to the right data sctructures.  
-		public void startProcessCoroutine()
-        {
-		StartCoroutine (AsynchronousReadFromArduino (incommingData =>
-		{
-            if (openStream)
-            {
-                string data = ReadDataFromArduino();
-                string[] dataStrings = SplitIncomingDataToStrings(data);
-                SetIncomingDataToGameData(dataStrings);
-            }
-        
-		},     // Callback
-		() => Debug.LogError("Error!"), // Error callback
-		10000f                          // Timeout (milliseconds)
-		)
-		);
-		}
-		
-    //queues up data to write to the serial port 
-	public void queueWrite(byte[] wri)
-	{
-		writeQueue.Enqueue (wri);
-	}
-    //function which is called when the coroutine starts up.  It fires off the call back function and returns data if it can read something from the port. 
-    public IEnumerator AsynchronousReadFromArduino(System.Action<string> callback, System.Action fail = null, float timeout = float.PositiveInfinity)
+    //queues up data to write to the serial port
+    public void queueWrite(byte[] wri)
     {
-        System.DateTime initialTime = System.DateTime.Now;
-        System.DateTime nowTime;
-        System.TimeSpan diff = default(System.TimeSpan);
-
-        string dataString = null;
-        do
-        {
-            try
-            {
-                dataString = stream.ReadLine();
-            }
-            catch (System.TimeoutException)
-            {
-                dataString = null;
-            }
-
-            if (dataString != null)
-            {
-                callback(dataString);
-                yield return null;
-            }
-            else
-                yield return new WaitForSeconds(0.05f);
-
-            nowTime = System.DateTime.Now;
-            diff = nowTime - initialTime;
-
-        } while (diff.Milliseconds < timeout);
-
-        if (fail != null)
-            fail();
-        yield return null;
+        writeQueue.Enqueue(wri);
     }
-
 
     void checkFirstCharacter() {
 
@@ -224,6 +167,18 @@ public class SerialReader : AbstractInputReader
     void Update()
     {
         checkForWrites(); //makes sure if there's data in our writeQueue, it sends. 
+
+        if (openStream)
+        {
+            string data = ReadDataFromArduino();
+            if (data != null)
+            {
+                Debug.Log(data);
+                string[] dataStrings = SplitIncomingDataToStrings(data);
+                SetIncomingDataToGameData(dataStrings);
+            }
+        }
+
     }
     void OnDisable()
     {
