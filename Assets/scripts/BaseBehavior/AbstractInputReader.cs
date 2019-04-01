@@ -46,7 +46,7 @@ public struct MenuButtonState {
 public struct TouchedBots {
 	public TouchedBots(string touch1, string touch2) {
 		botsTouched = touch1;
-		touch = touch2;
+		touch = touch2;         
 	}
         
 	public void printTouchData() {

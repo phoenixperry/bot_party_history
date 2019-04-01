@@ -9,16 +9,16 @@ using System;
 //public struct Colors {
 //   public static Color     
 //} 
- 
+
 public class SerialReader : AbstractInputReader
 {
 
     //opens a queue of bites, which is the opposite of a stack. It's first in first out. Just like a line, you deal with the data in the order it shows up. 
     Queue<byte[]> writeQueue;
-    
-	SerialPort stream = null; //serial port data 
 
-	MenuButtonState menu_state;
+    SerialPort stream = null; //serial port data 
+
+    MenuButtonState menu_state;
 
     string incommingData; //data coming in through the port 
 
@@ -28,18 +28,18 @@ public class SerialReader : AbstractInputReader
     string getSerialPort()
     {
 
-		string[] ports = SerialPort.GetPortNames ();
-		if (ports.Length == 0) {
-			Debug.Log ("No serial port found.");
-			return "";
-		}
-		return ports [0]; // TODO: At present this uses the first found serial input. --cap
+        string[] ports = SerialPort.GetPortNames();
+        if (ports.Length == 0) {
+            Debug.Log("No serial port found.");
+            return "";
+        }
+        return ports[0]; // TODO: At present this uses the first found serial input. --cap
     }
-        
+
 
     public bool OpenStream()
     {
-   
+
         string port = getSerialPort(); //gets the first port at position 0. 
 
         if (port == "")
@@ -53,7 +53,7 @@ public class SerialReader : AbstractInputReader
         stream.ReadTimeout = 10; // Need to nicely handle this.
         Debug.Log("Opening stream...");
         stream.Open();
-        return true; 
+        return true;
     }
 
     public bool CloseStream()
@@ -89,7 +89,7 @@ public class SerialReader : AbstractInputReader
         catch (TimeoutException exception)
         {
             // Error!
-            Debug.Log(exception); 
+            Debug.Log(exception);
             return null;
         }
     }
@@ -97,7 +97,7 @@ public class SerialReader : AbstractInputReader
     public string[] SplitIncomingDataToStrings(string incomingSensorData)
     {
         string[] sensors = incomingSensorData.Split(' ');
-        return sensors; 
+        return sensors;
     }
 
     public void SetIncomingDataToGameData(string[] sensors) {
@@ -136,6 +136,7 @@ public class SerialReader : AbstractInputReader
             menu_state = newMenu;
         }
     }
+
     void checkForWrites()
     {
         while (writeQueue.Count > 0 && stream != null)
@@ -143,15 +144,6 @@ public class SerialReader : AbstractInputReader
             stream.Write(writeQueue.Dequeue(), 0, 2); //this sends the first byte in the writeQueue, it starts with the first byte in the buffer and sends 2 bytes of data. we are sending only 2 bytes to arduino this way to save memory and increase speed. 
         }
     }
-    void OnEnable()
-    {
-		base.OnEnable (); //calls the base class enable function
-		OnWriteToSerial += queueWrite; //calls queueWrite when the OnWriteSerial event is called. 
-		writeQueue = new Queue<byte[]>();
-        openStream = OpenStream();
-        Debug.Log ("Starting stream coroutine...");    
-	 
-	}
 
     //queues up data to write to the serial port
     public void queueWrite(byte[] wri)
@@ -159,31 +151,44 @@ public class SerialReader : AbstractInputReader
         writeQueue.Enqueue(wri);
     }
 
-    void checkFirstCharacter() {
-
-    }
-
     //this update function simply checks if anything needs to be written. 
     void Update()
     {
         checkForWrites(); //makes sure if there's data in our writeQueue, it sends. 
-
-        if (openStream)
-        {
-            string data = ReadDataFromArduino();
-            if (data != null)
-            {
-                Debug.Log(data);
-                string[] dataStrings = SplitIncomingDataToStrings(data);
-                SetIncomingDataToGameData(dataStrings);
-            }
-        }
-
+ 
     }
+    void OnEnable()
+    {
+        base.OnEnable(); //calls the base class enable function
+        OnWriteToSerial += queueWrite; //calls queueWrite when the OnWriteSerial event is called. 
+        writeQueue = new Queue<byte[]>();
+        openStream = OpenStream();
+
+        InvokeRepeating("handleData",0, 0.001f);
+        Debug.Log("Starting stream coroutine...");
+    } 
+
+//function which is called when the coroutine starts up.  It fires off the call back function and returns data if it can read something from the port.
+    public void handleData()
+    {
+            if (openStream)
+            {
+                string data = ReadDataFromArduino();
+                Debug.Log("I AM HERE");
+                if (data != null)
+                {
+                    Debug.Log(data);
+                    string[] dataStrings = SplitIncomingDataToStrings(data);
+                    SetIncomingDataToGameData(dataStrings);
+                }
+            }
+     }
+    
     void OnDisable()
     {
         base.OnDisable();
         OnWriteToSerial -= queueWrite;
+        CancelInvoke("handleData");
         CloseStream(); 
     }
 
