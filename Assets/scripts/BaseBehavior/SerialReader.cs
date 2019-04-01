@@ -163,17 +163,20 @@ public class SerialReader : AbstractInputReader
         OnWriteToSerial += queueWrite; //calls queueWrite when the OnWriteSerial event is called. 
         writeQueue = new Queue<byte[]>();
         openStream = OpenStream();
-
+        if(openStream)
+        { 
         InvokeRepeating("handleData",0, 0.001f);
         Debug.Log("Starting stream coroutine...");
-    } 
+        }
+    }
 
-//function which is called when the coroutine starts up.  It fires off the call back function and returns data if it can read something from the port.
+    //function which is called when the coroutine starts up.  It fires off the call back function and returns data if it can read something from the port.
+    string data; 
     public void handleData()
     {
             if (openStream)
             {
-                string data = ReadDataFromArduino();
+                data = ReadDataFromArduino();
                 Debug.Log("I AM HERE");
                 if (data != null)
                 {
@@ -193,3 +196,4 @@ public class SerialReader : AbstractInputReader
     }
 
 }
+
