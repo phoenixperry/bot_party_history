@@ -9,6 +9,9 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
 	double box3speed = 0;
 	float nextTime = 0;
 	int currentPart = 0;
+    int successRow = 0;
+    const float speedReductionFactor = 1 / 6;
+    const float speedReductionMin = 0.4f;
 	public override void startPart() {
 		gameObject.transform.Find("Resol").Find ("ResolBass").GetComponent<HelmSequencer> ().enabled = true;
 		gameObject.transform.Find("Resol").Find ("ResolLead").GetComponent<HelmSequencer> ().enabled = true;
@@ -35,6 +38,7 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
 		}
 	}
 	public override void targetSuccess() {
+        successRow += 1;
 		if (currentPart == 1) {
 			SendPlayGameSound (Resources.Load ("TouchTouchTransmission/gamesounds/Success 2") as AudioClip);
 			SendNewTarget (TouchState.None, (int)Mathf.Floor(35f*getTimeReduction()), 0.6f * getTimeReduction());		} 
@@ -44,6 +48,7 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
 		}
 	}
 	public override void targetFailure() {
+        successRow = 0;
 		if (currentPart == 1) {
 			SendPlayGameSound (Resources.Load ("TouchTouchTransmission/gamesounds/Fail 2") as AudioClip);
 			SendNewTarget (TouchState.None, (int)Mathf.Floor (45f * getTimeReduction ()), 0.8f * getTimeReduction ());
@@ -53,11 +58,14 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
 		}
 	}
 	public float getTimeReduction() {
-		double speed = (box1speed + box2speed + box3speed) / 3;
-		if (speed == 0) {
-			return 1;
-		}
-		return (float) (1 - (speed / 20));
+        // Customisable; time reduction based on number of successes in row.
+        if (successRow > 1/speedReductionFactor)
+        {
+            return speedReductionMin;
+        } else
+        {
+            return (1 - successRow * speedReductionMin);
+        }
 	}
 	void partOne() {
 		nextTime = Time.time + 60;
