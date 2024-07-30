@@ -9,9 +9,11 @@ public class ArdityReader : AbstractInputReader
     MenuButtonState menu_state;
     Queue<string> writeQueue = new Queue<string>();
     public SerialController serialController;
+    int messages = 0;
 
     void checkForWrites()
     {
+        Debug.Log("Writes since last frame: "+writeQueue.Count);
         while (writeQueue.Count > 0)
         {
             serialController.SendSerialMessage(writeQueue.Dequeue());
@@ -41,19 +43,22 @@ public class ArdityReader : AbstractInputReader
     void Update()
     {
         checkForWrites(); //makes sure if there's data in our writeQueue, it sends. 
+        Debug.Log("Reads since last frame: "+messages);
+        messages = 0;
     }
 
     void OnMessageArrived(string msg) {
-        Debug.Log("ArdityReader: "+msg);
+        //Debug.Log("ArdityReader: "+msg);
         string[] data = SplitIncomingDataToStrings(msg);
         SetIncomingDataToGameData(data);
+        messages++;
     }
 
     void OnConnectionEvent(bool success) {
         if (success) {
-         Debug.Log("ArdityReader: Connected!");
+            Debug.LogWarning("ArdityReader: Connected!");
         } else {
-            Debug.Log("ArdityReader: Failed to Connect");
+            Debug.LogWarning("ArdityReader: Failed to Connect");
         }
     }
 
@@ -70,7 +75,6 @@ public class ArdityReader : AbstractInputReader
         {
             passOnTouch(new TouchedBots(sensors[0], sensors[1])); //creates a new touchedBots struct and passes in data.  
 
-            Debug.Log(sensors[0] + sensors[1]);
         }
         //this is the accelerometers 
         else if (sensors.Length == 6)

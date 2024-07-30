@@ -101,8 +101,10 @@ float comp_z_3 = 0;
 //end testing case!!!!!!!!!!!!!!!!!!!
 
 //fade code broken
-int delayTime = 150; //set different for each ( 100, 150,200)
+int delayTime = 16; //set different for each ( 100, 150,200)
 int readsPerDelay = 20;
+int ledCounter = 0;
+int ledsLoopSkip = 8;
 int ledPin = 10 ; 
 int pulse = 0; 
 int pulseSpeed = 1; 
@@ -178,7 +180,7 @@ bool inRange(int val, int minimum, int maximum)
 
 void setup()
 {
-  Serial.begin(31250);
+  Serial.begin(250000);
   pinMode(btn_1, INPUT_PULLUP); 
   pinMode(btn_2, INPUT_PULLUP); 
   pinMode(btn_3, INPUT_PULLUP);
@@ -320,9 +322,11 @@ void loop(void)
     doThing(IMU_2, &mag2, comp_x_2, comp_y_2, comp_z_2, "botTwo", led_2, btn_2);
     doThing(IMU_3, &mag3, comp_x_3, comp_y_3, comp_z_3, "botThree", led_3, btn_3);
 
-    handleLedOne();
-    handleLedTwo();
-    handleLedThree();
+    if ((ledCounter = ++ledCounter % ledsLoopSkip) == 0) {
+      handleLedOne();
+      handleLedTwo();
+      handleLedThree();
+    }
        
     int ar = readTouches(box1, box2);
     

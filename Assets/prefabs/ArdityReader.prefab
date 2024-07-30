@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   portName: COM4
-  baudRate: 31250
+  baudRate: 250000
   messageListener: {fileID: 5993477818477866216}
   reconnectionDelay: 1000
-  maxUnreadMessages: 1000
+  maxUnreadMessages: 50
