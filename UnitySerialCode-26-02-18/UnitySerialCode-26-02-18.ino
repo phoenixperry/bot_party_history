@@ -39,7 +39,9 @@ const int box3 = A2;
 ////bot One vars 
 int btn_1 =12;
 int led_1 = 11;
+int led_1_strip = 255; // PP: Change this!
 int IMU_1 = 2;
+int motor_1 = 255; // PP: Change this!
 String botOne = "botOne"; 
 float comp_x_1 = 0;
 float comp_y_1 = 0;
@@ -48,7 +50,9 @@ float comp_z_1 = 0;
 ////bot Two vars 
 int btn_2 = 8;
 int led_2 = 10;
+int led_2_strip = 255; // PP: Change this!
 int IMU_2 = 3;
+int motor_2 = 255; // PP: Change this!
 String botTwo = "botTwo"; 
 float comp_x_2 = 0;
 float comp_y_2 = 0;
@@ -58,7 +62,9 @@ float comp_z_2 = 0;
 ////bot Three vars 
 int btn_3 = 2;
 int led_3 = 9;
+int led_3_strip = 255; // PP: Change this!
 int IMU_3 = 1;
+int motor_3 = 255; // PP: Change this!
 String botThree = "botThree"; 
 float comp_x_3 = 0;
 float comp_y_3 = 0;
@@ -108,6 +114,10 @@ int ledsLoopSkip = 8;
 int ledPin = 10 ; 
 int pulse = 0; 
 int pulseSpeed = 1; 
+
+int MOTOR1_VALUE = 0;
+int MOTOR2_VALUE = 0;
+int MOTOR3_VALUE = 0;
 
 /* Assign a unique ID to this sensor at the same time */
 Adafruit_LSM303_Mag_Unified mag1 = Adafruit_LSM303_Mag_Unified(IMU_1);
@@ -327,6 +337,10 @@ void loop(void)
       handleLedTwo();
       handleLedThree();
     }
+
+    handleMotorOne();
+    handleMotorTwo();
+    handleMotorThree();
        
     int ar = readTouches(box1, box2);
     
@@ -504,12 +518,15 @@ void ledFadeOn(int led, int parameter) {
   if (led == 1) {
     LED1_MODE = 1;
     LED1_PARAMETER = parameter;
+    MOTOR1_VALUE = parameter/5;
   } else if (led == 2) {
     LED2_MODE = 1;
     LED2_PARAMETER = parameter;
+    MOTOR2_VALUE = parameter/5;
   } else if (led == 3) {
     LED3_MODE = 1;
     LED3_PARAMETER = parameter;
+    MOTOR3_VALUE = parameter/5;
   }
 }
 
@@ -574,6 +591,7 @@ void handleLedOne() {
     }
   }
   analogWrite(led_1, LED1_VALUE);
+  analogWrite(led_1_strip, LED1_VALUE);
 }
 
 void handleLedTwo() {
@@ -598,6 +616,7 @@ if (LED2_MODE == 0) {
     }
   }
   analogWrite(led_2, LED2_VALUE);
+  analogWrite(led_2_strip, LED1_VALUE);
 }
 
 void handleLedThree() {
@@ -622,5 +641,32 @@ if (LED3_MODE == 0) {
     }
   }
   analogWrite(led_3, LED3_VALUE);
+  analogWrite(led_3_strip, LED1_VALUE);
 }
 
+void handleMotorOne() {
+  if (MOTOR1_VALUE > 0) {
+    digitalWrite(motor_1, HIGH);
+    MOTOR1_VALUE--;
+  } else {
+    digitalWrite(motor_1, LOW);
+  }
+}
+
+void handleMotorTwo() {
+  if (MOTOR1_VALUE > 0) {
+    digitalWrite(motor_1, HIGH);
+    MOTOR1_VALUE--;
+  } else {
+    digitalWrite(motor_1, LOW);
+  }
+}
+
+void handleMotorThree() {
+  if (MOTOR1_VALUE > 0) {
+    digitalWrite(motor_1, HIGH);
+    MOTOR1_VALUE--;
+  } else {
+    digitalWrite(motor_1, LOW);
+  }
+}
