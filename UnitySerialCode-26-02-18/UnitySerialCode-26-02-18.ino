@@ -495,6 +495,7 @@ int LED3_MODE = 0;
 int LED3_PARAMETER = 0;
 void readSerialToLED() {
   byte data[2];
+  if (Serial.available() == 1) { Serial.readBytes(data,1); }
   while (Serial.available() >= 2) {
       Serial.readBytes(data, 2);
       int led = (int) (data[0] >> 6); // To get the first 2 bits, the LED portion.
