@@ -37,22 +37,22 @@ const int box2 = A1;
 const int box3 = A2; 
 //
 ////bot One vars 
-int btn_1 =12;
-int led_1 = 11;
-int led_1_strip = 255; // PP: Change this!
-int IMU_1 = 2;
-int motor_1 = 255; // PP: Change this!
+int btn_1 =2;
+int led_1 = 8;
+int led_1_strip = 11; // PP: Change this!
+int IMU_1 = 5;
+int motor_1 = 5; // PP: Change this!
 String botOne = "botOne"; 
 float comp_x_1 = 0;
 float comp_y_1 = 0;
 float comp_z_1 = 0;
 //
 ////bot Two vars 
-int btn_2 = 8;
-int led_2 = 10;
-int led_2_strip = 255; // PP: Change this!
-int IMU_2 = 3;
-int motor_2 = 255; // PP: Change this!
+int btn_2 = 3;
+int led_2 = 9;
+int led_2_strip = 12; // PP: Change this!
+int IMU_2 = 6;
+int motor_2 = 6; // PP: Change this!
 String botTwo = "botTwo"; 
 float comp_x_2 = 0;
 float comp_y_2 = 0;
@@ -60,11 +60,11 @@ float comp_z_2 = 0;
 //
 //
 ////bot Three vars 
-int btn_3 = 2;
-int led_3 = 9;
-int led_3_strip = 255; // PP: Change this!
-int IMU_3 = 1;
-int motor_3 = 255; // PP: Change this!
+int btn_3 = 4;
+int led_3 = 10;
+int led_3_strip = 13; // PP: Change this!
+int IMU_3 = 7;
+int motor_3 = 7; // PP: Change this!
 String botThree = "botThree"; 
 float comp_x_3 = 0;
 float comp_y_3 = 0;
@@ -107,7 +107,7 @@ float comp_z_3 = 0;
 //end testing case!!!!!!!!!!!!!!!!!!!
 
 //fade code broken
-int delayTime = 16; //set different for each ( 100, 150,200)
+int delayTime = 50; //set different for each ( 100, 150,200)
 int readsPerDelay = 20;
 int ledCounter = 0;
 int ledsLoopSkip = 8;
@@ -190,7 +190,7 @@ bool inRange(int val, int minimum, int maximum)
 
 void setup()
 {
-  Serial.begin(250000);
+  Serial.begin(115200);
   pinMode(btn_1, INPUT_PULLUP); 
   pinMode(btn_2, INPUT_PULLUP); 
   pinMode(btn_3, INPUT_PULLUP);
@@ -204,38 +204,38 @@ void setup()
 //  Serial.println("mag Test"); Serial.println("");
 
   /* Initialise the 1st sensor */
-  tcaselect(IMU_1);
-  mag1.begin(); 
-  tcaselect(IMU_1);
-  mag1.enableAutoRange(true);
-  if (!mag1.begin())
-  {
-    /* There was a problem detecting the HMC5883 ... check your connections */
-    Serial.println("Ooops, no LM303 1 detected ... Check your wiring!");
-    while (1);
-  }
-
-  tcaselect(IMU_2);
-  mag2.begin(); 
-  tcaselect(IMU_2);
-  mag2.enableAutoRange(true);
-  if (!mag2.begin())
-  {
-    /* There was a problem detecting the HMC5883 ... check your connections */
-    Serial.println("Ooops, no LM303 2 detected ... Check your wiring!");
-    while (1);
-  }
-
-  tcaselect(IMU_3);
-  mag3.begin(); 
-  tcaselect(IMU_3);
-  mag3.enableAutoRange(true);
-  if (!mag3.begin())
-  {
-    /* There was a problem detecting the HMC5883 ... check your connections */
-    Serial.println("Ooops, no LM303 3 detected ... Check your wiring!");
-    while (1);
-  }
+//  tcaselect(IMU_1);
+//  mag1.begin(); 
+//  tcaselect(IMU_1);
+//  mag1.enableAutoRange(true);
+//  if (!mag1.begin())
+//  {
+//    /* There was a problem detecting the HMC5883 ... check your connections */
+//    Serial.println("Ooops, no LM303 1 detected ... Check your wiring!");
+//    //while (1);
+//  }
+//
+//  tcaselect(IMU_2);
+//  mag2.begin(); 
+//  tcaselect(IMU_2);
+//  mag2.enableAutoRange(true);
+//  if (!mag2.begin())
+//  {
+//    /* There was a problem detecting the HMC5883 ... check your connections */
+//    Serial.println("Ooops, no LM303 2 detected ... Check your wiring!");
+//   // while (1);
+//  }
+//
+//  tcaselect(IMU_3);
+//  mag3.begin(); 
+//  tcaselect(IMU_3);
+//  mag3.enableAutoRange(true);
+//  if (!mag3.begin())
+//  {
+//    /* There was a problem detecting the HMC5883 ... check your connections */
+//    Serial.println("Ooops, no LM303 3 detected ... Check your wiring!");
+//   // while (1);
+//  }
 
 
 
@@ -275,14 +275,14 @@ int readTouches(int pin1, int pin2)
 
 void doThing(int IMU, Adafruit_LSM303_Mag_Unified *mag, float &comp_x, float &comp_y, float &comp_z, String botID, int led, int btn){
  
-  sensors_event_t event;
-  tcaselect(IMU);
-  mag->getEvent(&event);
+//  sensors_event_t event;
+//  tcaselect(IMU);
+//  mag->getEvent(&event);
   
-  int heading = run_compass(mag,comp_x,comp_y,comp_z);
+//  int heading = run_compass(mag,comp_x,comp_y,comp_z);
   Serial.print(botID); 
   Serial.print(" "); 
-  Serial.print(heading);  
+//  Serial.print(heading);  
   Serial.print(" "); 
   Serial.print(int(comp_x));
   Serial.print(" ");  
@@ -654,19 +654,19 @@ void handleMotorOne() {
 }
 
 void handleMotorTwo() {
-  if (MOTOR1_VALUE > 0) {
-    digitalWrite(motor_1, HIGH);
-    MOTOR1_VALUE--;
+  if (MOTOR2_VALUE > 0) {
+    digitalWrite(motor_2, HIGH);
+    MOTOR2_VALUE--;
   } else {
-    digitalWrite(motor_1, LOW);
+    digitalWrite(motor_2, LOW);
   }
 }
 
 void handleMotorThree() {
-  if (MOTOR1_VALUE > 0) {
-    digitalWrite(motor_1, HIGH);
-    MOTOR1_VALUE--;
+  if (MOTOR3_VALUE > 0) {
+    digitalWrite(motor_3, HIGH);
+    MOTOR3_VALUE--;
   } else {
-    digitalWrite(motor_1, LOW);
+    digitalWrite(motor_3, LOW);
   }
 }
