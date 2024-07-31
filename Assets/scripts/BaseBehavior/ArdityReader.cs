@@ -11,19 +11,12 @@ public class ArdityReader : AbstractInputReader
     public SerialController serialController;
     int messages = 0;
 
-    void checkForWrites()
-    {
-        Debug.Log("Writes since last frame: "+writeQueue.Count);
-        while (writeQueue.Count > 0)
-        {
-            serialController.SendSerialMessage(writeQueue.Dequeue());
-        }
-    }
 
     //queues up data to write to the serial port
-    public void queueWrite(byte[] wri)
+    public void queueWrite(string wri)
     {
-        writeQueue.Enqueue(System.Text.Encoding.ASCII.GetString(wri));
+        //Debug.Log("Writing: "+wri);
+        serialController.SendSerialMessage(wri+"\n");
     }
 
     void Setup() {
@@ -42,14 +35,12 @@ public class ArdityReader : AbstractInputReader
     //this update function simply checks if anything needs to be written. 
     void Update()
     {
-        checkForWrites(); //makes sure if there's data in our writeQueue, it sends. 
-        Debug.Log("Reads since last frame: "+messages);
-        messages = 0;
+
     }
 
     void OnMessageArrived(string msg) {
-        //Debug.Log("ArdityReader: "+msg);
         string[] data = SplitIncomingDataToStrings(msg);
+        //Debug.Log(msg);
         SetIncomingDataToGameData(data);
         messages++;
     }

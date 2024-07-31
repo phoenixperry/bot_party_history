@@ -107,10 +107,10 @@ float comp_z_3 = 0;
 //end testing case!!!!!!!!!!!!!!!!!!!
 
 //fade code broken
-int delayTime = 50; //set different for each ( 100, 150,200)
-int readsPerDelay = 20;
+int delayTime = 100; //set different for each ( 100, 150,200)
+int readsPerDelay = 10;
 int ledCounter = 0;
-int ledsLoopSkip = 8;
+int ledsLoopSkip = 1;
 int ledPin = 10 ; 
 int pulse = 0; 
 int pulseSpeed = 1; 
@@ -494,26 +494,44 @@ int LED3_VALUE = 0;
 int LED3_MODE = 0;
 int LED3_PARAMETER = 0;
 void readSerialToLED() {
-  byte data[2];
-  if (Serial.available() == 1) { Serial.readBytes(data,1); }
-  while (Serial.available() >= 2) {
-      Serial.readBytes(data, 2);
-      int led = (int) (data[0] >> 6); // To get the first 2 bits, the LED portion.
-      int parameter = (int) data[1]; // The second portion is just an 8-bit unsigned int
-      int flags = (int) (data[0] & B00111111); // To get the flag portion minus the led portion.
-      if (flags == 32) {
-        ledOn(led, parameter);
-      } else if (flags == 16) {
-        ledOff(led, parameter);
-      } else if (flags == 8) {
-        ledSetTo(led, parameter);
-      } else if (flags == 4) {
-        ledFadeOn(led, parameter);
-      } else if (flags == 2) {
-        ledFadeOff(led, parameter);
+  String data;
+  if (Serial.available() >= 6) {
+      data = Serial.readString();
+      Serial.print("GOT "+data);
+      
+      int length = data.length();
+      int i = 0;
+
+      while (i < length) {
+        if (data[i] == 'X') {
+          readOneLEDInstruction(data.substring(i+1, i+6));
+          i = i + 6;
+        } else {
+          i++;
+        }
       }
+    
       }
     }
+
+bool readOneLEDInstruction(String instruction) {
+      Serial.print("DOING: "+instruction);
+      int led = instruction.substring(0,1).toInt();
+      int parameter = instruction.substring(2,5).toInt();
+      char mode = instruction[1];
+      if (mode == 'Y') {
+        ledOn(led, parameter);
+      } else if (mode == 'N') {
+        ledOff(led, parameter);
+      } else if (mode == 'S') {
+        ledSetTo(led, parameter);
+      } else if (mode == 'F') {
+        ledFadeOn(led, parameter);
+      } else if (mode == 'f') {
+        ledFadeOff(led, parameter);
+      }
+      return true;
+}
 
 void ledFadeOn(int led, int parameter) {
   if (led == 1) {

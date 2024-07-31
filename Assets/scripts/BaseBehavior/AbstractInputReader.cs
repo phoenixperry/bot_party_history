@@ -58,7 +58,7 @@ public struct TouchedBots {
 
 public enum LED_CHANGES {None=0, On, Off, Set, FadeOn, FadeOff};
 public class AbstractInputReader : MonoBehaviour {
-	public delegate void WriteToSerial(byte[] wri); //all methods that subscribe to this delegate must be void and pass in a bite of 8 bits in an array  
+	public delegate void WriteToSerial(string wri); //all methods that subscribe to this delegate must be void and pass in a bite of 8 bits in an array  
 	public static event WriteToSerial OnWriteToSerial; //this is the event to register your functions to 
 
     //these two bytes for the flag then the value. 
@@ -68,24 +68,26 @@ public class AbstractInputReader : MonoBehaviour {
     //`Z` = Parameter(Interpreted as an 8bit unsigned integer) (
 
     public void HandleLEDChange(int led, LED_CHANGES type, int parameter) {
-		byte first = (byte) (((byte) led) << 6); //sets the LED to trigger to be the last two bits of the bit 
-        //these lines simply set the flags up for what mode to trigger
+		string toWrite = "X";
+		toWrite += led.ToString();
 		if (type == LED_CHANGES.On) {
-			first += 32; //0010 0000
+			toWrite += "Y";
 		} else if (type == LED_CHANGES.Off) {
-			first += 16; //0001 0000 
+			toWrite += "N";
 		} else if (type == LED_CHANGES.Set) {
-			first += 8; //0000 1000
+			toWrite += "S";
 		} else if (type == LED_CHANGES.FadeOn) {
-			first += 4; //0000 0100
+			toWrite += "F";
 		} else if (type == LED_CHANGES.FadeOff) {
-			first += 2; //000 0010 
+			toWrite += "f";
 		}
+
+		toWrite += parameter.ToString().PadLeft(3,'0');
         //call function to write the data and pass the vars first and parameter as a bite array of 2 elements . 
-		passWrite(new byte[] { first, (byte)parameter});
+		passWrite(toWrite);
 	}
     //function calls the werite to serial function and sends it a bite array. 
-	public static void passWrite(byte[] wri) {
+	public static void passWrite(string wri) {
 		if (OnWriteToSerial != null) {
 			OnWriteToSerial (wri);
 		}

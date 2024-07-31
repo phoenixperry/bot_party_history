@@ -160,7 +160,7 @@ public class SerialReader : AbstractInputReader
     void OnEnable()
     {
         base.OnEnable(); //calls the base class enable function
-        OnWriteToSerial += queueWrite; //calls queueWrite when the OnWriteSerial event is called. 
+        //OnWriteToSerial += queueWrite; //calls queueWrite when the OnWriteSerial event is called. 
         writeQueue = new Queue<byte[]>();
         openStream = OpenStream();
         if(openStream)
@@ -190,7 +190,7 @@ public class SerialReader : AbstractInputReader
     void OnDisable()
     {
         base.OnDisable();
-        OnWriteToSerial -= queueWrite;
+        //OnWriteToSerial -= queueWrite;
         CancelInvoke("handleData");
         CloseStream(); 
     }
