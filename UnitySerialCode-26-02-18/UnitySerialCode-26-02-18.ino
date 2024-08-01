@@ -310,7 +310,7 @@ void sensorRead(int IMU, Adafruit_LSM303_Mag_Unified *mag, float &comp_x, float 
     - LOOP_LED_SKIP_EVERY: How often the LED fades happen, versus runs of the read loop.
     - LOOP_LED_COUNTER: DO NOT TOUCH (loop variable for tracking the above.)
 */
-int LOOP_MAIN_TIME = 50;
+int LOOP_MAIN_TIME = 2000;
 int LOOP_READS_PER_LOOP = 5;
 int LOOP_LED_SKIP_EVERY = 10;
 
@@ -318,17 +318,11 @@ int LOOP_LED_COUNTER = 0;
 
 
 // To turn off the loop
-bool skipBoxes = true;
+bool skipBoxes = false;
 
 void loop(void)
 {
-  Serial.println("2: "+String(digitalRead(2)));
-  Serial.println("3: "+String(digitalRead(3)));
-  Serial.println("4: "+String(digitalRead(4)));
-  delay(LOOP_MAIN_TIME);
-
-  if (skipBoxes == false)
-  {
+    if (skipBoxes) { return; }
     sensorRead(PIN_IMU_1, &mag1, comp_x_1, comp_y_1, comp_z_1, "botOne", PIN_LED_1, PIN_BUTTON_1);
     sensorRead(PIN_IMU_2, &mag2, comp_x_2, comp_y_2, comp_z_2, "botTwo", PIN_LED_2, PIN_BUTTON_2);
     sensorRead(PIN_IMU_3, &mag3, comp_x_3, comp_y_3, comp_z_3, "botThree", PIN_LED_3, PIN_BUTTON_3);
@@ -344,9 +338,6 @@ void loop(void)
       i++;
       delay(LOOP_MAIN_TIME / LOOP_READS_PER_LOOP);
     }
-
-
-  }
 }
 
 void writePinInnerLoop() {
