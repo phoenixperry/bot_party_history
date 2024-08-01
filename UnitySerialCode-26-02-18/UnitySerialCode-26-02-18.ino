@@ -468,10 +468,11 @@ bool serialChange = false;
 bool readSerialFull()
 {
   String data;
-  int bufferLength = Serial.available();
-  if (bufferLength > 96) { bufferLength = 96; }
-  if (bufferLength >= 6)
+  int bufferLength;
+  do 
   {
+    bufferLength = Serial.available();
+    if (bufferLength > 96) { bufferLength = 96; }
     char dataRaw[100];
     //Serial.print("Reading!");
     Serial.readBytes(dataRaw, bufferLength);
@@ -483,7 +484,7 @@ bool readSerialFull()
     {
       if (data[i] == 'X')
       {
-        if (readSerialOne(data.substring(i + 1, i + 6))) { serialChange = true; };
+        if (readSerialOne(data.substring(i + 1, i + 6))) { serialChange = true; }
         i = i + 6;
       }
       else
@@ -492,9 +493,9 @@ bool readSerialFull()
       }
     }
     //Serial.print("Done processing!");
-  }
+  } while (bufferLength >= 6);
   if (serialChange) { serialChange = false; return true;} else { return false; }
-}
+} 
 
 bool readSerialOne(String instruction)
 {
