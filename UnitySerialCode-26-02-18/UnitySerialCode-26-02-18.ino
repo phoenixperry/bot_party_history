@@ -236,7 +236,7 @@ void setup()
 
   // calls the calibration routine
   
-  Serial.write("DEBUG: SETUP COMPLETE!");
+  Serial.println("DEBUG: SETUP COMPLETE!");
   calibrate();
 }
 
@@ -465,41 +465,30 @@ int MOTOR_3_VALUE = 0;
   These functions handle the incoming serial data.
 */
 bool serialChange = false;
+
 bool readSerialFull()
 {
   String data;
   int bufferLength;
-  do 
+  while ((bufferLength = Serial.available()) >= 6)
   {
-    bufferLength = Serial.available();
-    if (bufferLength > 90) { bufferLength = 90; } // For safety - so we don't fall off the end of it.
-    char dataRaw[100];
-    //Serial.print("Reading!");
-    Serial.readBytes(dataRaw, bufferLength);
-    //Serial.print("Done reading!");
-    data = String(dataRaw);
-    int i = 0;
+    Serial.println("DEBUG: BufferLength = "+String(bufferLength));
+    char dataRaw[90];
+    int lengthFlushed = 0;
+    if ((lengthFlushed = Serial.readBytesUntil('X',dataRaw, bufferLength)) > 0) { Serial.println("FLUSHING "+String(dataRaw).substring(0,lengthFlushed));};
+    if ((bufferLength = Serial.available()) < 5) { continue; }
+    Serial.readBytesUntil('X',dataRaw, 5);
 
-    while (i < bufferLength - 5)
-    {
-      if (data[i] == 'X')
-      {
-        if (readSerialOne(data.substring(i + 1, i + 6))) { serialChange = true; }
-        i = i + 6;
-      }
-      else
-      {
-        i++;
-      }
-    }
+    data = String(dataRaw);
+    readSerialOne(data.substring(0, 5));
     //Serial.print("Done processing!");
-  } while (bufferLength >= 6);
+  }
   if (serialChange) { serialChange = false; return true;} else { return false; }
 } 
 
 bool readSerialOne(String instruction)
 {
-  //Serial.print("DEBUG: "+instruction+"\n");
+  Serial.println("\nDEBUG: INSTRUCTION --- "+instruction);
   int led = instruction.substring(0, 1).toInt();
   int parameter = instruction.substring(2, 5).toInt();
   char mode = instruction[1];

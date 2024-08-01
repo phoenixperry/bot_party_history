@@ -51,7 +51,8 @@ public class ArdityReader : AbstractInputReader
     void OnMessageArrived(string msg) {
         string[] data = SplitIncomingDataToStrings(msg);
         if (msg.Contains("DEBUG")) {
-            //Debug.Log("DEBUG: "+msg+"\n");
+            Debug.Log("DEBUG: "+msg+"\n");
+            return;
         }
         SetIncomingDataToGameData(data);
         messages++;

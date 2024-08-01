@@ -11,7 +11,7 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
 	int currentPart = 0;
     int successRow = 0;
     const float speedReductionFactor = 1 / 6;
-    const float speedReductionMin = 0.6f;
+    const float speedReductionMin = 0.4f;
 	public override void startPart() {
 		gameObject.transform.Find("Resol").Find ("ResolBass").GetComponent<HelmSequencer> ().enabled = true;
 		gameObject.transform.Find("Resol").Find ("ResolLead").GetComponent<HelmSequencer> ().enabled = true;
@@ -64,7 +64,7 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
             return speedReductionMin;
         } else
         {
-            return (1 - successRow * speedReductionMin);
+            return (1 - (successRow * speedReductionFactor * speedReductionMin));
         }
 	}
 	void partOne() {
