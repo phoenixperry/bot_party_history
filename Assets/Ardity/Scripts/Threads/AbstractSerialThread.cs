@@ -237,7 +237,7 @@ public abstract class AbstractSerialThread
         try
         {
             // Send a message.
-            if (outputQueue.Count != 0)
+            if (outputQueue.Count > 0)
             {
                 SendToWire(outputQueue.Dequeue(), serialPort);
             }
@@ -246,8 +246,8 @@ public abstract class AbstractSerialThread
             // If a line was read, and we have not filled our queue, enqueue
             // this line so it eventually reaches the Message Listener.
             // Otherwise, discard the line.
-            object inputMessage = ReadFromWire(serialPort);
-            if (inputMessage != null)
+            object inputMessage;
+            if ((inputMessage = ReadFromWire(serialPort)) != null)
             {
                 if (inputQueue.Count < maxUnreadMessages)
                 {

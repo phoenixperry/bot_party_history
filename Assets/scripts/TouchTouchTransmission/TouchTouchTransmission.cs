@@ -198,11 +198,12 @@ public class TouchTouchTransmission : AbstractManager {
 		clearTargets ();
 		hasBeenCleared = false;
 		// I hate I have to do this and not invoke, but...
+		Debug.Log("Delaying at "+System.DateTime.UtcNow.Millisecond.ToString());
 		StartCoroutine(targetAddWrapper(new_target, duration,pause)); 
 	}
 	IEnumerator targetAddWrapper(TouchState new_target, int duration, float pause) {
 		yield return new WaitForSeconds(pause);
-
+		Debug.Log("Target add wrapper: "+System.DateTime.UtcNow.Millisecond.ToString());
 		addNewTarget (new_target, duration);
 	}
 	public void addNewTarget(TouchState new_target, int duration) {
@@ -231,6 +232,7 @@ public class TouchTouchTransmission : AbstractManager {
 	}
 		
 	void lightUp(TouchState newTarget, int time) {
+		Debug.Log("Clearing lights");
 		TurnOffLEDOne ();
 		TurnOffLEDTwo ();
 		TurnOffLEDThree ();

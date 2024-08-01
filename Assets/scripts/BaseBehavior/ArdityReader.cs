@@ -15,7 +15,15 @@ public class ArdityReader : AbstractInputReader
     //queues up data to write to the serial port
     public void queueWrite(string wri)
     {
-        Debug.Log("Writing: "+wri);
+        Debug.Log("Queueing: "+wri+" at "+System.DateTime.UtcNow.Millisecond.ToString());
+        writeQueue.Enqueue(wri);
+    }
+
+    void writeToSerial() {
+        if (writeQueue.Count <= 0) { return; }
+        string wri = "";
+        while (writeQueue.Count > 0) { wri += writeQueue.Dequeue(); }
+        Debug.Log("Writing: "+wri+" at "+System.DateTime.UtcNow.Millisecond.ToString());
         serialController.SendSerialMessage(wri+"\n");
     }
 
@@ -37,11 +45,14 @@ public class ArdityReader : AbstractInputReader
     {  
         //Debug.Log("Messages since last frame: "+messages+ " approx FPS: "+(1.0f/Time.deltaTime));
         messages = 0;
+        writeToSerial();
     }
 
     void OnMessageArrived(string msg) {
         string[] data = SplitIncomingDataToStrings(msg);
-        //Debug.Log(msg);
+        if (msg.Contains("INSTRUCTION")) {
+            Debug.Log(msg+"\n");
+        }
         SetIncomingDataToGameData(data);
         messages++;
     }

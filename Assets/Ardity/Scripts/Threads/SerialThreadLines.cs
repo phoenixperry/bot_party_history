@@ -31,6 +31,7 @@ public class SerialThreadLines : AbstractSerialThread
 
     protected override void SendToWire(object message, SerialPort serialPort)
     {
+        Debug.Log("Actually writing @ "+System.DateTime.UtcNow.Millisecond.ToString());
         serialPort.WriteLine((string) message);
     }
 

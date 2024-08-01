@@ -114,7 +114,7 @@ Adafruit_LSM303_Mag_Unified mag3 = Adafruit_LSM303_Mag_Unified(PIN_IMU_3);
 
 void sensorRead(int IMU, Adafruit_LSM303_Mag_Unified *mag, float &comp_x, float &comp_y, float &comp_z, String &botID, int &led, int &btn);
 
-void readSerialFull();
+bool readSerialFull();
 
 bool inRange(int val, int minimum, int maximum);
 // launches the calibration routine
@@ -308,9 +308,9 @@ void sensorRead(int IMU, Adafruit_LSM303_Mag_Unified *mag, float &comp_x, float 
     - LOOP_LED_SKIP_EVERY: How often the LED fades happen, versus runs of the read loop.
     - LOOP_LED_COUNTER: DO NOT TOUCH (loop variable for tracking the above.)
 */
-int LOOP_MAIN_TIME = 16;
-int LOOP_READS_PER_LOOP = 2;
-int LOOP_LED_SKIP_EVERY = 7;
+int LOOP_MAIN_TIME = 100;
+int LOOP_READS_PER_LOOP = 3;
+int LOOP_LED_SKIP_EVERY = 5;
 
 int LOOP_LED_COUNTER = 0;
 
@@ -327,12 +327,10 @@ void loop(void)
 
     menuInnerLoop();
 
-    writePinInnerLoop();
-
     int i = 0;
     while (i < LOOP_READS_PER_LOOP)
     {
-      readInnerLoop();
+      if (readInnerLoop()) { writePinInnerLoop(); }
       i++;
       delay(LOOP_MAIN_TIME / LOOP_READS_PER_LOOP);
     }
@@ -417,15 +415,17 @@ void touchInnerLoop() {
     Serial.println(TOUCH_ALL);
 }
 
-void readInnerLoop() {
-  
-    readSerialFull();
+bool readInnerLoop() {
+    bool readChange = false;
+    readChange = readSerialFull();
     if ((LOOP_LED_COUNTER = ++LOOP_LED_COUNTER % LOOP_LED_SKIP_EVERY) == 0)
     {
+      readChange = true;
       fadeLedOne();
       fadeLedTwo();
       fadeLedThree();
     }
+    return true;
 }
 
 /* 
@@ -460,22 +460,25 @@ int MOTOR_3_VALUE = 0;
   READ SERIAL FUNCTIONS
   These functions handle the incoming serial data.
 */
-void readSerialFull()
+bool serialChange = false;
+bool readSerialFull()
 {
   String data;
-  if (Serial.available() >= 6)
+  int bufferLength = Serial.available();
+  if (bufferLength >= 6)
   {
-    data = Serial.readString();
-    Serial.print("GOT " + data);
-
-    int length = data.length();
+    char dataRaw[100];
+    //Serial.print("Reading!");
+    Serial.readBytes(dataRaw, bufferLength);
+    //Serial.print("Done reading!");
+    data = String(dataRaw);
     int i = 0;
 
-    while (i < length)
+    while (i < bufferLength)
     {
       if (data[i] == 'X')
       {
-        readSerialOne(data.substring(i + 1, i + 6));
+        if (readSerialOne(data.substring(i + 1, i + 6))) { serialChange = true; };
         i = i + 6;
       }
       else
@@ -483,11 +486,14 @@ void readSerialFull()
         i++;
       }
     }
+    //Serial.print("Done processing!");
   }
+  if (serialChange) { serialChange = false; return true;} else { return false; }
 }
 
 bool readSerialOne(String instruction)
 {
+  //Serial.print("INSTRUCTION: "+instruction+"\n");
   int led = instruction.substring(0, 1).toInt();
   int parameter = instruction.substring(2, 5).toInt();
   char mode = instruction[1];
