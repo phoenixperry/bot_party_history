@@ -343,9 +343,13 @@ void writePinInnerLoop() {
     writeLedOne();
     writeLedTwo();    
     writeLedThree();
-    writeMotorOne();
-    writeMotorTwo();
-    writeMotorThree();
+    
+    /*
+      // Motors disabled.
+      writeMotorOne();
+      writeMotorTwo();
+      writeMotorThree();
+    */
 }
 
 void menuInnerLoop() {
