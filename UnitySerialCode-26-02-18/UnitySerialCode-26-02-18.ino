@@ -532,7 +532,7 @@ bool readOneLEDInstruction(String instruction) {
       }
       return true;
 }
-int MOTOR_BASE_VALUE = 10;
+int MOTOR_BASE_VALUE = 3;
 void ledFadeOn(int led, int parameter) {
   if (led == 1) {
     LED1_MODE = 1;
