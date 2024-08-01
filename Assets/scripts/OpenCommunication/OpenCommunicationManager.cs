@@ -18,10 +18,16 @@ public class OpenCommunicationManager : AbstractManager {
 		whichTouches = TouchMusicSet.Animal;
 		setTouchSound (whichTouches);
 		StartCoroutine(delayLEDTurnOn());
+		TurnOffLEDOne();
+		TurnOffLEDTwo();
+		TurnOffLEDThree();
+		TurnOnLEDOne ();
+		TurnOnLEDTwo ();
+		TurnOnLEDThree ();
 	}
 
 	IEnumerator delayLEDTurnOn() {
-		yield return new WaitForSeconds(0.3f);
+		yield return new WaitForSeconds(2f);
 		TurnOnLEDOne ();
 		TurnOnLEDTwo ();
 		TurnOnLEDThree ();
