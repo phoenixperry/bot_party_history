@@ -108,9 +108,11 @@ public class BotData : MonoBehaviour
 
 		// Deals with button presses
 		if (b1.btn == "1" && b2.btn == "0") {
+			Debug.Log("Button down!");
 			doButtonDownFor (b1);
 		} else if (b1.btn == "0" && b2.btn == "1") {
 			doButtonUpFor (b1);
+			Debug.Log("Button up!");
 		}
 
 		processAccelerometer (b2, b1);
