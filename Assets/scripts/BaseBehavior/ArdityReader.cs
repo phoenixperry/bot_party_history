@@ -23,7 +23,7 @@ public class ArdityReader : AbstractInputReader
         if (writeQueue.Count <= 0) { return; }
         string wri = "";
         while (writeQueue.Count > 0) { wri += writeQueue.Dequeue(); }
-        //Debug.Log("Writing: "+wri+" at "+System.DateTime.UtcNow.Millisecond.ToString());
+        Debug.Log("Writing: "+wri+" at "+System.DateTime.UtcNow.Millisecond.ToString());
         serialController.SendSerialMessage(wri+"\n");
     }
 
