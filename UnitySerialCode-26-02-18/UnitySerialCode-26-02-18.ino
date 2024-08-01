@@ -107,7 +107,7 @@ float comp_z_3 = 0;
 //end testing case!!!!!!!!!!!!!!!!!!!
 
 //fade code broken
-int delayTime = 100; //set different for each ( 100, 150,200)
+int delayTime = 150; //set different for each ( 100, 150,200)
 int readsPerDelay = 10;
 int ledCounter = 0;
 int ledsLoopSkip = 1;
@@ -331,16 +331,6 @@ void loop(void)
     doThing(IMU_1, &mag1, comp_x_1, comp_y_1, comp_z_1, "botOne", led_1, btn_1);  
     doThing(IMU_2, &mag2, comp_x_2, comp_y_2, comp_z_2, "botTwo", led_2, btn_2);
     doThing(IMU_3, &mag3, comp_x_3, comp_y_3, comp_z_3, "botThree", led_3, btn_3);
-
-    if ((ledCounter = ++ledCounter % ledsLoopSkip) == 0) {
-      handleLedOne();
-      handleLedTwo();
-      handleLedThree();
-    }
-
-    handleMotorOne();
-    handleMotorTwo();
-    handleMotorThree();
        
     int ar = readTouches(box1, box2);
     
@@ -389,8 +379,16 @@ void loop(void)
       int i = 0;
       while (i < readsPerDelay ) {
             readSerialToLED();
-            delay(delayTime/readsPerDelay);
+                if ((ledCounter = ++ledCounter % ledsLoopSkip) == 0) {
+                  handleLedOne();
+                  handleLedTwo();
+                  handleLedThree();
+                }
+              handleMotorOne();
+              handleMotorTwo();
+              handleMotorThree();
           i++;
+          delay(delayTime/readsPerDelay);
       }
    
        //delay(delayTime); 
