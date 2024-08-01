@@ -635,7 +635,7 @@ if (LED2_MODE == 0) {
     }
   }
   analogWrite(led_2, LED2_VALUE);
-  analogWrite(led_2_strip, LED1_VALUE);
+  analogWrite(led_2_strip, LED2_VALUE);
 }
 
 void handleLedThree() {
@@ -660,7 +660,7 @@ if (LED3_MODE == 0) {
     }
   }
   analogWrite(led_3, LED3_VALUE);
-  analogWrite(led_3_strip, LED1_VALUE);
+  analogWrite(led_3_strip, LED3_VALUE);
 }
 
 void handleMotorOne() {
