@@ -195,38 +195,38 @@ void setup()
   //  Serial.println("mag Test"); Serial.println("");
 
   /* Initialise the 1st sensor */
-  //  tcaselect(IMU_1);
-  //  mag1.begin();
-  //  tcaselect(IMU_1);
-  //  mag1.enableAutoRange(true);
-  //  if (!mag1.begin())
-  //  {
-  //    /* There was a problem detecting the HMC5883 ... check your connections */
-  //    Serial.println("Ooops, no LM303 1 detected ... Check your wiring!");
-  //    //while (1);
-  //  }
-  //
-  //  tcaselect(IMU_2);
-  //  mag2.begin();
-  //  tcaselect(IMU_2);
-  //  mag2.enableAutoRange(true);
-  //  if (!mag2.begin())
-  //  {
-  //    /* There was a problem detecting the HMC5883 ... check your connections */
-  //    Serial.println("Ooops, no LM303 2 detected ... Check your wiring!");
-  //   // while (1);
-  //  }
-  //
-  //  tcaselect(IMU_3);
-  //  mag3.begin();
-  //  tcaselect(IMU_3);
-  //  mag3.enableAutoRange(true);
-  //  if (!mag3.begin())
-  //  {
-  //    /* There was a problem detecting the HMC5883 ... check your connections */
-  //    Serial.println("Ooops, no LM303 3 detected ... Check your wiring!");
-  //   // while (1);
-  //  }
+   tcaselect(PIN_IMU_1);
+   mag1.begin();
+   tcaselect(PIN_IMU_1);
+   mag1.enableAutoRange(true);
+   if (!mag1.begin())
+   {
+     /* There was a problem detecting the HMC5883 ... check your connections */
+     Serial.println("Ooops, no LM303 1 detected ... Check your wiring!");
+     //while (1);
+   }
+  
+   tcaselect(PIN_IMU_2);
+   mag2.begin();
+   tcaselect(PIN_IMU_2);
+   mag2.enableAutoRange(true);
+   if (!mag2.begin())
+   {
+     /* There was a problem detecting the HMC5883 ... check your connections */
+     Serial.println("Ooops, no LM303 2 detected ... Check your wiring!");
+    // while (1);
+   }
+  
+   tcaselect(PIN_IMU_3);
+   mag3.begin();
+   tcaselect(PIN_IMU_3);
+   mag3.enableAutoRange(true);
+   if (!mag3.begin())
+   {
+     /* There was a problem detecting the HMC5883 ... check your connections */
+     Serial.println("Ooops, no LM303 3 detected ... Check your wiring!");
+    // while (1);
+   }
 
   //  /* Display some basic information on this sensor */
   //  tcaselect(IMU);
@@ -267,14 +267,14 @@ int readTouches(int pin1, int pin2)
 void sensorRead(int IMU, Adafruit_LSM303_Mag_Unified *mag, float &comp_x, float &comp_y, float &comp_z, String botID, int led, int btn)
 {
 
-  //  sensors_event_t event;
-  //  tcaselect(IMU);
-  //  mag->getEvent(&event);
+  sensors_event_t event;
+  //tcaselect(IMU);
+  mag->getEvent(&event);
 
-  //  int heading = run_compass(mag,comp_x,comp_y,comp_z);
+  int heading = run_compass(mag,comp_x,comp_y,comp_z);
   Serial.print(botID);
   Serial.print(" ");
-  //  Serial.print(heading);
+  Serial.print(heading);
   Serial.print(" ");
   Serial.print(int(comp_x));
   Serial.print(" ");
@@ -291,10 +291,10 @@ void sensorRead(int IMU, Adafruit_LSM303_Mag_Unified *mag, float &comp_x, float 
   else
   {
     Serial.println('1');
-    if (pulse > 255 || pulse < 0)
+    /*if (pulse > 255 || pulse < 0)
       pulseSpeed = pulseSpeed * -1;
     // (led,pulse);
-    pulse = pulse + pulseSpeed;
+    pulse = pulse + pulseSpeed;*/
   }
 }
 
@@ -313,7 +313,6 @@ int LOOP_READS_PER_LOOP = 5;
 int LOOP_LED_SKIP_EVERY = 10;
 
 int LOOP_LED_COUNTER = 0;
-
 
 void loop(void)
 {
