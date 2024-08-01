@@ -68,6 +68,8 @@ public abstract class AbstractManager : MonoBehaviour {
 	
 		AbstractInputReader.OnMenuFreePlayPushed += MenuFreePlay;
 		AbstractInputReader.OnMenuSecretCiphersPushed += MenuSecretCiphers;
+		AbstractInputReader.OnMenuSecretCiphersInfinitePushed += MenuSecretCiphersInfinite;
+
 	}
 	//here's how to unsubscibe - if you do one, you must do the other! 
 	public void OnDisable()
@@ -123,6 +125,7 @@ public abstract class AbstractManager : MonoBehaviour {
 
 		AbstractInputReader.OnMenuFreePlayPushed -= MenuFreePlay;
 		AbstractInputReader.OnMenuSecretCiphersPushed -= MenuSecretCiphers;
+		AbstractInputReader.OnMenuSecretCiphersInfinitePushed -= MenuSecretCiphersInfinite;
 	}
 
 	/* This section contains all of the events for boxes touching eachother.
@@ -256,6 +259,10 @@ public abstract class AbstractManager : MonoBehaviour {
 
 	}
 	public virtual void MenuSecretCiphers() {
+
+	}
+
+	public virtual void MenuSecretCiphersInfinite() {
 
 	}
 

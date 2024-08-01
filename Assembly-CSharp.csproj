@@ -149,6 +149,8 @@
      <Compile Include="Assets\scripts\TouchTouchTransmission\AbstractTTTScript.cs" />
      <Compile Include="Assets\scripts\TouchTouchTransmission\AbstractTTTScriptPart.cs" />
      <Compile Include="Assets\scripts\TouchTouchTransmission\BridgeTTTScriptPart.cs" />
+     <Compile Include="Assets\scripts\TouchTouchTransmission\InfiniteTTTScript.cs" />
+     <Compile Include="Assets\scripts\TouchTouchTransmission\InfiniteTTTScriptPart.cs" />
      <Compile Include="Assets\scripts\TouchTouchTransmission\TestBeginningScriptPart.cs" />
      <Compile Include="Assets\scripts\TouchTouchTransmission\TestBuildupScriptPart.cs" />
      <Compile Include="Assets\scripts\TouchTouchTransmission\TestIntermediateScriptPart.cs" />

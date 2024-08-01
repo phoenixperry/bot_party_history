@@ -197,9 +197,8 @@ public class TouchTouchTransmission : AbstractManager {
 	public void newTarget(TouchState new_target, int duration, float pause) {
 		clearTargets ();
 		hasBeenCleared = false;
-		//Pause goes here
-
-		StartCoroutine(targetAddWrapper(new_target, duration,pause)); // I hate I have to do this and not invoke, but...
+		// I hate I have to do this and not invoke, but...
+		StartCoroutine(targetAddWrapper(new_target, duration,pause)); 
 	}
 	IEnumerator targetAddWrapper(TouchState new_target, int duration, float pause) {
 		yield return new WaitForSeconds(pause);

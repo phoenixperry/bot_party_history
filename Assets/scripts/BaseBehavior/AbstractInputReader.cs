@@ -121,6 +121,9 @@ public class AbstractInputReader : MonoBehaviour {
 	public static event MenuFreePlayPushed OnMenuFreePlayPushed;
 	public delegate void MenuSecretCiphersPushed();
 	public static event MenuSecretCiphersPushed OnMenuSecretCiphersPushed;
+
+	public delegate void MenuSecretCiphersInfinitePushed();
+	public static event MenuSecretCiphersInfinitePushed OnMenuSecretCiphersInfinitePushed;
 	bool freeplay_down, secret_down;
 	protected void MenuFreePlay() {
 		freeplay_down = true;
@@ -132,6 +135,13 @@ public class AbstractInputReader : MonoBehaviour {
 		secret_down = true;
 		if (OnMenuSecretCiphersPushed != null) {
 			OnMenuSecretCiphersPushed ();
+		}
+	}
+
+	protected void MenuSecretCiphersInfinite() {
+		secret_down = true;
+		if (OnMenuSecretCiphersInfinitePushed != null) {
+			OnMenuSecretCiphersInfinitePushed();
 		}
 	}
 		

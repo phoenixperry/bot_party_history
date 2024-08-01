@@ -39,6 +39,10 @@ public class MenuManager : AbstractManager
 	public override void MenuSecretCiphers() {
 		TouchTouchRevolution ();
 	}
+
+	public override void MenuSecretCiphersInfinite() {
+		TouchTouchRevolution();
+	}
 	void populateClips() {
 		for (int i = 0; i < clipNames.Count; i++) {
 			AudioClip c = Resources.Load(clipNames [i]) as AudioClip;
@@ -72,6 +76,11 @@ public class MenuManager : AbstractManager
     {
         SceneManager.LoadScene("TouchTouchTransmission", LoadSceneMode.Single);
     }
+
+	public static void TouchTouchRevolutionInfinite() {
+		SceneManager.LoadScene("TouchTouchTransmission", LoadSceneMode.Single);
+		
+	}
 
     void Update()
     {

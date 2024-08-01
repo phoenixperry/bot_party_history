@@ -15,7 +15,7 @@ public class ArdityReader : AbstractInputReader
     //queues up data to write to the serial port
     public void queueWrite(string wri)
     {
-        //Debug.Log("Writing: "+wri);
+        Debug.Log("Writing: "+wri);
         serialController.SendSerialMessage(wri+"\n");
     }
 
@@ -34,8 +34,9 @@ public class ArdityReader : AbstractInputReader
 
     //this update function simply checks if anything needs to be written. 
     void Update()
-    {
-
+    {  
+        //Debug.Log("Messages since last frame: "+messages+ " approx FPS: "+(1.0f/Time.deltaTime));
+        messages = 0;
     }
 
     void OnMessageArrived(string msg) {

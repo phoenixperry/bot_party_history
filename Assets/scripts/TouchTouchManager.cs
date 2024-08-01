@@ -58,12 +58,18 @@ public class TouchTouchManager : AbstractManager {
 	}
 
 	void success() {
+		TurnOffLEDOne ();
+		TurnOffLEDTwo ();
+		TurnOffLEDThree ();
 		score += 1;
 		gameObject.transform.Find ("TouchSound").GetComponent<AudioSource> ().clip = Sound_Success as AudioClip;
 		gameObject.transform.Find ("TouchSound").GetComponent<AudioSource> ().Play ();
 	}
 
 	void fail() {
+		TurnOffLEDOne ();
+		TurnOffLEDTwo ();
+		TurnOffLEDThree ();
 		gameObject.transform.Find ("TouchSound").GetComponent<AudioSource> ().clip = Sound_Fail as AudioClip;
 		gameObject.transform.Find ("TouchSound").GetComponent<AudioSource> ().Play ();
 	}

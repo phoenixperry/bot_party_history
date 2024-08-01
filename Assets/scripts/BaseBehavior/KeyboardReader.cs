@@ -57,5 +57,10 @@ public class KeyboardReader : AbstractInputReader {
 			MenuFreePlay ();
 		}
 
+		if (Input.GetKeyDown(KeyCode.T)) {
+			Debug.Log("T Pressed");
+			MenuSecretCiphersInfinite();
+		}
+
 	}
 }
