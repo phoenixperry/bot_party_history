@@ -104,11 +104,6 @@ float comp_z_3 = 0;
 // float comp_z_3 = 0;
 // end testing case!!!!!!!!!!!!!!!!!!!
 
-// fade code broken
-int LOOP_MAIN_TIME = 100; // set different for each ( 100, 150,200)
-int LOOP_READS_PER_LOOP = 10;
-int LOOP_LED_COUNTER = 0;
-int LOOP_LED_SKIP_EVERY = 1;
 int pulse = 0;
 int pulseSpeed = 1;
 
@@ -308,6 +303,23 @@ void sensorRead(int IMU, Adafruit_LSM303_Mag_Unified *mag, float &comp_x, float 
   }
 }
 
+/* 
+  LOOP FUNCTIONS
+  Deals with the core read/write loop.
+
+  Variables:
+    - LOOP_MAIN_TIME: How much delay between new runs of the touch data being sent.
+    - LOOP_READS_PER_LOOP: How many times the serial port is read for new e.g. LED changes between each instance of touch data being sent.
+    - LOOP_LED_SKIP_EVERY: How often the LED fades happen, versus runs of the read loop.
+    - LOOP_LED_COUNTER: DO NOT TOUCH (loop variable for tracking the above.)
+*/
+int LOOP_MAIN_TIME = 50;
+int LOOP_READS_PER_LOOP = 5;
+int LOOP_LED_SKIP_EVERY = 5;
+
+int LOOP_LED_COUNTER = 0;
+
+
 void loop(void)
 {
   if (skipBoxes == false)
@@ -404,10 +416,13 @@ void readInnerLoop() {
     readSerialFull();
     if ((LOOP_LED_COUNTER = ++LOOP_LED_COUNTER % LOOP_LED_SKIP_EVERY) == 0)
     {
-      writeLedOne();
-      writeLedTwo();
-      writeLedThree();
+      fadeLedOne();
+      fadeLedTwo();
+      fadeLedThree();
     }
+    writeLedOne();
+    writeLedTwo();    
+    writeLedThree();
     writeMotorOne();
     writeMotorTwo();
     writeMotorThree();
@@ -559,22 +574,17 @@ void ledOn(int led, int parameter)
 {
   ledSetTo(led, 255);
 }
-void ledOff(int led, int parameter)
-{
+void ledOff(int led, int parameter) {
   ledSetTo(led, 0);
 }
 
 /*
-  WRITE FUNCTIONS
-  These functions directly write to the LED and Motor pins, using data from the LED SETUP FUNCTIONS.
+  LED FADE FUNCTIONS
+  These functions deal with LED fading.
 */
-void writeLedOne()
-{
-  if (LED_1_MODE == 0)
-  {
-    // All good, just static value.
-  }
-  else if (LED_1_MODE == 1)
+
+void fadeLedOne() {
+  if (LED_1_MODE == 1)
   {
     // Fade on
     if (LED_1_PARAMETER == 0)
@@ -606,17 +616,11 @@ void writeLedOne()
       }
       LED_1_PARAMETER -= 1;
     }
-  }
-  analogWrite(PIN_LED_1, LED_1_VALUE);
-  analogWrite(PIN_LED_STRIP_1, LED_1_VALUE);
 }
-void writeLedTwo()
-{
-  if (LED_2_MODE == 0)
-  {
-    // All good, just static value.
-  }
-  else if (LED_2_MODE == 1)
+}
+
+void fadeLedTwo() {
+  if (LED_2_MODE == 1)
   {
     // Fade on
     if (LED_2_PARAMETER == 0)
@@ -649,16 +653,10 @@ void writeLedTwo()
       LED_2_PARAMETER -= 1;
     }
   }
-  analogWrite(PIN_LED_2, LED_2_VALUE);
-  analogWrite(PIN_LED_STRIP_2, LED_2_VALUE);
 }
-void writeLedThree()
-{
-  if (LED_3_MODE == 0)
-  {
-    // All good, just static value.
-  }
-  else if (LED_3_MODE == 1)
+
+void fadeLedThree() {
+  if (LED_3_MODE == 1)
   {
     // Fade on
     if (LED_3_PARAMETER == 0)
@@ -691,6 +689,24 @@ void writeLedThree()
       LED_3_PARAMETER -= 1;
     }
   }
+}
+
+/*
+  WRITE FUNCTIONS
+  These functions directly write to the LED and Motor pins, using data from the LED SETUP FUNCTIONS.
+*/
+void writeLedOne()
+{
+  analogWrite(PIN_LED_1, LED_1_VALUE);
+  analogWrite(PIN_LED_STRIP_1, LED_1_VALUE);
+}
+void writeLedTwo()
+{
+  analogWrite(PIN_LED_2, LED_2_VALUE);
+  analogWrite(PIN_LED_STRIP_2, LED_2_VALUE);
+}
+void writeLedThree()
+{
   analogWrite(PIN_LED_3, LED_3_VALUE);
   analogWrite(PIN_LED_STRIP_3, LED_3_VALUE);
 }
