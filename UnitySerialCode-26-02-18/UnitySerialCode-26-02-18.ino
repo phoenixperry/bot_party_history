@@ -532,20 +532,20 @@ bool readOneLEDInstruction(String instruction) {
       }
       return true;
 }
-
+int MOTOR_BASE_VALUE = 2;
 void ledFadeOn(int led, int parameter) {
   if (led == 1) {
     LED1_MODE = 1;
     LED1_PARAMETER = parameter;
-    MOTOR1_VALUE = parameter/5;
+    MOTOR1_VALUE = MOTOR_BASE_VALUE;
   } else if (led == 2) {
     LED2_MODE = 1;
     LED2_PARAMETER = parameter;
-    MOTOR2_VALUE = parameter/5;
+    MOTOR2_VALUE = MOTOR_BASE_VALUE;
   } else if (led == 3) {
     LED3_MODE = 1;
     LED3_PARAMETER = parameter;
-    MOTOR3_VALUE = parameter/5;
+    MOTOR3_VALUE = MOTOR_BASE_VALUE;
   }
 }
 
@@ -553,15 +553,15 @@ void ledFadeOff(int led, int parameter) {
   if (led == 1) {
     LED1_MODE = 2;
     LED1_PARAMETER = parameter;
-    MOTOR1_VALUE = parameter/5;
+    MOTOR1_VALUE = MOTOR_BASE_VALUE;
   } else if (led == 2) {
     LED2_MODE = 2;
     LED2_PARAMETER = parameter;
-    MOTOR2_VALUE = parameter/5;
+    MOTOR2_VALUE = MOTOR_BASE_VALUE;
   } else if (led == 3) {
     LED3_MODE = 2;
     LED3_PARAMETER = parameter;
-    MOTOR3_VALUE = parameter/5;
+    MOTOR3_VALUE = MOTOR_BASE_VALUE;
   }
 }
 
