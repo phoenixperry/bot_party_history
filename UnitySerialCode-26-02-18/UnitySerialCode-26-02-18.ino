@@ -3,26 +3,13 @@
 #include <Adafruit_LSM303_U.h>
 #define TCAADDR 0x70
 
-// console buttons
-int PIN_MENU_1 = 0;
-int PIN_MENU_2 = 1;
-
-// data for averages
-int avTOUCH_1_2 = 0;
-int avTOUCH_1_3 = 0;
-int avTOUCH_2_3 = 0;
-int avTOUCH_1_2_3 = 20;
-int con = 20;
-//++++++++++ FILP THIS TRUE TO SKIP OVER THE CALIBATION ROUTINE
+/*
+  CALIBRATION VARIABLES
+  - calibrated: setting this to false turns on the calibration routine.
+  - skipBoxes: tk
+*/
 bool calibrated = true;
 bool skipBoxes = false;
-
-// calibration checks
-bool started = false;
-
-bool TOUCH_2_3_calibrated = false;
-bool TOUCH_1_3_calibrated = false;
-bool TOUCH_1_2_calibrated = false;
 
 // inbetween box touching state bools
 bool TOUCH_1_2;
@@ -30,12 +17,25 @@ bool TOUCH_1_3;
 bool TOUCH_2_3;
 bool TOUCH_ALL;
 
-// pins for release !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+/*
+  PIN SETUP
+*/
+// console buttons
+int PIN_MENU_1 = 0;
+int PIN_MENU_2 = 1;
+
 // touches
 const int PIN_TOUCH_1 = A0;
 const int PIN_TOUCH_2 = A1;
 const int PIN_TOUCH_3 = A2;
-//
+
+// averages for different touches
+int avTOUCH_1_2 = 0;
+int avTOUCH_1_3 = 0;
+int avTOUCH_2_3 = 0;
+int avTOUCH_1_2_3 = 20;
+int con = 20;
+
 ////bot One vars
 int PIN_BUTTON_1 = 2;
 int PIN_LED_1 = 8;
@@ -106,11 +106,6 @@ float comp_z_3 = 0;
 
 int pulse = 0;
 int pulseSpeed = 1;
-
-int MOTOR_1_VALUE = 0;
-int MOTOR_2_VALUE = 0;
-int MOTOR_3_VALUE = 0;
-int MOTOR_BASE_VALUE = 3;
 
 /* Assign a unique ID to this sensor at the same time */
 Adafruit_LSM303_Mag_Unified mag1 = Adafruit_LSM303_Mag_Unified(PIN_IMU_1);
@@ -428,10 +423,12 @@ void readInnerLoop() {
     writeMotorThree();
 }
 
-// LED MODES:
-// 0 - Set to value
-// 1 - Fade on to 255
-// 2 - Fade off to 0
+/* 
+  LED VARIABLES
+  - ALL VARIABLES: DO NOT TOUCH (loop/management of LED variables.)
+  
+  LED modes: 0 ("set to value"), 1 ("fade on to 255"), 2 ("fade off to 0")
+*/
 int LED_1_VALUE = 0;
 int LED_1_MODE = 0;
 int LED_1_PARAMETER = 0;
@@ -443,6 +440,16 @@ int LED_2_PARAMETER = 0;
 int LED_3_VALUE = 0;
 int LED_3_MODE = 0;
 int LED_3_PARAMETER = 0;
+
+/* 
+  MOTOR VARIABLES
+  - MOTOR_BASE_VALUE: the number of inner loops the motor turns on for
+  - MOTOR_1_VALUE, MOTOR_2_VALUE, MOTOR_3_VALUE: DO NOT TOUCH (loop variables)
+*/
+int MOTOR_BASE_VALUE = 3;
+int MOTOR_1_VALUE = 0;
+int MOTOR_2_VALUE = 0;
+int MOTOR_3_VALUE = 0;
 
 /*
   READ SERIAL FUNCTIONS
@@ -582,7 +589,6 @@ void ledOff(int led, int parameter) {
   LED FADE FUNCTIONS
   These functions deal with LED fading.
 */
-
 void fadeLedOne() {
   if (LED_1_MODE == 1)
   {
@@ -750,6 +756,12 @@ void writeMotorThree()
 /* 
   CALIBRATION FUNCTIONS
 */
+bool started = false;
+
+bool TOUCH_2_3_calibrated = false;
+bool TOUCH_1_3_calibrated = false;
+bool TOUCH_1_2_calibrated = false;
+
 void calibrate()
 {
   while (!calibrated)

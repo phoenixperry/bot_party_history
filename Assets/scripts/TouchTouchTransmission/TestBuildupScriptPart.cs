@@ -41,7 +41,7 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
         successRow += 1;
 		if (currentPart == 1) {
 			SendPlayGameSound (Resources.Load ("TouchTouchTransmission/gamesounds/Success 2") as AudioClip);
-			SendNewTarget (TouchState.None, (int)Mathf.Floor(35f*getTimeReduction()), 0.6f * getTimeReduction());		} 
+			SendNewTarget (TouchState.None, (int)Mathf.Floor(35f*getTimeReduction()), 0.4f * getTimeReduction());		} 
 		else if (currentPart == 3) {
 			currentPart = 4;
 			partFour ();
@@ -51,7 +51,7 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
         successRow = 0;
 		if (currentPart == 1) {
 			SendPlayGameSound (Resources.Load ("TouchTouchTransmission/gamesounds/Fail 2") as AudioClip);
-			SendNewTarget (TouchState.None, (int)Mathf.Floor (45f * getTimeReduction ()), 0.8f * getTimeReduction ());
+			SendNewTarget (TouchState.None, (int)Mathf.Floor (45f * getTimeReduction ()), 0.4f * getTimeReduction ());
 		} else if (currentPart == 3) {
 			currentPart = 4;
 			partFour ();
@@ -81,7 +81,7 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
 		nextTime = Time.time + TouchTouchTransmission.getTotalTimeToPlay (clips);
 	}
 	void partThree() {
-		SendNewTarget (TouchState.AllConnected, 255, 0.5f);
+		SendNewTarget (TouchState.AllConnected, 255, 0.2f);
 	}
 	void partFour() {
 		List<AudioClip> clips = new List<AudioClip> () {

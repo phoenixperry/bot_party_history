@@ -70,13 +70,13 @@ public class TrainingTTTScriptPart : AbstractTTTScriptPart {
 		nextTime = Time.time + TouchTouchTransmission.getTotalTimeToPlay (clips);
 	}
 	void partTwo() {
-		SendNewTarget (TouchState.OneTwo,250, 0.2f);
+		SendNewTarget (TouchState.OneTwo,250, 0.0f);
 	}
 	void partThree() {
-		SendNewTarget (TouchState.TwoThree,250, 1);
+		SendNewTarget (TouchState.TwoThree,250, 0.0f);
 	}
 	void partFour() {
-		SendNewTarget (TouchState.OneThree,250, 1);
+		SendNewTarget (TouchState.OneThree,250, 0.0f);
 	}
 	void partFive() {
 		SendClearTargets ();

@@ -31,18 +31,18 @@ public class TestBeginningTTTScriptPart : AbstractTTTScriptPart {
 	}
 	public override void targetSuccess() {
 		SendPlayGameSound (Resources.Load ("TouchTouchTransmission/gamesounds/Success 2") as AudioClip);
-		SendNewTarget (TouchState.None, 50, 1);
+		SendNewTarget (TouchState.None, 50, 0.2f);
 	}
 	public override void targetFailure() {
 		SendPlayGameSound (Resources.Load ("TouchTouchTransmission/gamesounds/Fail 2") as AudioClip);
-		SendNewTarget (TouchState.None,70, 1);
+		SendNewTarget (TouchState.None,70, 0.2f);
 	}
 	void partOne() {
 		nextTime = Time.time + 40;
 		List<AudioClip> clips = new List<AudioClip>() { Resources.Load ("TouchTouchTransmission/dialog/Beginning Transmiss 1") as AudioClip 
 		};
 		SendPlayVoices (clips);
-		SendNewTarget (TouchState.None, 70, 1);
+		SendNewTarget (TouchState.None, 70, 1f);
 	}
 	void partTwo() {
 		List<AudioClip> clips = new List<AudioClip>() { Resources.Load ("TouchTouchTransmission/dialog/Tranmiss Insuff") as AudioClip,
