@@ -494,7 +494,7 @@ bool readSerialFull()
 
 bool readSerialOne(String instruction)
 {
-  //Serial.print("INSTRUCTION: "+instruction+"\n");
+  //Serial.print("DEBUG: "+instruction+"\n");
   int led = instruction.substring(0, 1).toInt();
   int parameter = instruction.substring(2, 5).toInt();
   char mode = instruction[1];

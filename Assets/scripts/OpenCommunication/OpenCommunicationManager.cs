@@ -10,9 +10,6 @@ public class OpenCommunicationManager : AbstractManager {
 	TouchMusicSet whichTouches;
 
 	void Start() {
-		TurnOnLEDOne ();
-		TurnOnLEDTwo ();
-		TurnOnLEDThree ();
 		bot1_sound = gameObject.transform.Find ("Bots").Find ("Bot1").gameObject;
 		bot2_sound = gameObject.transform.Find ("Bots").Find ("Bot2").gameObject;
 		bot3_sound = gameObject.transform.Find ("Bots").Find ("Bot3").gameObject;
@@ -20,6 +17,9 @@ public class OpenCommunicationManager : AbstractManager {
 		markov_piano = new TestMarkovMusic (noteasy.text);
 		whichTouches = TouchMusicSet.Animal;
 		setTouchSound (whichTouches);
+		TurnOnLEDOne ();
+		TurnOnLEDTwo ();
+		TurnOnLEDThree ();
 
 	}
 	public void setTouchSound(TouchMusicSet which) {
