@@ -19,22 +19,35 @@ public class TestIntermediateTTTScriptPart : AbstractTTTScriptPart {
 		gameObject.transform.Find("Inter").Find ("InterBass").GetComponent<HelmSequencer> ().enabled = false;
 		gameObject.transform.Find("Inter").Find ("InterDrum").GetComponent<SampleSequencer> ().enabled = false;
 	}
+	bool readyToMoveOn = false;
 	void Update() {
 		if (currentPart == 1 && nextTime <= Time.time) {
+			readyToMoveOn = true;
+		} else if (currentPart == 2 && nextTime <= Time.time) {
+			readyToMoveOn = true;
+		}
+	}
+	bool checkMoveOn() {
+		if (readyToMoveOn && currentPart == 1) { 
 			partTwo ();
 			currentPart = 2;
-		} else if (currentPart == 2 && nextTime <= Time.time) {
+			return true;
+		} else if (readyToMoveOn && currentPart == 2) {
 			SendClearTargets ();
 			SendEndScriptPart ();
+			return true;
 		}
+		return false;
 	}
 	public override void targetSuccess() {
 		SendPlayGameSound (Resources.Load ("TouchTouchTransmission/gamesounds/Success 2") as AudioClip);
-		SendNewTarget (TouchState.None, 40, 0.5f);
+		if (checkMoveOn()) { return; }
+		SendNewTarget (TouchState.None, 80, 0.5f);
 	}
 	public override void targetFailure() {
 		SendPlayGameSound (Resources.Load ("TouchTouchTransmission/gamesounds/Fail 2") as AudioClip);
-		SendNewTarget (TouchState.None,60, 0.5f);
+		if (checkMoveOn()) { return; }
+		SendNewTarget (TouchState.None,100, 0.5f);
 	}
 	void partOne() {
 		nextTime = Time.time + 35;
