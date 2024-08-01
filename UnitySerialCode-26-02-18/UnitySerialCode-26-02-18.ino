@@ -310,7 +310,7 @@ void sensorRead(int IMU, Adafruit_LSM303_Mag_Unified *mag, float &comp_x, float 
     - LOOP_LED_SKIP_EVERY: How often the LED fades happen, versus runs of the read loop.
     - LOOP_LED_COUNTER: DO NOT TOUCH (loop variable for tracking the above.)
 */
-int LOOP_MAIN_TIME = 2000;
+int LOOP_MAIN_TIME = 50;
 int LOOP_READS_PER_LOOP = 5;
 int LOOP_LED_SKIP_EVERY = 10;
 
