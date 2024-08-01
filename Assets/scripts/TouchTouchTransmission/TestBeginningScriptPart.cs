@@ -25,7 +25,8 @@ public class TestBeginningTTTScriptPart : AbstractTTTScriptPart {
 		if (currentPart == 1 && nextTime <= Time.time) {
 			readyToMoveOn = true;
 		} else if (currentPart == 2 && nextTime <= Time.time) {
-			readyToMoveOn = true;
+			SendClearTargets ();
+			SendEndScriptPart ();
 		}
 	}
 
@@ -33,10 +34,7 @@ public class TestBeginningTTTScriptPart : AbstractTTTScriptPart {
 		if (readyToMoveOn && currentPart == 1) { 
 			partTwo ();
 			currentPart = 2;
-			return true;
-		} else if (readyToMoveOn && currentPart == 2) {
-			SendClearTargets ();
-			SendEndScriptPart ();
+			readyToMoveOn = false;
 			return true;
 		}
 		return false;
@@ -44,12 +42,12 @@ public class TestBeginningTTTScriptPart : AbstractTTTScriptPart {
 	public override void targetSuccess() {
 		SendPlayGameSound (Resources.Load ("TouchTouchTransmission/gamesounds/Success 2") as AudioClip);
 		if (checkMoveOn()) { return; }
-		SendNewTarget (TouchState.None, 80, 0.5f);
+		SendNewTarget (TouchState.None, 80, 1f);
 	}
 	public override void targetFailure() {
 		SendPlayGameSound (Resources.Load ("TouchTouchTransmission/gamesounds/Fail 2") as AudioClip);
 		if (checkMoveOn()) { return; }
-		SendNewTarget (TouchState.None,100, 0.5f);
+		SendNewTarget (TouchState.None,100, 1f);
 	}
 	void partOne() {
 		nextTime = Time.time + 40;

@@ -9,6 +9,7 @@
   - skipBoxes: tk
 */
 bool calibrated = true;
+bool RUN_COMPASS = true;
 
 // inbetween box touching state bools
 bool TOUCH_1_2;
@@ -193,7 +194,7 @@ void setup()
   //  Serial.println("Hi");
   //  Serial.println("mag Test"); Serial.println("");
 
-  
+  if (RUN_COMPASS) {
   // /* Initialise the 1st sensor */
    tcaselect(PIN_IMU_1);
    mag1.begin();
@@ -227,6 +228,7 @@ void setup()
      Serial.println("Ooops, no LM303 3 detected ... Check your wiring!");
     // while (1);
    }
+  }
 
   //  /* Display some basic information on this sensor */
   //  tcaselect(IMU);
@@ -269,11 +271,13 @@ int readTouches(int pin1, int pin2)
 void sensorRead(int IMU, Adafruit_LSM303_Mag_Unified *mag, float &comp_x, float &comp_y, float &comp_z, String botID, int led, int btn)
 {
 
-  sensors_event_t event;
-  tcaselect(IMU);
-  mag->getEvent(&event);
+  if (RUN_COMPASS) { 
+    sensors_event_t event;
+    tcaselect(IMU);
+    mag->getEvent(&event);
 
-  int heading = run_compass(mag,comp_x,comp_y,comp_z);
+    int heading = run_compass(mag,comp_x,comp_y,comp_z);
+  }
   Serial.print(botID);
   Serial.print(" ");
   Serial.print(100);
@@ -468,7 +472,7 @@ bool readSerialFull()
   do 
   {
     bufferLength = Serial.available();
-    if (bufferLength > 96) { bufferLength = 96; }
+    if (bufferLength > 90) { bufferLength = 90; } // For safety - so we don't fall off the end of it.
     char dataRaw[100];
     //Serial.print("Reading!");
     Serial.readBytes(dataRaw, bufferLength);
@@ -476,7 +480,7 @@ bool readSerialFull()
     data = String(dataRaw);
     int i = 0;
 
-    while (i < bufferLength)
+    while (i < bufferLength - 5)
     {
       if (data[i] == 'X')
       {

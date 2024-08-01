@@ -24,17 +24,15 @@ public class TestIntermediateTTTScriptPart : AbstractTTTScriptPart {
 		if (currentPart == 1 && nextTime <= Time.time) {
 			readyToMoveOn = true;
 		} else if (currentPart == 2 && nextTime <= Time.time) {
-			readyToMoveOn = true;
+			SendClearTargets ();
+			SendEndScriptPart ();
 		}
 	}
 	bool checkMoveOn() {
 		if (readyToMoveOn && currentPart == 1) { 
 			partTwo ();
 			currentPart = 2;
-			return true;
-		} else if (readyToMoveOn && currentPart == 2) {
-			SendClearTargets ();
-			SendEndScriptPart ();
+			readyToMoveOn = false;
 			return true;
 		}
 		return false;
@@ -42,16 +40,16 @@ public class TestIntermediateTTTScriptPart : AbstractTTTScriptPart {
 	public override void targetSuccess() {
 		SendPlayGameSound (Resources.Load ("TouchTouchTransmission/gamesounds/Success 2") as AudioClip);
 		if (checkMoveOn()) { return; }
-		SendNewTarget (TouchState.None, 80, 0.5f);
+		SendNewTarget (TouchState.None, 60, 0.75f);
 	}
 	public override void targetFailure() {
 		SendPlayGameSound (Resources.Load ("TouchTouchTransmission/gamesounds/Fail 2") as AudioClip);
 		if (checkMoveOn()) { return; }
-		SendNewTarget (TouchState.None,100, 0.5f);
+		SendNewTarget (TouchState.None,80, 0.75f);
 	}
 	void partOne() {
 		nextTime = Time.time + 35;
-		SendNewTarget (TouchState.None, 50, 0.5f);
+		SendNewTarget (TouchState.None, 60, 0.75f);
 	}
 	void partTwo() {
 		List<AudioClip> clips = new List<AudioClip>() { Resources.Load ("TouchTouchTransmission/dialog/Tranmiss Op Engage Accel") as AudioClip 

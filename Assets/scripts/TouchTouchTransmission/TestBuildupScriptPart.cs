@@ -11,7 +11,7 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
 	int currentPart = 0;
     int successRow = 0;
     const float speedReductionFactor = 1 / 6;
-    const float speedReductionMin = 0.4f;
+    const float speedReductionMin = 0.6f;
 	public override void startPart() {
 		gameObject.transform.Find("Resol").Find ("ResolBass").GetComponent<HelmSequencer> ().enabled = true;
 		gameObject.transform.Find("Resol").Find ("ResolLead").GetComponent<HelmSequencer> ().enabled = true;
@@ -41,7 +41,7 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
         successRow += 1;
 		if (currentPart == 1) {
 			SendPlayGameSound (Resources.Load ("TouchTouchTransmission/gamesounds/Success 2") as AudioClip);
-			SendNewTarget (TouchState.None, (int)Mathf.Floor(35f*getTimeReduction()), 0.5f * getTimeReduction());		} 
+			SendNewTarget (TouchState.None, (int)Mathf.Floor(50f*getTimeReduction()), 0.7f * getTimeReduction());		} 
 		else if (currentPart == 3) {
 			currentPart = 4;
 			partFour ();
@@ -51,7 +51,7 @@ public class TestBuildupTTTScriptPart : AbstractTTTScriptPart {
         successRow = 0;
 		if (currentPart == 1) {
 			SendPlayGameSound (Resources.Load ("TouchTouchTransmission/gamesounds/Fail 2") as AudioClip);
-			SendNewTarget (TouchState.None, (int)Mathf.Floor (45f * getTimeReduction ()), 0.5f * getTimeReduction ());
+			SendNewTarget (TouchState.None, (int)Mathf.Floor (70f * getTimeReduction ()), 0.7f * getTimeReduction ());
 		} else if (currentPart == 3) {
 			currentPart = 4;
 			partFour ();
