@@ -17,10 +17,14 @@ public class OpenCommunicationManager : AbstractManager {
 		markov_piano = new TestMarkovMusic (noteasy.text);
 		whichTouches = TouchMusicSet.Animal;
 		setTouchSound (whichTouches);
+		StartCoroutine(delayLEDTurnOn());
+	}
+
+	IEnumerator delayLEDTurnOn() {
+		yield return new WaitForSeconds(0.3f);
 		TurnOnLEDOne ();
 		TurnOnLEDTwo ();
 		TurnOnLEDThree ();
-
 	}
 	public void setTouchSound(TouchMusicSet which) {
 		if (which == TouchMusicSet.None) {
