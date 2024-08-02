@@ -92,6 +92,7 @@ public class ArdityReader : AbstractInputReader
         {
             // Menu Button update
             MenuButtonState newMenu = new MenuButtonState(sensors[1], sensors[2]);
+            Debug.Log("DEBUG: Menu Buttons: "+sensors[1]+"/"+sensors[2]);
             if (menu_state.def)
             {
                 if (newMenu.oc && !menu_state.oc)
