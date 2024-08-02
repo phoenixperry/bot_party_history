@@ -23,6 +23,11 @@ public class TouchTouchTransmission : AbstractManager {
 		last_menu_secret = Time.time;
 	}
 
+		
+	public void MenuBypass() {
+		MenuManager.Menu();
+	}
+
 	public static List<AudioClip> binaryToClips(int number) {
 		List<AudioClip> lst = new List<AudioClip>();
 		if (number < 0 || number > 255) {

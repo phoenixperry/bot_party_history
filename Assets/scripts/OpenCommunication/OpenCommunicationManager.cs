@@ -310,4 +310,8 @@ public class OpenCommunicationManager : AbstractManager {
 		}
 		last_menu_freeplay = Time.time;
 	}
+
+	public void MenuBypass() {
+		MenuManager.Menu();
+	}
 }
