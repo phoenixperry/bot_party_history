@@ -22,7 +22,7 @@ bool TOUCH_ALL;
 */
 // console buttons
 int PIN_MENU_1 = 0;
-int PIN_MENU_2 = 1;
+int PIN_MENU_2 = 17;
 
 // touches
 const int PIN_TOUCH_1 = A0;
