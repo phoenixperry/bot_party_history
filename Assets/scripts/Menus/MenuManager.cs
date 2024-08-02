@@ -21,6 +21,14 @@ public class MenuManager : AbstractManager
 		AudioSource speaker = gameObject.transform.Find ("RandomSound").GetComponent<AudioSource> ();
 		speaker.clip = Resources.Load ("Menu/capage-drafts/Standby Mode Initiated") as AudioClip;
 		speaker.Play ();
+		StartCoroutine(delayLEDTurnOn());
+	}
+
+	IEnumerator delayLEDTurnOn() {
+		yield return new WaitForSeconds(2f);
+		TurnOnLEDOne ();
+		TurnOnLEDTwo ();
+		TurnOnLEDThree ();
 	}
 	void OnEnable() {
 		base.OnEnable ();
