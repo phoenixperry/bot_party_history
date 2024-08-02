@@ -353,7 +353,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243007930724134922, guid: 158f54de10885d445bb1394b26cdc210,
     type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 302614730}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -821,7 +821,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243595278871154204, guid: 158f54de10885d445bb1394b26cdc210,
     type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 1568360233}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -920,6 +920,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bpm_: 120
+--- !u!83 &302614730
+AudioClip:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: helm
+  m_LoadType: 0
+  m_Channels: 1
+  m_Frequency: 48000
+  m_BitsPerSample: 32
+  m_Length: 0
+  m_IsTrackerFormat: 0
+  m_Ambisonic: 0
+  m_SubsoundIndex: 0
+  m_PreloadAudioData: 1
+  m_LoadInBackground: 0
+  m_Legacy3D: 0
+  m_Resource:
+    m_Source: 
+    m_Offset: 0
+    m_Size: 0
+  m_CompressionFormat: 0
+  m_EditorResource:
+    m_Source: 
+    m_Offset: 0
+    m_Size: 0
+  m_EditorCompressionFormat: 0
 --- !u!1 &320807935
 GameObject:
   m_ObjectHideFlags: 0
@@ -1276,7 +1304,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243983480382985750, guid: 158f54de10885d445bb1394b26cdc210,
     type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 849088670}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1638,6 +1666,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f6faed88bb01468fb8fd49178ba50fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!83 &386946831
+AudioClip:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: helm
+  m_LoadType: 0
+  m_Channels: 1
+  m_Frequency: 48000
+  m_BitsPerSample: 32
+  m_Length: 0
+  m_IsTrackerFormat: 0
+  m_Ambisonic: 0
+  m_SubsoundIndex: 0
+  m_PreloadAudioData: 1
+  m_LoadInBackground: 0
+  m_Legacy3D: 0
+  m_Resource:
+    m_Source: 
+    m_Offset: 0
+    m_Size: 0
+  m_CompressionFormat: 0
+  m_EditorResource:
+    m_Source: 
+    m_Offset: 0
+    m_Size: 0
+  m_EditorCompressionFormat: 0
 --- !u!1 &401392104
 GameObject:
   m_ObjectHideFlags: 0
@@ -2218,6 +2274,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bpm_: 120
+--- !u!83 &568813002
+AudioClip:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: helm
+  m_LoadType: 0
+  m_Channels: 1
+  m_Frequency: 48000
+  m_BitsPerSample: 32
+  m_Length: 0
+  m_IsTrackerFormat: 0
+  m_Ambisonic: 0
+  m_SubsoundIndex: 0
+  m_PreloadAudioData: 1
+  m_LoadInBackground: 0
+  m_Legacy3D: 0
+  m_Resource:
+    m_Source: 
+    m_Offset: 0
+    m_Size: 0
+  m_CompressionFormat: 0
+  m_EditorResource:
+    m_Source: 
+    m_Offset: 0
+    m_Size: 0
+  m_EditorCompressionFormat: 0
 --- !u!1001 &622769078
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3717,7 +3801,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243152823895745808, guid: 158f54de10885d445bb1394b26cdc210,
     type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 1908829957}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -3816,6 +3900,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bpm_: 120
+--- !u!83 &849088670
+AudioClip:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: helm
+  m_LoadType: 0
+  m_Channels: 1
+  m_Frequency: 48000
+  m_BitsPerSample: 32
+  m_Length: 0
+  m_IsTrackerFormat: 0
+  m_Ambisonic: 0
+  m_SubsoundIndex: 0
+  m_PreloadAudioData: 1
+  m_LoadInBackground: 0
+  m_Legacy3D: 0
+  m_Resource:
+    m_Source: 
+    m_Offset: 0
+    m_Size: 0
+  m_CompressionFormat: 0
+  m_EditorResource:
+    m_Source: 
+    m_Offset: 0
+    m_Size: 0
+  m_EditorCompressionFormat: 0
 --- !u!1 &934549511 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1000012649501230, guid: f411c93fc0bd3b146a2c8fa8915b6c3e,
@@ -4552,6 +4664,34 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!83 &986975873
+AudioClip:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: helm
+  m_LoadType: 0
+  m_Channels: 1
+  m_Frequency: 48000
+  m_BitsPerSample: 32
+  m_Length: 0
+  m_IsTrackerFormat: 0
+  m_Ambisonic: 0
+  m_SubsoundIndex: 0
+  m_PreloadAudioData: 1
+  m_LoadInBackground: 0
+  m_Legacy3D: 0
+  m_Resource:
+    m_Source: 
+    m_Offset: 0
+    m_Size: 0
+  m_CompressionFormat: 0
+  m_EditorResource:
+    m_Source: 
+    m_Offset: 0
+    m_Size: 0
+  m_EditorCompressionFormat: 0
 --- !u!1 &1055986026
 GameObject:
   m_ObjectHideFlags: 0
@@ -4621,6 +4761,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!83 &1058573388
+AudioClip:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: helm
+  m_LoadType: 0
+  m_Channels: 1
+  m_Frequency: 48000
+  m_BitsPerSample: 32
+  m_Length: 0
+  m_IsTrackerFormat: 0
+  m_Ambisonic: 0
+  m_SubsoundIndex: 0
+  m_PreloadAudioData: 1
+  m_LoadInBackground: 0
+  m_Legacy3D: 0
+  m_Resource:
+    m_Source: 
+    m_Offset: 0
+    m_Size: 0
+  m_CompressionFormat: 0
+  m_EditorResource:
+    m_Source: 
+    m_Offset: 0
+    m_Size: 0
+  m_EditorCompressionFormat: 0
 --- !u!1 &1106026576
 GameObject:
   m_ObjectHideFlags: 0
@@ -5892,7 +6060,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243107507763435488, guid: 158f54de10885d445bb1394b26cdc210,
     type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 386946831}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -6370,7 +6538,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243641942890444102, guid: 158f54de10885d445bb1394b26cdc210,
     type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 986975873}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -6663,6 +6831,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bpm_: 120
+--- !u!83 &1568360233
+AudioClip:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: helm
+  m_LoadType: 0
+  m_Channels: 1
+  m_Frequency: 48000
+  m_BitsPerSample: 32
+  m_Length: 0
+  m_IsTrackerFormat: 0
+  m_Ambisonic: 0
+  m_SubsoundIndex: 0
+  m_PreloadAudioData: 1
+  m_LoadInBackground: 0
+  m_Legacy3D: 0
+  m_Resource:
+    m_Source: 
+    m_Offset: 0
+    m_Size: 0
+  m_CompressionFormat: 0
+  m_EditorResource:
+    m_Source: 
+    m_Offset: 0
+    m_Size: 0
+  m_EditorCompressionFormat: 0
 --- !u!1 &1614132335
 GameObject:
   m_ObjectHideFlags: 0
@@ -6880,7 +7076,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243458445077112644, guid: 158f54de10885d445bb1394b26cdc210,
     type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 1058573388}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -7451,7 +7647,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243834198768937588, guid: 158f54de10885d445bb1394b26cdc210,
     type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 568813002}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -7550,6 +7746,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bpm_: 120
+--- !u!83 &1908829957
+AudioClip:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: helm
+  m_LoadType: 0
+  m_Channels: 1
+  m_Frequency: 48000
+  m_BitsPerSample: 32
+  m_Length: 0
+  m_IsTrackerFormat: 0
+  m_Ambisonic: 0
+  m_SubsoundIndex: 0
+  m_PreloadAudioData: 1
+  m_LoadInBackground: 0
+  m_Legacy3D: 0
+  m_Resource:
+    m_Source: 
+    m_Offset: 0
+    m_Size: 0
+  m_CompressionFormat: 0
+  m_EditorResource:
+    m_Source: 
+    m_Offset: 0
+    m_Size: 0
+  m_EditorCompressionFormat: 0
 --- !u!1 &1920176128
 GameObject:
   m_ObjectHideFlags: 0
@@ -7587,8 +7811,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2, y: 57}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -2, y: 0}
+  m_SizeDelta: {x: 480, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &1920176130
 MeshRenderer:
