@@ -4,125 +4,102 @@
 #define TCAADDR 0x70
 
 /*
-  CALIBRATION VARIABLES
-  - calibrated: setting this to false turns on the calibration routine.
-  - skipBoxes: tk
+  CALIBRATION AND DEBUG VARIABLES
+    - DEBUG_CALIBRATED: setting this to false turns on the calibration routine.
+    - DEBUG_RUN_COMPASS: disables or enables the reading from the IMU
+    - DEBUG_SKIP_BOXES: skips the sending of sensor data in the main loop
 */
-bool calibrated = true;
-bool RUN_COMPASS = true;
+bool DEBUG_CALIBRATED = true;
+bool DEBUG_RUN_COMPASS = true;
+bool DEBUG_SKIP_BOXES = false;
+bool DEBUG_ENABLE_MOTORS;
 
-// inbetween box touching state bools
+/*
+  PIN SETUP
+    Change these variables to represent how your arduino is wired.
+*/
+
+int PIN_MENU_1 = 0;
+int PIN_MENU_2 = 17;
+
+const int PIN_TOUCH_1 = A0;
+const int PIN_TOUCH_2 = A1;
+const int PIN_TOUCH_3 = A2;
+
+int PIN_BUTTON_1 = 2;
+int PIN_LED_1 = 8;
+int PIN_LED_STRIP_1 = 11; 
+int PIN_IMU_1 = 5;
+int PIN_MOTOR_1 = 5; 
+
+int PIN_BUTTON_2 = 3;
+int PIN_LED_2 = 9;
+int PIN_LED_STRIP_2 = 12; 
+int PIN_IMU_2 = 6;
+int PIN_MOTOR_2 = 6; 
+
+int PIN_BUTTON_3 = 4;
+int PIN_LED_3 = 10;
+int PIN_LED_STRIP_3 = 13; 
+int PIN_IMU_3 = 7;
+int PIN_MOTOR_3 = 7; 
+
+/*
+  STATE VARIABLES
+    ***DO NOT TOUCH THESE*** 
+    These global variables store the last-obtained sensor data.
+*/
+
 bool TOUCH_1_2;
 bool TOUCH_1_3;
 bool TOUCH_2_3;
 bool TOUCH_ALL;
 
+String OUTPUTSTRING_1 = "botOne";
+float comp_x_1 = 0;
+float comp_y_1 = 0;
+float comp_z_1 = 0;
+
+String OUTPUTSTRING_2 = "botTwo";
+float comp_x_2 = 0;
+float comp_y_2 = 0;
+float comp_z_2 = 0;
+
+String OUTPUTSTRING_3 = "botThree";
+float comp_x_3 = 0;
+float comp_y_3 = 0;
+float comp_z_3 = 0;
+
 /*
-  PIN SETUP
+TOUCH SETUP
+  These correspond to the voltages/etc for the touch sensors.
 */
-// console buttons
-int PIN_MENU_1 = 0;
-int PIN_MENU_2 = 17;
-
-// touches
-const int PIN_TOUCH_1 = A0;
-const int PIN_TOUCH_2 = A1;
-const int PIN_TOUCH_3 = A2;
-
-// averages for different touches
 int avTOUCH_1_2 = 0;
 int avTOUCH_1_3 = 0;
 int avTOUCH_2_3 = 0;
 int avTOUCH_1_2_3 = 20;
 int con = 20;
 
-////bot One vars
-int PIN_BUTTON_1 = 2;
-int PIN_LED_1 = 8;
-int PIN_LED_STRIP_1 = 11; // PP: Change this!
-int PIN_IMU_1 = 5;
-int PIN_MOTOR_1 = 5; // PP: Change this!
-String OUTPUTSTRING_1 = "botOne";
-float comp_x_1 = 0;
-float comp_y_1 = 0;
-float comp_z_1 = 0;
-//
-////bot Two vars
-int PIN_BUTTON_2 = 3;
-int PIN_LED_2 = 9;
-int PIN_LED_STRIP_2 = 12; // PP: Change this!
-int PIN_IMU_2 = 6;
-int PIN_MOTOR_2 = 6; // PP: Change this!
-String OUTPUTSTRING_2 = "botTwo";
-float comp_x_2 = 0;
-float comp_y_2 = 0;
-float comp_z_2 = 0;
-//
-//
-////bot Three vars
-int PIN_BUTTON_3 = 4;
-int PIN_LED_3 = 10;
-int PIN_LED_STRIP_3 = 13; // PP: Change this!
-int PIN_IMU_3 = 7;
-int PIN_MOTOR_3 = 7; // PP: Change this!
-String OUTPUTSTRING_3 = "botThree";
-float comp_x_3 = 0;
-float comp_y_3 = 0;
-float comp_z_3 = 0;
-
-// pins for testing!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-// touches
-//  const int box1 = A2;
-//  const int box2 = A0;
-//  const int box3 = A1;
-
-// //bot One vars
-// int btn_1 = 8;
-// int led_1 = 9;
-// int IMU_1 = 3;
-// String botOne = "botOne";
-// float comp_x_1 = 0;
-// float comp_y_1 = 0;
-// float comp_z_1 = 0;
-
-// //bot Two vars
-// int btn_2 = 13;
-// int led_2 = 11;
-// int IMU_2 = 2;
-// String botTwo = "botTwo";
-// float comp_x_2 = 0;
-// float comp_y_2 = 0;
-// float comp_z_2 = 0;
-
-// //bot Three vars
-// int btn_3 = 12;
-// int led_3 = 10;
-// int IMU_3 = 4;
-// String botThree = "botThree";
-// float comp_x_3 = 0;
-// float comp_y_3 = 0;
-// float comp_z_3 = 0;
-// end testing case!!!!!!!!!!!!!!!!!!!
-
-int pulse = 0;
-int pulseSpeed = 1;
-
-/* Assign a unique ID to this sensor at the same time */
+/*
+  IMUs
+    These objects represent each IMU in turn.
+*/
 Adafruit_LSM303_Mag_Unified mag1 = Adafruit_LSM303_Mag_Unified(PIN_IMU_1);
 Adafruit_LSM303_Mag_Unified mag2 = Adafruit_LSM303_Mag_Unified(PIN_IMU_2);
 Adafruit_LSM303_Mag_Unified mag3 = Adafruit_LSM303_Mag_Unified(PIN_IMU_3);
 
+/*
+  FUNCTION HEADERS
+*/
 void sensorRead(int IMU, Adafruit_LSM303_Mag_Unified *mag, float &comp_x, float &comp_y, float &comp_z, String &botID, int &led, int &btn);
-
 bool readSerialFull();
-
 bool inRange(int val, int minimum, int maximum);
-// launches the calibration routine
 void calibrate();
-
-// calibrates the boxes during the calibration routine
 int calibrateBoxes(int box_a, int box_b);
 
+/*
+  SENSOR UTILITY FUNCTIONS
+*/
 void displaySensorDetails(Adafruit_LSM303_Mag_Unified *mag)
 {
   sensor_t sensor;
@@ -179,6 +156,10 @@ bool inRange(int val, int minimum, int maximum)
   return ((minimum <= val) && (val <= maximum));
 }
 
+/*
+  BEGINNING SETUP
+*/
+
 void setup()
 {
   Serial.begin(115200);
@@ -194,7 +175,7 @@ void setup()
   //  Serial.println("Hi");
   //  Serial.println("mag Test"); Serial.println("");
 
-  if (RUN_COMPASS) {
+  if (DEBUG_RUN_COMPASS) {
   // /* Initialise the 1st sensor */
    tcaselect(PIN_IMU_1);
    mag1.begin();
@@ -242,7 +223,7 @@ void setup()
 
 /* 
   SENSOR FUNCTIONS
-  These functions deal with getting sensor data for touch and the accelerometers.
+    These functions deal with getting sensor data for touch and the accelerometers.
 */
 int readTouches(int pin1, int pin2)
 {
@@ -271,13 +252,14 @@ int readTouches(int pin1, int pin2)
 void sensorRead(int IMU, Adafruit_LSM303_Mag_Unified *mag, float &comp_x, float &comp_y, float &comp_z, String botID, int led, int btn)
 {
 
-  if (RUN_COMPASS) { 
+  if (DEBUG_RUN_COMPASS) { 
     sensors_event_t event;
     tcaselect(IMU);
     mag->getEvent(&event);
 
     int heading = run_compass(mag,comp_x,comp_y,comp_z);
   }
+
   Serial.print(botID);
   Serial.print(" ");
   Serial.print(100);
@@ -301,13 +283,11 @@ void sensorRead(int IMU, Adafruit_LSM303_Mag_Unified *mag, float &comp_x, float 
 
 /* 
   LOOP FUNCTIONS
-  Deals with the core read/write loop.
-
-  Variables:
-    - LOOP_MAIN_TIME: How much delay between new runs of the touch data being sent.
-    - LOOP_READS_PER_LOOP: How many times the serial port is read for new e.g. LED changes between each instance of touch data being sent.
-    - LOOP_LED_SKIP_EVERY: How often the LED fades happen, versus runs of the read loop.
-    - LOOP_LED_COUNTER: DO NOT TOUCH (loop variable for tracking the above.)
+    Deals with the core read/write loop.
+      - LOOP_MAIN_TIME: How much delay between new runs of the touch data being sent.
+      - LOOP_READS_PER_LOOP: How many times the serial port is read for new e.g. LED changes between each instance of touch data being sent.
+      - LOOP_LED_SKIP_EVERY: How often the LED fades happen, versus runs of the read loop.
+      - LOOP_LED_COUNTER: DO NOT TOUCH (loop variable for tracking the above.)
 */
 int LOOP_MAIN_TIME = 50;
 int LOOP_READS_PER_LOOP = 5;
@@ -315,13 +295,9 @@ int LOOP_LED_SKIP_EVERY = 10;
 
 int LOOP_LED_COUNTER = 0;
 
-
-// To turn off the loop
-bool skipBoxes = false;
-
 void loop(void)
 {
-    if (skipBoxes) { return; }
+    if (DEBUG_SKIP_BOXES) { return; }
     sensorRead(PIN_IMU_1, &mag1, comp_x_1, comp_y_1, comp_z_1, "botOne", PIN_LED_1, PIN_BUTTON_1);
     sensorRead(PIN_IMU_2, &mag2, comp_x_2, comp_y_2, comp_z_2, "botTwo", PIN_LED_2, PIN_BUTTON_2);
     sensorRead(PIN_IMU_3, &mag3, comp_x_3, comp_y_3, comp_z_3, "botThree", PIN_LED_3, PIN_BUTTON_3);
@@ -344,12 +320,11 @@ void writePinInnerLoop() {
     writeLedTwo();    
     writeLedThree();
     
-    /*
-      // Motors disabled.
+    if (DEBUG_ENABLE_MOTORS) {
       writeMotorOne();
       writeMotorTwo();
       writeMotorThree();
-    */
+    }
 }
 
 void menuInnerLoop() {
@@ -384,7 +359,6 @@ void touchInnerLoop() {
       Serial.println(1);
     else
       Serial.println(0);
-    // Serial.println(TOUCH_1_2);
 
     ar = readTouches(PIN_TOUCH_1, PIN_TOUCH_3);
     ar = map(ar, 0, 1024, 0, 10);
@@ -394,7 +368,6 @@ void touchInnerLoop() {
       Serial.println(1);
     else
       Serial.println(0);
-    //       Serial.println(TOUCH_1_3);
 
     ar = readTouches(PIN_TOUCH_2, PIN_TOUCH_3);
     ar = map(ar, 0, 1024, 0, 10);
@@ -434,9 +407,8 @@ bool readInnerLoop() {
 
 /* 
   LED VARIABLES
-  - ALL VARIABLES: DO NOT TOUCH (loop/management of LED variables.)
-  
-  LED modes: 0 ("set to value"), 1 ("fade on to 255"), 2 ("fade off to 0")
+    - ALL VARIABLES: DO NOT TOUCH (loop/management of LED variables.)
+    LED modes: 0 ("set to value"), 1 ("fade on to 255"), 2 ("fade off to 0")
 */
 int LED_1_VALUE = 0;
 int LED_1_MODE = 0;
@@ -452,8 +424,8 @@ int LED_3_PARAMETER = 0;
 
 /* 
   MOTOR VARIABLES
-  - MOTOR_BASE_VALUE: the number of inner loops the motor turns on for
-  - MOTOR_1_VALUE, MOTOR_2_VALUE, MOTOR_3_VALUE: DO NOT TOUCH (loop variables)
+    - MOTOR_BASE_VALUE: the number of inner loops the motor turns on for
+    - MOTOR_1_VALUE, MOTOR_2_VALUE, MOTOR_3_VALUE: DO NOT TOUCH (loop variables)
 */
 int MOTOR_BASE_VALUE = 3;
 int MOTOR_1_VALUE = 0;
@@ -462,7 +434,7 @@ int MOTOR_3_VALUE = 0;
 
 /*
   READ SERIAL FUNCTIONS
-  These functions handle the incoming serial data.
+    These functions handle the incoming serial data.
 */
 bool serialChange = false;
 
@@ -518,7 +490,7 @@ bool readSerialOne(String instruction)
 
 /*
   LED SETUP FUNCTIONS
-  These functions set up LED (and motor) actions to then be processed by the WRITE FUNCTIONS.
+    These functions set up LED (and motor) actions to then be processed by the WRITE FUNCTIONS.
 */
 void ledFadeOn(int led, int parameter)
 {
@@ -593,12 +565,11 @@ void ledOff(int led, int parameter) {
 
 /*
   LED FADE FUNCTIONS
-  These functions deal with LED fading.
+    These functions deal with LED fading.
 */
 void fadeLedOne() {
   if (LED_1_MODE == 1)
   {
-    // Fade on
     if (LED_1_PARAMETER == 0)
     {
       ledOn(1, 0);
@@ -634,7 +605,6 @@ void fadeLedOne() {
 void fadeLedTwo() {
   if (LED_2_MODE == 1)
   {
-    // Fade on
     if (LED_2_PARAMETER == 0)
     {
       ledOn(2, 0);
@@ -670,7 +640,6 @@ void fadeLedTwo() {
 void fadeLedThree() {
   if (LED_3_MODE == 1)
   {
-    // Fade on
     if (LED_3_PARAMETER == 0)
     {
       ledOn(3, 0);
@@ -705,7 +674,7 @@ void fadeLedThree() {
 
 /*
   WRITE FUNCTIONS
-  These functions directly write to the LED and Motor pins, using data from the LED SETUP FUNCTIONS.
+    These functions directly write to the LED and Motor pins, using data from the LED SETUP FUNCTIONS.
 */
 void writeLedOne()
 {
@@ -770,9 +739,8 @@ bool TOUCH_1_2_calibrated = false;
 
 void calibrate()
 {
-  while (!calibrated)
+  while (!DEBUG_CALIBRATED)
   {
-    // put your main code here, to run repeatedly:
     String incoming = Serial.readStringUntil('\n');
 
     if (started == false)
@@ -816,11 +784,12 @@ void calibrate()
       Serial.println(avTOUCH_2_3);
       Serial.println("That's it! We're about to start up data sending!");
       TOUCH_2_3_calibrated = true;
-      calibrated = true;
+      DEBUG_CALIBRATED = true;
       delay(1500);
     }
   }
 }
+
 int calibrateBoxes(int box_a, int box_b)
 {
   Serial.println("You've got 2 seconds to touch boxes! Starting up");
