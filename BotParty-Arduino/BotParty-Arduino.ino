@@ -435,6 +435,13 @@ int MOTOR_3_VALUE = 0;
 /*
   READ SERIAL FUNCTIONS
     These functions handle the incoming serial data.
+
+    The format for LED commands is:
+      X[LED][MODE][Parameter], where:
+        - X is the "start of instruction" command.
+        - [LED] is the LED number in question: 1, 2, or 3.
+        - [MODE] - represents the requested action: Y for "on", N for "off", S for "set value", F for "fade on", and f for "fade off"
+        - [Parameter] - A number between 0 and 255 (PADDED TO THREE DIGITS: i.e. 000) representing the values for some modes. I.e. the time to fade, or the value to set the LED to.
 */
 bool serialChange = false;
 
